@@ -1,0 +1,235 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.btn{
+    border-radius: 7px !important;
+}
+.btn-warning{
+    background-color: #fa9e00 !important;
+}
+.main-btn {
+    background: #fdac04;
+    border: solid #1898d900 2px;
+    color: var(--white);
+    font-weight: 600;
+    padding: 5px 25px;
+    text-transform: uppercase;
+    border-radius: 4px;
+    font-size: 16px;
+    transition: 0.5s ease;
+}
+.text-warning{
+    color: #fa9e00 !important;
+}
+.wrapper {
+    overflow: hidden;
+}
+
+.thanks-wrapper {
+    /* background-color: #f2f4f5; */
+    position: relative;
+    padding: 50px 0;
+}
+
+.thanks-wrapper .th-logo {
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    overflow: hidden;
+    position: absolute;
+    top: -70px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.thanks-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.thanks img {
+    max-width: 150px;
+
+}
+
+.thanks h5 {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 0;
+    margin-top: 10px;
+}
+
+.order-banner {
+    background-color: #fff;
+    border-radius: 22px;
+    padding: 20px;
+}
+
+.order-banner h4 {
+    font-size: 25px;
+    color: #212529;
+}
+
+.order-banner h5 {
+    font-weight: 400;
+    color: #212529;
+    border-bottom: 1px solid #eee;
+}
+
+.order-banner h5 img {
+    width: 30px;
+}
+
+.order-banner p {
+    font-size: 17px;
+    margin-bottom: 0;
+}
+
+
+
+
+.order-information {
+    background-color: #fff;
+    border-radius: 20px;
+    padding: 20px;
+    margin: 30px 0;
+}
+
+.order-information h3 i{
+    color: #fa9e00;
+}
+.order-information h3 {
+    font-size: 25px;
+    color: #212529;
+    margin: 0;
+    padding-bottom: 10px;
+}
+
+.order-information h3 i {
+    margin-right: 10px;
+}
+
+.order-information .user-detail {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+
+
+.order-information .user-detail li:first-child {
+    border-top: 1px solid #eee;
+}
+
+.order-information .user-detail li {
+    border-bottom: 1px solid #eee;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.order-information .user-detail li p {
+    margin: 0;
+    font-size: 16px;
+    padding: 8px;
+}
+
+.order-information .user-detail li p:last-child {
+    text-align: right;
+}
+
+.order-information .price {
+    margin: 0;
+    padding: 0;
+    border-top: 1px solid #eee;
+    padding-top: 5px;
+    list-style: none;
+}
+
+.order-information .price li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 3px;
+}
+
+.order-information .price li p {
+    margin: 0;
+    font-size: 16px;
+}
+
+.order-information .price li p:last-child {
+    color: #6c757d;
+}
+
+.btm-text {
+    margin-top: 20px;
+}
+
+.g-total {
+    font-size: 26px !important;
+    font-weight: 700;
+}
+
+
+
+.cart-product {
+    margin-top: 50px;
+}
+
+.cart-product h3 {
+    font-size: 25px;
+    color: #212529;
+    margin: 0;
+    padding-bottom: 10px;
+}
+
+.cart-product table thead tr th:first-child {
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+}
+
+.cart-product table thead tr th:last-child {
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+
+.cart-product table thead tr th {
+    font-size: 13px;
+    font-weight: 400;
+    vertical-align: middle;
+    color: #6c757d;
+    background-color: #e0e0e0;
+    border-bottom: 0;
+    padding: 10px 40px;
+}
+
+.cart-product table tbody tr td {
+    padding: 10px 40px;
+    font-size: 16px;
+
+}
+
+@media (max-width: 575px){
+    .cart-product table thead tr th {
+        padding: 10px 20px;
+    }
+    
+    .cart-product table tbody tr td {
+        padding: 10px 20px;
+    
+    }
+}
+
+.order-table thead tr th{
+    background-color: #fdac04;
+    font-size: 12px;
+    white-space: nowrap;
+}
+.order-table tbody tr td{
+    font-size: 12px;
+    vertical-align: middle;
+}

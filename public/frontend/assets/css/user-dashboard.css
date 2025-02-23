@@ -1,0 +1,156 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    overflow-x: hidden;
+}
+/* 
+================================================
+    USER DASHBOARD 
+================================================
+*/
+.user-dashboard .side-bar {
+    background-color: var(--light-black);
+    /* border-top: 1px solid var(--grey); */
+    height: 100%;
+    padding: 20px;
+    max-width: 300px;
+
+}
+
+@media (min-width: 992px) {
+    .user-dashboard .side-bar {
+        min-height: 100vh;
+    }
+
+}
+
+.user-dashboard .side-bar h3 {
+    font-size: 20px;
+    text-align: center;
+    border-bottom: 1px solid var(--grey);
+    color: var(--white);
+    padding-bottom: 15px;
+}
+
+.user-dashboard .side-bar ul {
+    padding: 0;
+}
+
+.user-dashboard .side-bar ul li {
+    list-style: none;
+}
+
+.user-dashboard .side-bar ul li a {
+    display: block;
+    color: var(--white);
+    /* background-color: var(--dark-blue); */
+    margin: 5px 0;
+    padding: 7px 10px;
+    border-radius: 3px;
+}
+
+.user-dashboard .side-bar ul li a i {
+    margin-right: 10px;
+    transition: .4s ease;
+}
+
+.user-dashboard .side-bar ul li a.active,
+.user-dashboard .side-bar ul li a:hover {
+    background-color: var(--primary-blue);
+}
+
+.user-dashboard .side-bar ul li a:hover i {
+    margin-right: 20px;
+}
+
+
+
+
+
+.user-dashboard .user-main {
+    padding: 40px;
+}
+
+
+.user-profile-banner{
+    height: 250px;
+}
+
+.user-dashboard .user-main h5 {
+    margin-bottom: 20px;
+}
+
+.user-dashboard .user-main .user-profile h4 {
+    border-bottom: 1px solid var(--light-grey);
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+}
+
+.user-dashboard .user-main .user-profile p {
+    margin: 16px 0;
+}
+
+.user-dashboard .user-main .user-profile p strong {
+    font-weight: 600 !important;
+}
+
+@media (max-width: 991px) {
+    .user-profile-banner{
+        height: 200px;
+    }
+
+    .user-dashboard .side-bar {
+        max-width: 100%;
+        margin: 0;
+        padding: 5px;
+        overflow: hidden;
+    }
+    .user-dashboard .side-bar ul{
+        display: flex;
+        margin: 0;
+        padding: 0;
+        overflow-x: auto;
+    }
+    .user-dashboard .side-bar ul li a{
+        white-space: nowrap;
+    }
+
+
+
+
+    .user-main .form-wrap {
+        border: 1px solid #c1c1c1c9;
+    }
+
+}
+
+@media (max-width: 575px){
+    .user-profile-banner{
+        height: 130px;
+    }
+
+    .user-dashboard .side-bar {
+        padding: 0 5px;
+    }
+
+    .user-dashboard .side-bar ul li a{
+        white-space: nowrap;
+        font-size: 12px;
+        padding: 2px 7px;
+    }
+}
+
+/* 
+================================================
+    USER DASHBOARD END
+================================================
+*/
+.content-area table thead tr th {
+    background-color: var(--light-black);
+    color: var(--white);
+    border-color: var(--light-black);
+}
