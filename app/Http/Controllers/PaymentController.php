@@ -7,6 +7,7 @@ use App\Mail\OrderConfirmationMail;
 use App\Models\Order;
 use App\Models\OrderDetail;
 use App\Models\OrderItem;
+use App\Models\Product;
 use App\Models\StripeSetting;
 use App\Models\User;
 use Illuminate\Contracts\Session\Session as SessionSession;
@@ -37,9 +38,8 @@ class PaymentController extends Controller
     {
         $settings = StripeSetting::first();
         $stipeKey = "";
-        if($settings != ""){
+        if ($settings != "") {
             $stipeKey = $settings->stripe_publishable_key;
-            
         }
         return view('frontend.checkout', ['stripe_publishable_key' => $stipeKey]);
     }
@@ -89,10 +89,33 @@ class PaymentController extends Controller
             $orderDetail->save();
 
 
+            $order = new Order();
+            $order->order_id = $order_id;
+            $order->order_detail_id = $orderDetail->id;
+            $order->user_id = Auth::user()->id;
+            $order->order_status = "Pending";
+            $order->total_price = $request->pay_amount;
+            $order->payment_status = "";
+            $order->save();
+
+            $product_ids = $request->product_id;
+            $qtys = $request->qty;
+
+            foreach ($product_ids as $index => $product_id) {
+
+                $orderItem = new OrderItem();
+                $product = Product::find($product_id);
+                $product->in_stock = $product->in_stock - $qtys[$index];
+                $product->save();
+
+                $orderItem->o_id = $order->id;
+                $orderItem->order_id = $order_id;
+                $orderItem->product_id = $product_id;
+                $orderItem->qty = $qtys[$index];
+                $orderItem->save();
+            }
 
             if ($request->payment == "stripe") {
-
-
                 $settings = StripeSetting::first();
                 if ($settings) {
                     \Stripe\Stripe::setApiKey($settings->stripe_secret_key);
@@ -112,87 +135,126 @@ class PaymentController extends Controller
                     "description" => "HEllo"
 
                 ]);
-
-
-                $order = new Order();
-                $order->order_id = $order_id;
-                $order->order_detail_id = $orderDetail->id;
-                $order->user_id = Auth::user()->id;
-                $order->order_status = "Pending";
                 $order->payment_status = "Paid Online";
-                $order->total_price = $request->pay_amount;
-
-                $order->save();
-
-
-                $product_ids = $request->product_id;
-                $qtys = $request->qty;
-
-                foreach ($product_ids as $index => $product_id) {
-
-                    $orderItem = new OrderItem();
-
-                    $orderItem->o_id = $order->id;
-                    $orderItem->order_id = $order_id;
-                    $orderItem->product_id = $product_id;
-                    $orderItem->qty = $qtys[$index];
-                    $orderItem->save();
-                }
-                // session(["order_id" => $order_id]);
-
-                // DB::table('orders')->insert($products);
-
-                session()->flash('success', 'Payment Online successful!');
-                // session()->flash('success', "Pay Online");
-                return redirect()->route("thanks");
             } else {
-
-
-
-                // $orderDetailId = OrderDetail::where("user_id", Auth::user()->id)->first();
-
-                $order = new Order();
-                $order->order_id = $order_id;
-                $order->order_detail_id = $orderDetail->id;
-                $order->user_id = Auth::user()->id;
-                $order->order_status = "Pending";
                 $order->payment_status = "Cash on Delivery";
-                $order->total_price = $request->pay_amount;
-
-                $order->save();
-
-
-                $product_ids = $request->product_id;
-                $qtys = $request->qty;
-
-                // $products = [];
-                foreach ($product_ids as $index => $product_id) {
-
-                    $orderItem = new OrderItem();
-
-                    $orderItem->o_id = $order->id;
-                    $orderItem->order_id = $order_id;
-                    $orderItem->product_id = $product_id;
-                    $orderItem->qty = $qtys[$index];
-                    $orderItem->save();
-
-                    // $products[] = [
-                    //     "order_id" => $order_id,
-                    //     "user_id" => Auth::user()->id,
-                    //     "order_detail_id" => $orderDetail->id,
-
-                    //     "total_price" => $request->pay_amount,
-                    // ];
-                }
             }
+
+            $order->save();
+            // if ($request->payment == "stripe") {
+
+
+            //     $settings = StripeSetting::first();
+            //     if ($settings) {
+            //         \Stripe\Stripe::setApiKey($settings->stripe_secret_key);
+            //     }
+            //     // Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
+
+
+
+            //     Stripe\Charge::create([
+
+            //         "amount" => $request->pay_amount * 100,
+
+            //         "currency" => "eur",
+
+            //         "source" => $request->stripeToken,
+
+            //         "description" => "HEllo"
+
+            //     ]);
+
+
+            //     // $order = new Order();
+            //     // $order->order_id = $order_id;
+            //     // $order->order_detail_id = $orderDetail->id;
+            //     // $order->user_id = Auth::user()->id;
+            //     // $order->order_status = "Pending";
+            //     $order->payment_status = "Paid Online";
+            //     // $order->total_price = $request->pay_amount;
+
+            //     $order->save();
+
+
+            //     // $product_ids = $request->product_id;
+            //     // $qtys = $request->qty;
+            //     // foreach ($product_ids as $index => $product_id) {
+
+            //     //     $orderItem = new OrderItem();
+            //     //     $product = OrderItem::find($product_id);
+            //     //     $product->in_stock = $product->in_stock - $qtys[$index];
+            //     //     $product->save();
+
+            //     //     $orderItem->o_id = $order->id;
+            //     //     $orderItem->order_id = $order_id;
+            //     //     $orderItem->product_id = $product_id;
+            //     //     $orderItem->qty = $qtys[$index];
+
+
+
+            //     //     $orderItem->save();
+            //     // }
+            //     // session(["order_id" => $order_id]);
+
+            //     // DB::table('orders')->insert($products);
+
+            //     session()->flash('success', 'Payment Online successful!');
+            //     // session()->flash('success', "Pay Online");
+            //     return redirect()->route("thanks");
+            // } else {
+
+
+
+            //     // $orderDetailId = OrderDetail::where("user_id", Auth::user()->id)->first();
+
+            //     // $order = new Order();
+            //     // $order->order_id = $order_id;
+            //     // $order->order_detail_id = $orderDetail->id;
+            //     // $order->user_id = Auth::user()->id;
+            //     // $order->order_status = "Pending";
+            //     $order->payment_status = "Cash on Delivery";
+            //     // $order->total_price = $request->pay_amount;
+
+            //     $order->save();
+
+
+            //     // $product_ids = $request->product_id;
+            //     // $qtys = $request->qty;
+
+            //     // // $products = [];
+            //     // foreach ($product_ids as $index => $product_id) {
+
+            //     //     $orderItem = new OrderItem();
+            //     //     $product = Product::find($product_id);
+            //     //     $product->in_stock = $product->in_stock - $qtys[$index];
+            //     //     $product->save();
+
+            //     //     $orderItem->o_id = $order->id;
+            //     //     $orderItem->order_id = $order_id;
+            //     //     $orderItem->product_id = $product_id;
+            //     //     $orderItem->qty = $qtys[$index];
+            //     //     $orderItem->save();
+
+            //         // $products[] = [
+            //         //     "order_id" => $order_id,
+            //         //     "user_id" => Auth::user()->id,
+            //         //     "order_detail_id" => $orderDetail->id,
+
+            //         //     "total_price" => $request->pay_amount,
+            //         // ];
+            //     }
+            // }
+
+            // $order->save();
+
 
             $orderDetail->o_id = $order->id;
             $orderDetail->save();
 
-            
+
             $orderItem = Order::where("order_id", $order_id)->with("orderDetail", "orderItem", "orderItem.product", "orderItem.product.images", "user")->first();
             // return $orderItem;
-            
+
             $orderDetail = [
                 "c_name" => $orderItem->user->fname . " " . $orderItem->user->lname,
                 "c_phone" => $orderItem->user->phone,

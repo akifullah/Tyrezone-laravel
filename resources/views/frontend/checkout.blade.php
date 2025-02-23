@@ -404,10 +404,11 @@
                                     @if (Auth::check())
                                         <button id="onDeliveryBtn" class="main-btn ">PROCEED TO
                                             BOOKING</button>
+                                    @else
+                                        <button type="button" class="main-btn "
+                                            style="cursor: not-allowed; pointer-events: all; opacity: .7; ">Please Login to
+                                            Continue</button>
                                     @endif
-                                    <button type="button" class="main-btn "
-                                        style="cursor: not-allowed; pointer-events: all; opacity: .7; ">Please Login to
-                                        Continue</button>
                             @endif
                         </div>
 
