@@ -306,7 +306,7 @@
 
 
         function handleSelectChange(event, id) {
-            $("#preloader").removeClass("d-none");
+            // $("#preloader").removeClass("d-none");   
             var value = event.target.value;
             let order_id = id;
 

@@ -11,6 +11,7 @@ use App\Mail\OrderPending;
 use App\Mail\OrderRejection;
 use App\Models\Order;
 use App\Models\OrderDetail;
+use App\Models\OrderItem;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
@@ -24,9 +25,9 @@ class OrderController extends Controller
 
         $orderDetail = Order::with("user", "orderItem", "orderDetail", "orderItem.product", "orderItem.product.images")->get();
         // return $orderDetail;
-        
+
         // return $orders;
-        
+
         // $orders = OrderDetail::with("user")->get();
         // $products = Order::with("product", "product.manufacturer", "product.patteren")->get();
         // $orders["products"] = $products;
@@ -46,25 +47,25 @@ class OrderController extends Controller
         // return $orders;
         // $orders = Order::with("orderDetail", "product", "user")->get();
         // return $orders;
-        
+
         // return $orders;
         return view("admin.orders", [
             // "products"=> $products,
-            "orders"=> $orderDetail,
-            "pendingOrder" =>$pendingOrder, 
-            "confirmOrder" => $confirmOrder, 
-            "invalidOrder" => $invalidOrder, 
-            "rejectedOrder" => $rejectedOrder, 
-            "notAvailableOrder" => $notAvailableOrder, 
-            "deliveredOrder" => $deliveredOrder, 
-    ]);
-
+            "orders" => $orderDetail,
+            "pendingOrder" => $pendingOrder,
+            "confirmOrder" => $confirmOrder,
+            "invalidOrder" => $invalidOrder,
+            "rejectedOrder" => $rejectedOrder,
+            "notAvailableOrder" => $notAvailableOrder,
+            "deliveredOrder" => $deliveredOrder,
+        ]);
     }
 
 
-    function orderStatus(Request $req){
+    function orderStatus(Request $req)
+    {
 
-       
+
 
         $order = Order::where("id", $req->id)->first();
         $order->order_status = $req->status;
@@ -76,22 +77,21 @@ class OrderController extends Controller
         // return $orderStatus["order_item"];
 
         $orderStatus = Order::where("order_id", $order->order_id)
-        ->with("orderDetail", "orderItem", "orderItem.product", "user")
-        ->first();
+            ->with("orderDetail", "orderItem", "orderItem.product", "user")
+            ->first();
 
-        // return $orderStatus->orderItem;
 
         $mailData = [
-            "order_status"=> $req->status,
+            "order_status" => $req->status,
             "orderId" => $orderStatus->order_id,
-            "c_name" => $orderStatus->user->fname ." " . $orderStatus->user->lname,
-            "total_price"=> $orderStatus->total_price,
-            "shipping_address"=> $orderStatus->orderDetail->address,
-            "order_date"=> $orderStatus->created_at,
-            "items"=> $orderStatus->orderItem,
+            "c_name" => $orderStatus->user->fname . " " . $orderStatus->user->lname,
+            "total_price" => $orderStatus->total_price,
+            "shipping_address" => $orderStatus->orderDetail->address,
+            "order_date" => $orderStatus->created_at,
+            "items" => $orderStatus->orderItem,
         ];
 
-        if($req->status == "Confirmed"){
+        if ($req->status == "Confirmed") {
             Mail::to($orderStatus->user->email)->send(new OrderConfirmed($mailData));
         }
 
@@ -99,15 +99,12 @@ class OrderController extends Controller
             Mail::to($orderStatus->user->email)->send(new NotAvailable($mailData));
         }
         if ($req->status == "Rejected") {
-            foreach($orderStatus->order_item as $item){
-                $qty = $item->qty;
-                $product = Product::find($item->product_id);
-                $product->in_stock = $product->in_stock - $qty;
-                $product->save();
-            }
+            // return var_dump($orderStatus->orderItem);
+            $this->revertQty($orderStatus->orderItem);
+
             // Mail::to($orderStatus->user->email)->send(new OrderRejection($mailData));
         }
-        
+
         if ($req->status == "Delivered") {
             Mail::to($orderStatus->user->email)->send(new OrderDelivered($mailData));
         }
@@ -115,35 +112,49 @@ class OrderController extends Controller
         if ($req->status == "Invalid") {
             Mail::to($orderStatus->user->email)->send(new OrderInvalid($mailData));
         }
-        
+
         if ($req->status == "Pending") {
             // Mail::to($orderStatus->user->email)->send(new OrderPending($mailData));
         }
-        
+
 
 
 
         // return $orderStatus;
-        
+
         return response()->json([
             $req->input()
         ]);
     }
 
 
-    function deleteOrder(Request $req){
+    function deleteOrder(Request $req)
+    {
         $order = Order::find($req->id);
 
-        if($order){
+        if ($order) {
             $order->delete();
             session()->flash("succcess", "Order Deleted");
             return response()->json([
-                "status"=> true,
-                "message"=> "Order Deleted!"
+                "status" => true,
+                "message" => "Order Deleted!"
             ]);
         }
     }
-    
-    
-    
+
+
+    public function revertQty($orderItem)
+    {
+        foreach ($orderItem as $item) {
+            if ($item->qty_status == 1) {
+
+                $product = Product::find($item->product_id);
+                $product->in_stock = $product->in_stock + $item->qty;
+                $product->save();
+            }
+            $item->qty_status = 0;
+            $item->save();
+        }
+
+    }
 }
