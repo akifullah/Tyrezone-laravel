@@ -71,8 +71,15 @@ class OrderController extends Controller
         $order->save();
 
 
-        $orderStatus = Order::where("order_id", $order->order_id)->with("orderDetail", "orderItem", "orderItem.product", "user")->first();
+        // $orderStatus = Order::where("order_id", $order->order_id)->with("orderDetail", "orderItem", "orderItem.product", "user")->first();
 
+        // return $orderStatus["order_item"];
+
+        $orderStatus = Order::where("order_id", $order->order_id)
+        ->with("orderDetail", "orderItem", "orderItem.product", "user")
+        ->first();
+
+        // return $orderStatus->orderItem;
 
         $mailData = [
             "order_status"=> $req->status,
@@ -91,9 +98,14 @@ class OrderController extends Controller
         if ($req->status == "Not Available") {
             Mail::to($orderStatus->user->email)->send(new NotAvailable($mailData));
         }
-        
         if ($req->status == "Rejected") {
-            Mail::to($orderStatus->user->email)->send(new OrderRejection($mailData));
+            foreach($orderStatus->order_item as $item){
+                $qty = $item->qty;
+                $product = Product::find($item->product_id);
+                $product->in_stock = $product->in_stock - $qty;
+                $product->save();
+            }
+            // Mail::to($orderStatus->user->email)->send(new OrderRejection($mailData));
         }
         
         if ($req->status == "Delivered") {
@@ -105,7 +117,7 @@ class OrderController extends Controller
         }
         
         if ($req->status == "Pending") {
-            Mail::to($orderStatus->user->email)->send(new OrderPending($mailData));
+            // Mail::to($orderStatus->user->email)->send(new OrderPending($mailData));
         }
         
 

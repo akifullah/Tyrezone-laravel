@@ -320,9 +320,9 @@
                 dataType: "json",
                 success: function(res) {
                     console.log(res);
-                    $("#preloader").addClass("d-none");
+                    //$("#preloader").addClass("d-none");
 
-                    window.location.reload();
+                    //window.location.reload();
                 }
             })
 
