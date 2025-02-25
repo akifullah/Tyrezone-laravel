@@ -30,7 +30,7 @@
                                 <div class="d-flex flex-wrap flex-row-reverse align-items-center justify-content-between">
 
                                     <div class="text-end">
-                                        <p class="m-0"><a href="forget-password.html">Forgot Password?</a></p>
+                                        <p class="m-0"><a href="{{ route("password.request") }}">Forgot Password?</a></p>
                                     </div>
                                     <div class="form-check">
                                         <input type="checkbox" name="remember_me" value="1" class="form-check-input"

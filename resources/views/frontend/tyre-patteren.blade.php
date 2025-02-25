@@ -167,26 +167,32 @@
         function addToCart(event, pname) {
             event.preventDefault();
             let product = pname;
-            product.qty = +event.target.quantity.value;
-
-
-
+            let qty = parseInt(event.target.quantity.value) || 1;
+            
+            
+            console.log(product)
+            
             let cart = JSON.parse(localStorage.getItem("tyreZoneCart"));
             let isInCart = cart.findIndex((value) => value.id == product.id);
 
             if (isInCart < 0) {
                 cart.push({
-                    ...product
+                    ...product,
+                    qty 
                 });
             } else {
-                cart[isInCart].qty = cart[isInCart].qty + 1;
+                if( (cart[isInCart].qty + qty) > cart[isInCart].in_stock){
+                    alert(`Only ${cart[isInCart].in_stock} item availble in stock.`)
+                    return
+                }
+                cart[isInCart].qty = cart[isInCart].qty + qty;
             }
 
             localStorage.setItem("tyreZoneCart", JSON.stringify(cart));
             cartLength();
             callData();
 
-            window.location.href = '{{ route('cart') }}';
+            // window.location.href = '{{ route('cart') }}';
             // localStorage.setItem("tyreZoneCart", [...cart, product])
 
         }

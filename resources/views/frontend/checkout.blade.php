@@ -591,7 +591,7 @@
         let payOnline = document.getElementById("payOnline");
         let payAtFitting = document.getElementById("atFitting");
 
-        payOnline.addEventListener("click", function() {
+        payOnline?.addEventListener("click", function() {
             document.getElementById("collapseExample").classList.add("show");
             document.getElementById("onDeliveryBtn").classList.add("d-none");
 
