@@ -117,12 +117,16 @@
                                         <div class="col-lg-3 col-sm-6 px-2">
 
                                             <div class="product-card  overflow-hidden">
-
+                                                @if ($product->in_stock < 1)
+                                                    <div class="tags">Out of Stock</div>
+                                                @endif
                                                 <div class="img-row">
-                                                    <div class="brand-img">
-                                                        <img
-                                                            src="{{ asset('uploads/brands/' . $product->manufacturer->image) }}">
-                                                    </div>
+                                                    @if ($product->manufacturer->image)
+                                                        <div class="brand-img">
+                                                            <img alt=""
+                                                                src="{{ asset('uploads/brands/' . $product->manufacturer->image) }}">
+                                                        </div>
+                                                    @endif
                                                     <div class="p-card-img position-relative w-100">
                                                         <img src="{{ asset('uploads/products/' . $product->images[0]->name) }}"
                                                             alt="" width="100%">

@@ -47,6 +47,7 @@
                                             <th>Address</th>
                                             <th class="text-center">Products</th>
                                             <th>Payment Status</th>
+                                            <th>Total Price</th>
                                             <th>Order Status</th>
 
                                         </tr>
@@ -77,13 +78,20 @@
                                                                     </div>
 
                                                                     <div class="modal-body">
-                                                                        <h6 class="text-start">Order #:
-                                                                            {{ $order->order_id }}</h6>
+                                                                        <div
+                                                                            class="d-flex align-items-center justify-content-between">
+                                                                            <h6 class="text-start">Order #:
+                                                                                {{ $order->order_id }}</h6>
+
+                                                                            <h6 class="text-end">Total:
+                                                                                £{{ $order->total_price }}</h6>
+
+                                                                        </div>
                                                                         <div class="table-responsive">
                                                                             <table
                                                                                 class="table table-condensed table-bordered">
                                                                                 <tr class="bg-none">
-                                                                                    
+
                                                                                     <th class="bg-transparent">
                                                                                         Product Name
                                                                                     </th>
@@ -91,11 +99,13 @@
                                                                                     </th>
                                                                                     <th class="bg-transparent">Size</th>
                                                                                     <th class="bg-transparent">Qty</th>
+                                                                                    <th class="bg-transparent">Vat Price</th>
+                                                                                    <th class="bg-transparent">Price</th>
                                                                                 </tr>
 
                                                                                 @foreach ($order->orderItem as $product)
                                                                                     <tr>
-                                                                                        
+
                                                                                         <td>
                                                                                             <a class="text-black text-decoration-underline"
                                                                                                 href="{{ route('shop-detail', ['id' => $product->product->id]) }}">
@@ -111,6 +121,8 @@
                                                                                         <td>{{ $product->product->tyre_size }}
                                                                                         </td>
                                                                                         <td>{{ $product->qty }}</td>
+                                                                                        <td>£{{ $product->vat_price }}</td>
+                                                                                        <td>£{{ $product->price }}</td>
                                                                                     </tr>
                                                                                 @endforeach
                                                                             </table>
@@ -123,6 +135,7 @@
 
                                                     </td>
                                                     <td>{{ $order->payment_status }}</td>
+                                                    <td>£{{ $order->total_price }}</td>
                                                     <td>{{ $order->order_status }}</td>
                                                 </tr>
                                             @endforeach

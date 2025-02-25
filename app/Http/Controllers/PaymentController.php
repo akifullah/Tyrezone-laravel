@@ -112,7 +112,8 @@ class PaymentController extends Controller
                 $orderItem->order_id = $order_id;
                 $orderItem->product_id = $product_id;
                 $orderItem->qty = $qtys[$index];
-                $orderItem->price = "100";
+                $orderItem->price = $product->price;
+                $orderItem->vat_price = $product->vat_price;
                 $orderItem->save();
             }
 

@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string("product_id");
             $table->integer("qty");
             $table->text("price");
+            $table->text("vat_price");
             $table->boolean("qty_status")->default(1);
             $table->timestamps();
         });

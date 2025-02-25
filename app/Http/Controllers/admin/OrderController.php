@@ -92,17 +92,19 @@ class OrderController extends Controller
         ];
 
         if ($req->status == "Confirmed") {
+            $this->revertQty($orderStatus->orderItem, true);
             Mail::to($orderStatus->user->email)->send(new OrderConfirmed($mailData));
         }
 
         if ($req->status == "Not Available") {
+            $this->revertQty($orderStatus->orderItem);
+
             Mail::to($orderStatus->user->email)->send(new NotAvailable($mailData));
         }
         if ($req->status == "Rejected") {
-            // return var_dump($orderStatus->orderItem);
             $this->revertQty($orderStatus->orderItem);
 
-            // Mail::to($orderStatus->user->email)->send(new OrderRejection($mailData));
+            Mail::to($orderStatus->user->email)->send(new OrderRejection($mailData));
         }
 
         if ($req->status == "Delivered") {
@@ -110,11 +112,15 @@ class OrderController extends Controller
         }
 
         if ($req->status == "Invalid") {
+            $this->revertQty($orderStatus->orderItem);
+
             Mail::to($orderStatus->user->email)->send(new OrderInvalid($mailData));
         }
 
         if ($req->status == "Pending") {
-            // Mail::to($orderStatus->user->email)->send(new OrderPending($mailData));
+            $this->revertQty($orderStatus->orderItem);
+
+            Mail::to($orderStatus->user->email)->send(new OrderPending($mailData));
         }
 
 
@@ -143,10 +149,10 @@ class OrderController extends Controller
     }
 
 
-    public function revertQty($orderItem)
+    public function revertQty($orderItem , $confirm = false)
     {
         foreach ($orderItem as $item) {
-            if ($item->qty_status == 1) {
+            if ($item->qty_status == 1 && !$confirm) {
 
                 $product = Product::find($item->product_id);
                 $product->in_stock = $product->in_stock + $item->qty;

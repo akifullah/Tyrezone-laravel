@@ -111,7 +111,7 @@
                                     <div class="form-group mb-3">
                                         <label for="">Brand</label>
                                         <select name="manufacturer" class=" form-select shadow-none">
-                                            <option disabled selected="selected">Select Brand</option>
+                                            <option selected="selected" value="">Select Brand</option>
                                             @if ($manufacturers->isNotEmpty())
                                                 @foreach ($manufacturers as $manufacturer)
                                                     <option
@@ -127,7 +127,7 @@
                                     <div class="form-group mb-3">
                                         <label for="">Patteren</label>
                                         <select name="patteren" class=" form-select shadow-none">
-                                            <option selected="selected" disabled>Select Patteren</option>
+                                            <option selected="selected" value="">Select Patteren</option>
                                             @if ($patterens->isNotEmpty())
                                                 @foreach ($patterens as $patteren)
                                                     <option
@@ -142,7 +142,7 @@
                                     <div class="form-group mb-3">
                                         <label for="">Tyre Size</label>
                                         <select name="size" class="form-select shadow-none">
-                                            <option selected="selected" disabled>Select Size</option>
+                                            <option selected="selected" value="">Select Size</option>
                                             @if ($sizes->isNotEmpty())
                                                 @foreach ($sizes as $size)
                                                     <option

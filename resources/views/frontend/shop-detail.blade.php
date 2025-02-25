@@ -331,7 +331,7 @@
         function addToCart(pname, buyNow = false) {
             let product = pname;
 
-            if (product.in_stock == 0) {
+            if (product.in_stock <= 0) {
                 alert("Product is out of stock!")
                 return
             }

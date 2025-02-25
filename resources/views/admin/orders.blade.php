@@ -166,6 +166,7 @@
                         {{-- <th>Qty</th> --}}
                         {{-- <th>Price</th> --}}
                         <th>Pay Status</th>
+                        <th>Total Price</th>
                         <th>Order Status</th>
                         <th>Action</th>
 
@@ -208,6 +209,8 @@
                                                                 <th class="bg-transparent">Product Image</th>
                                                                 <th class="bg-transparent">Size</th>
                                                                 <th class="bg-transparent">Qty</th>
+                                                                <th class="bg-transparent">Vat Price</th>
+                                                                <th class="bg-transparent">Price</th>
                                                             </tr>
 
                                                             @foreach ($order->orderItem as $product)
@@ -226,6 +229,8 @@
                                                                     </td>
                                                                     <td>{{ $product->product->tyre_size }}</td>
                                                                     <td>{{ $product->qty }}</td>
+                                                                    <td>£{{ $product->vat_price }}</td>
+                                                                    <td>£{{ $product->price }}</td>
                                                                 </tr>
                                                             @endforeach
                                                         </table>
@@ -242,6 +247,7 @@
                                 <td>{{ $order->orderDetail->address }}</td>
 
                                 <td>{{ $order->payment_status }}</td>
+                                <td>£{{ $order->total_price }}</td>
                                 <td>
                                     <select onchange="handleSelectChange(event, '{{ $order->id }}')"
                                         class="border-0 outline-0">
@@ -306,7 +312,7 @@
 
 
         function handleSelectChange(event, id) {
-            // $("#preloader").removeClass("d-none");   
+            $("#preloader").removeClass("d-none");   
             var value = event.target.value;
             let order_id = id;
 
@@ -320,9 +326,9 @@
                 dataType: "json",
                 success: function(res) {
                     console.log(res);
-                    //$("#preloader").addClass("d-none");
+                    $("#preloader").addClass("d-none");
 
-                    //window.location.reload();
+                    window.location.reload();
                 }
             })
 

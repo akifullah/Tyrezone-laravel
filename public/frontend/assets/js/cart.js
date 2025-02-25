@@ -219,7 +219,7 @@ function callData() {
                                 </div>
                             </td>
                             <td>
-                                <p class="price mb-0">£${((parseFloat(product.price) + parseFloat(product.vat_price)) * product.qty).toFixed(2)}</p>
+                                <p class="price mb-0">£${((parseFloat(product.price)) * product.qty).toFixed(2)}</p>
                             </td>
                             <td>
                                 <div class="text-end">
