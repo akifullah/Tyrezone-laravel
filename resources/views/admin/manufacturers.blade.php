@@ -39,9 +39,9 @@
                 <tbody>
 
                     @if ($manufacturers->isNotEmpty())
-                        @foreach ($manufacturers as $manufacturer)
+                        @foreach ($manufacturers as  $manufacturer)
                             <tr>
-                                <td>1</td>
+                                <td>{{ $manufacturer->id }}</td>
 
                                 <td>{{ $manufacturer->name }}</td>
                                 <td>

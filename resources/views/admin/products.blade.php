@@ -42,54 +42,54 @@
                     @if ($products->isNotEmpty())
                         @foreach ($products as $product)
                             <tr>
-                                <td>{{ $product->id }}</td>
-                                <td>{{ $product->name }}</td>
+                                <td>{{ $product?->id }}</td>
+                                <td>{{ $product?->name }}</td>
                                 <td>
-                                    @if ($product->images->isNotEmpty())
-                                        <img src="{{ asset('uploads/products/' . $product->images[0]->name) }}"
+                                    @if ($product?->images->isNotEmpty())
+                                        <img src="{{ asset('uploads/products/' . $product?->images[0]?->name) }}"
                                             alt="">
                                     @endif
                                 </td>
-                                <td>{{ $product->manufacturer->name }}</td>
-                                <td>{{ $product->patteren != null ? $product->patteren->name : '' }}</td>
-                                <td>{{ $product->fuel_efficiency }}</td>
-                                <td>{{ $product->wet_grip }}</td>
-                                <td>{{ $product->road_noise }}</td>
+                                <td>{{ $product?->manufacturer?->name }}</td>
+                                <td>{{ $product?->patteren != null ? $product?->patteren?->name : '' }}</td>
+                                <td>{{ $product?->fuel_efficiency }}</td>
+                                <td>{{ $product?->wet_grip }}</td>
+                                <td>{{ $product?->road_noise }}</td>
                                 <td class="text-nowrap">
-                                    {{ $product->tyre_size }}
+                                    {{ $product?->tyre_size }}
                                 </td>
 
                                 <td>
-                                    @if ($product->season_type == 1)
+                                    @if ($product?->season_type == 1)
                                         <i title="Summer" class=" h3 fa-solid fa-sun"></i>
-                                    @elseif($product->season_type == 2)
+                                    @elseif($product?->season_type == 2)
                                         <i title="Winter" class=" h3 fa-regular fa-snowflake"></i>
                                     @else
                                         <i title="All Season" class=" h3 fa-brands fa-galactic-republic"></i>
                                     @endif
                                 </td>
                                 {{-- <td>
-                                    @if ($product->budget_tyre == 1)
+                                    @if ($product?->budget_tyre == 1)
                                         Yes
                                     @else
                                         No
                                     @endif
 
                                 </td> --}}
-                                <td class="text-nowrap">{{ $product->in_stock }}</td>
-                                <td class="text-nowrap">${{ $product->vat_price }}</td>
-                                <td class="text-nowrap">${{ $product->price }}</td>
+                                <td class="text-nowrap">{{ $product?->in_stock }}</td>
+                                <td class="text-nowrap">${{ $product?->vat_price }}</td>
+                                <td class="text-nowrap">${{ $product?->price }}</td>
                                 <td>
                                     <div class="last-btns">
 
-                                        <a href="{{ route('admin.editProduct', ['id' => $product->id]) }}"
+                                        <a href="{{ route('admin.editProduct', ['id' => $product?->id]) }}"
                                             class="btn btn-success">
                                             <i class="fa-solid fa-pen"></i>
                                         </a>
 
 
 
-                                        <button onclick="deleteProduct({{ $product->id }})" class="btn btn-danger">
+                                        <button onclick="deleteProduct({{ $product?->id }})" class="btn btn-danger">
                                             <i class="fa-solid fa-trash-can"></i>
                                         </button>
                                     </div>

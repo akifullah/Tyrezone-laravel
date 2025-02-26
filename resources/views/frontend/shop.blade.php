@@ -34,7 +34,7 @@
                                                     <div class="tags">Out of Stock</div>
                                                 @endif
                                                 <div class="img-row">
-                                                    @if ($product->manufacturer->image != '')
+                                                    @if ($product->manufacturer?->image != '')
                                                         <div class="brand-img">
                                                             <img
                                                                 src="{{ asset('uploads/brands/' . $product->manufacturer->image) }}">
