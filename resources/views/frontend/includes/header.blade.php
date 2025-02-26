@@ -72,8 +72,8 @@
     <nav class="navbar navbar-dark navbar-expand-lg main-nav p-0 ">
         <div class="container-xl h-100">
             <a href="{{ route('home') }}" class="logo me-3">
-                @if ($logo->name != '')
-                    <img src="{{ asset('uploads/logos/' . $logo->name) }}" width="150px" alt="">
+                @if ($logo?->name != '')
+                    <img src="{{ asset('uploads/logos/' . $logo?->name) }}" width="150px" alt="">
                 @else
                     <img src="{{ asset('frontend/assets/imgs/logo (2).png') }}" width="150px" alt="">
                 @endif
