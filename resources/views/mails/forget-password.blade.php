@@ -24,7 +24,7 @@
             display: inline-block;
             padding: 10px 15px;
             background: #007bff;
-            color: white;
+            color: white !important;
             text-decoration: none;
             border-radius: 5px;
             font-weight: bold;
@@ -45,7 +45,7 @@
         <p>Hello,</p>
         <p>You recently requested to reset your password. Click the button below to proceed:</p>
         <p style="text-align: center;">
-            <a href="{{ route("password.reset", $data["token"])}}" class="button">Reset Password</a>
+            <a href="{{ route('password.reset', $data['token']) }}" class="button ">Reset Password</a>
         </p>
         <p>If you didn't request this, you can safely ignore this email.</p>
         <p>For security reasons, this link will expire in 60 minutes.</p>
