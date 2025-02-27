@@ -4,12 +4,6 @@
     @section('main')
         <div class="wrapper">
 
-            @include('frontend.includes.header')
-
-
-
-
-
             <!-- REGISTRATION FORM START-->
             <section class="registration form-wrap">
                 <div class="container ">
@@ -46,14 +40,6 @@
                 </div>
             </section>
             <!-- REGISTRATION FORM END -->
-
-
-
-
-
-
-
-            @include('frontend.includes.footer')
 
         </div>
     @endsection

@@ -2,9 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\ForgetPasswordMail;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Password;
+use Illuminate\Support\Str;
 
 class PasswordResetController extends Controller
 {
@@ -24,18 +29,34 @@ class PasswordResetController extends Controller
             session()->flash("error", "User not found!");
         }
 
-        $status = Password::sendResetLink(
-            $request->only('email')
+        $token = Str::random(64);
+
+        // Store the token in the database
+        DB::table('password_reset_tokens')->updateOrInsert(
+            ['email' => $request->email],
+            ['token' => Hash::make($token), 'created_at' => now()]
         );
 
+        $mailData = [
+            "token" => $token,
+            "email" => $request->email
+        ];
+        Mail::to($request->email)->send(new ForgetPasswordMail($mailData));
 
-        if ($status === Password::RESET_LINK_SENT) {
-            session()->flash("success", "Please check your email to reset your password!");
-        }
+        return redirect()->back()->with("success", 'We have emailed your password reset link!');
 
-        return $status === Password::RESET_LINK_SENT
-            ? back()->with(['status' => __($status)])
-            : back()->withErrors(['email' => __($status)]);
+        // $status = Password::sendResetLink(
+        //     $request->only('email')
+        // );
+
+
+        // if ($status === Password::RESET_LINK_SENT) {
+        //     session()->flash("success", "Please check your email to reset your password!");
+        // }
+
+        // return $status === Password::RESET_LINK_SENT
+        //     ? back()->with(['status' => __($status)])
+        //     : back()->withErrors(['email' => __($status)]);
     }
 
     // Show the form to reset the password
