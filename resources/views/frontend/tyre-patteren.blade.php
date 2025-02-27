@@ -107,7 +107,7 @@
                                                     </a>
                                                 </div>
 
-                                                <div class="price">
+                                                {{-- <div class="price">
                                                     <form onsubmit="addToCart(event, {{ $product }})">
 
                                                         <div
@@ -135,9 +135,10 @@
                                                             BUY <i class="fa-solid fa-angle-right"></i>
                                                         </button>
                                                     </form>
-                                                </div>
+                                                </div> --}}
 
-
+                                                <a href="{{ route('shop-detail', ['id' => $product->id]) }}"
+                                                    class="main-btn sm w-100 mt-2 d-block text-center">Select</a>
                                             </div>
                                         </div>
                                         <!-- CARD -->
@@ -168,20 +169,20 @@
             event.preventDefault();
             let product = pname;
             let qty = parseInt(event.target.quantity.value) || 1;
-            
-            
+
+
             console.log(product)
-            
+
             let cart = JSON.parse(localStorage.getItem("tyreZoneCart"));
             let isInCart = cart.findIndex((value) => value.id == product.id);
 
             if (isInCart < 0) {
                 cart.push({
                     ...product,
-                    qty 
+                    qty
                 });
             } else {
-                if( (cart[isInCart].qty + qty) > cart[isInCart].in_stock){
+                if ((cart[isInCart].qty + qty) > cart[isInCart].in_stock) {
                     alert(`Only ${cart[isInCart].in_stock} item availble in stock.`)
                     return
                 }

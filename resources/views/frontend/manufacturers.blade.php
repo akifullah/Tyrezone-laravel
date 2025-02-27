@@ -248,8 +248,6 @@
                                                 </div>
                                                 <div class="d-flex align-items-center">
                                                     <div class="d-flex flex-wrap align-items-center gap-2 labels-wrap w-100 mb-2">
-                                                        <span><i class="fa-solid fa-car"></i>
-                                                            {{ $product->tyre_type }}</span>
 
                                                         @if ($product->season_type == '0')
                                                             <span><i title="All Season"

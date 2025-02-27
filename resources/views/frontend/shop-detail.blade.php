@@ -106,15 +106,15 @@
                                     <table class="table table-striped border">
                                         <tbody>
                                             <tr>
-                                                <td>Tyre Size</td>
+                                                <td>Pattern Name</td>
                                                 <td class="text-end">
-                                                    <span>{{ $product->tyre_size }}</span>
+                                                    <span>{{ $product->patteren != null ? $product->patteren->name : 'Not Specified' }}</span>
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td>Rim Size</td>
+                                                <td>Tyre Size</td>
                                                 <td class="text-end">
-                                                    <span>{{ $product->rim_size }} Inches</span>
+                                                    <span>{{ $product->tyre_size }}</span>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -124,17 +124,30 @@
                                                 </td>
                                             </tr>
                                             <tr>
+                                                <td>Rim Size</td>
+                                                <td class="text-end">
+                                                    <span>{{ $product->rim_size }} Inches</span>
+                                                </td>
+                                            </tr>
+                                            <tr>
                                                 <td>Tyre Aspect Ratio (Height)</td>
                                                 <td class="text-end">
                                                     <span>{{ $product->profile }} %</span>
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td>Pattern Name</td>
+                                                <td>Speed Rating</td>
                                                 <td class="text-end">
-                                                    <span>{{ $product->patteren != null ? $product->patteren->name : 'Not Specified' }}</span>
+                                                    <span>{{ $product->speed }}</span>
                                                 </td>
                                             </tr>
+                                            <tr>
+                                                <td>Load Index</td>
+                                                <td class="text-end">
+                                                    <span>{{ $product->load_index }}</span>
+                                                </td>
+                                            </tr>
+
 
                                         </tbody>
                                     </table>
@@ -220,7 +233,7 @@
                                                     </div>
                                                     <div class="d-flex flex-wrap gap-2 labels-wrap w-100 mb-2">
                                                         <span><i class="fa-solid fa-car"></i>
-                                                            {{ $product->tyre_type }}</span>
+                                                            {{ $product->load_index }}</span>
 
                                                         @if ($product->season_type == '0')
                                                             <span><i title="All Season"

@@ -184,10 +184,10 @@
                             <div class="row">
                                 <div class="col-md-6 mb-2">
                                     <div class="form-group">
-                                        <label for="">Tyre Type:</label>
-                                        <input type="text" value="{{ $product->tyre_type }}" name="tyre_type"
-                                            class="form-control @error('tyre_type') is-invalid @enderror"
-                                            placeholder="Tyre Type" value="{{ $product->tyre_type }}">
+                                        <label for="">Load Index:</label>
+                                        <input type="text" value="{{ $product->load_index }}" name="load_index"
+                                            class="form-control @error('load_index') is-invalid @enderror"
+                                            placeholder="Load Index" value="{{ $product->load_index }}">
                                     </div>
                                 </div>
 
@@ -228,10 +228,10 @@
 
                         {{-- <div class="col-md-4 mb-4">
                             <div class="form-group">
-                                <label for="">Tyre Type:</label>
-                                <input type="text" value="{{ $product->tyre_type }}" name="tyre_type"
-                                    class="form-control @error('tyre_type') is-invalid @enderror" placeholder="Tyre Type"
-                                    value="{{ $product->tyre_type }}">
+                                <label for="">Load Index:</label>
+                                <input type="text" value="{{ $product->load_index }}" name="load_index"
+                                    class="form-control @error('load_index') is-invalid @enderror" placeholder="Load Index"
+                                    value="{{ $product->load_index }}">
                             </div>
                         </div>
 

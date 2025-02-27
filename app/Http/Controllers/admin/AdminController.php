@@ -149,7 +149,7 @@ class AdminController extends Controller
             // "profile" => "required",
             // "rim_size" => "required",
             // "speed" => "required",
-            "tyre_type" => "required",
+            "load_index" => "required",
             "season_type" => "required",
             "budget_tyre" => "required",
             "price" => "required",
@@ -210,7 +210,7 @@ class AdminController extends Controller
             $product->profile = $profile;
             $product->rim_size = $rim;
             $product->speed = $speed;
-            $product->tyre_type = $req->tyre_type;
+            $product->load_index = $req->load_index;
             $product->season_type = $req->season_type;
             $product->budget_tyre = $req->budget_tyre;
             $product->price = $req->price;
@@ -316,7 +316,7 @@ class AdminController extends Controller
             // "profile" => "required",
             // "rim_size" => "required",
             // "speed" => "required",
-            "tyre_type" => "required",
+            "load_index" => "required",
             "season_type" => "required",
             "budget_tyre" => "required",
             "in_stock" => "required",
@@ -362,7 +362,7 @@ class AdminController extends Controller
             $product->profile = $profile;
             $product->rim_size = $rim;
             $product->speed = $speed;
-            $product->tyre_type = $req->tyre_type;
+            $product->load_index = $req->load_index;
             $product->season_type = $req->season_type;
             $product->budget_tyre = $req->budget_tyre;
             $product->in_stock = $req->in_stock;

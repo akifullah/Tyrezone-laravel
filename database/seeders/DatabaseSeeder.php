@@ -56,7 +56,7 @@ class DatabaseSeeder extends Seeder
             'profile' => '45',
             'rim_size' => '15',
             'speed' => 'H',
-            'tyre_type' => 'car',
+            'load_index' => '70',
             'season_type' => '0',
             'budget_tyre' => '1',
             'in_stock' => '10',

@@ -161,10 +161,10 @@
                             <div class="row">
                                 <div class="col-md-6 mb-2">
                                     <div class="form-group">
-                                        <label for="">Tyre Type:</label>
-                                        <input type="text" value="{{ old('tyre_type') }}" name="tyre_type"
-                                            class="form-control @error('tyre_type') is-invalid @enderror"
-                                            placeholder="Tyre Type" value="Car">
+                                        <label for="">Load Index:</label>
+                                        <input type="text" value="{{ old('load_index') }}" name="load_index"
+                                            class="form-control @error('load_index') is-invalid @enderror"
+                                            placeholder="Load Index" value="Car">
                                     </div>
                                 </div>
 

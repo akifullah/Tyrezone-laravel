@@ -27,7 +27,7 @@ return new class extends Migration
             $table->string("profile");
             $table->string("rim_size");
             $table->string("speed");
-            $table->string("tyre_type");
+            $table->string("load_index");
             $table->string("season_type");
             $table->string("budget_tyre");
             $table->string("in_stock");
