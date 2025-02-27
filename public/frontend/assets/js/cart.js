@@ -48,7 +48,6 @@ function totalAmount() {
     let cart = JSON.parse(localStorage.getItem("tyreZoneCart"));
     let total = 0;
     let totalAmount = 0;
-
     cart.forEach(product => {
         total += ((parseFloat(product.price)) * product.qty);
         totalAmount += ((parseFloat(product.vat_price)) * product.qty);
@@ -64,11 +63,14 @@ function totalAmount() {
     if (document.querySelector("#total") != null) {
         document.querySelector("#total").innerText = "£" + (parseFloat(total) + parseFloat(totalAmount)).toFixed(2);
     }
+    let totalWithTax = (total + totalAmount);
+
+
     if (document.querySelector("#totalPay") != null) {
-        document.querySelector("#totalPay").innerText = "£" + total.toFixed(2);
+        document.querySelector("#totalPay").innerText = "£" + totalWithTax.toFixed(2);
     }
     if (document.querySelector("#totalPayAmount") != null) {
-        document.querySelector("#totalPayAmount").value = total.toFixed(2);
+        document.querySelector("#totalPayAmount").value = totalWithTax.toFixed(2);
     }
 
 }

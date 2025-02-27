@@ -193,10 +193,11 @@
                                                 </div>
 
                                                 <div class="modal-body">
-                                                    <div class="d-flex align-items-center justify-content-between flex-wrap gap-3">
+                                                    <div
+                                                        class="d-flex align-items-center justify-content-between flex-wrap gap-3">
 
                                                         <h6 class="text-start">Order #: {{ $order->order_id }}</h6>
-                                                        
+
                                                         <h6>Total Price: £{{ $order->total_price }}</h6>
                                                     </div>
                                                     <div class="table-responsive">
@@ -212,27 +213,28 @@
                                                                 <th class="bg-transparent">Vat Price</th>
                                                                 <th class="bg-transparent">Price</th>
                                                             </tr>
-
-                                                            @foreach ($order->orderItem as $product)
-                                                                <tr>
-                                                                    <td>{{ $product->product->id }}</td>
-                                                                    <td>
-                                                                        <a class="text-black text-decoration-underline"
-                                                                            href="{{ route('shop-detail', ['id' => $product->product->id]) }}">
-                                                                            {{ $product->product->name }}
-                                                                        </a>
-                                                                    </td>
-                                                                    <td>
-                                                                        <img src="{{ asset('uploads/products/' . $product->product->images[0]->name) }}"
-                                                                            width="40px" style="width: 50px;"
-                                                                            alt="">
-                                                                    </td>
-                                                                    <td>{{ $product->product->tyre_size }}</td>
-                                                                    <td>{{ $product->qty }}</td>
-                                                                    <td>£{{ $product->vat_price }}</td>
-                                                                    <td>£{{ $product->price }}</td>
-                                                                </tr>
-                                                            @endforeach
+                                                            @if ($order->orderItem->isNotEmpty())
+                                                                @foreach ($order->orderItem as $product)
+                                                                    <tr>
+                                                                        <td>{{ $product->product?->id }}</td>
+                                                                        <td>
+                                                                            <a class="text-black text-decoration-underline"
+                                                                                href="{{ route('shop-detail', ['id' => $product->product?->id] || "") }}">
+                                                                                {{ $product->product?->name }}
+                                                                            </a>
+                                                                        </td>
+                                                                        <td>
+                                                                            <img src="{{ asset('uploads/products/' . $product->product?->images[0]?->name) }}"
+                                                                                width="40px" style="width: 50px;"
+                                                                                alt="">
+                                                                        </td>
+                                                                        <td>{{ $product?->product?->tyre_size }}</td>
+                                                                        <td>{{ $product?->qty }}</td>
+                                                                        <td>£{{ $product?->vat_price }}</td>
+                                                                        <td>£{{ $product?->price }}</td>
+                                                                    </tr>
+                                                                @endforeach
+                                                            @endif
                                                         </table>
                                                     </div>
                                                 </div>
@@ -274,6 +276,10 @@
 
                             </tr>
                         @endforeach
+                    @else
+                        <tr>
+                            <td colspan="9" class="text-center">No orders are available</td>
+                        </tr>
                     @endif
                 </tbody>
             </table>
@@ -302,7 +308,7 @@
                         id
                     },
                     success: function(res) {
-                        if(res.status){
+                        if (res.status) {
                             window.location.reload();
                         }
                     }
@@ -312,7 +318,7 @@
 
 
         function handleSelectChange(event, id) {
-            $("#preloader").removeClass("d-none");   
+            $("#preloader").removeClass("d-none");
             var value = event.target.value;
             let order_id = id;
 

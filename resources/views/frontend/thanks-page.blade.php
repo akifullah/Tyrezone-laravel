@@ -33,7 +33,7 @@
                                     style="background: #fdac04 !important; font-weight: 500; color:black">Received</span>
                             </h5>
 
-                               
+
                             <div class="table-responsive">
                                 <table class="table table-bordered order-table">
                                     <thead>
@@ -46,18 +46,24 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($orders->orderItem as $order)
+                                        @if (!empty($orders?->orderItem))
+                                            @foreach ($orders?->orderItem as $order)
+                                                <tr>
+                                                    <td>#{{ $order->order_id }}</td>
+                                                    <td>{{ $order->product->name }}</td>
+                                                    <td>
+                                                        <img src="{{ asset('uploads/products/' . $order->product->images[0]->name) }}"
+                                                            width="40px" style="width: 50px;" alt="">
+                                                    </td>
+                                                    <td>$ {{ $order->product->price + $order->product->vat_price }}</td>
+                                                    <td>{{ $orders->payment_status }}</td>
+                                                </tr>
+                                            @endforeach
+                                        @else
                                             <tr>
-                                                <td>#{{ $order->order_id }}</td>
-                                                 <td>{{ $order->product->name }}</td>
-                                                <td>
-                                                    <img src="{{ asset('uploads/products/' . $order->product->images[0]->name) }}"
-                                                        width="40px" style="width: 50px;" alt="">
-                                                </td>
-                                                <td>$ {{ $order->product->price }}</td>
-                                                <td>{{ $orders->payment_status }}</td> 
+                                                <td colspan="6" class="text-center">No item found</td>
                                             </tr>
-                                        @endforeach
+                                        @endif
                                     </tbody>
                                 </table>
                             </div>
