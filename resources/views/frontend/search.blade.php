@@ -55,7 +55,7 @@
 
                                     <div class="col-lg-2 col-6 mb-2 px-1">
                                         <div class="form-group">
-                                            <select name="rim_size" class="form-control">
+                                            <select name="rim_size" class="form-select">
                                                 <option disabled selected>Rim Size</option>
                                                 @if ($sizes->isNotEmpty())
                                                     @foreach ($sizes as $size)
@@ -72,7 +72,7 @@
                                     <div class="col-lg-2 col-6 mb-2 px-1">
                                         <div class="form-group">
                                             <select name="speed" class="form-select">
-                                                <option disabled selected>Speed</option>
+                                                <option >Speed</option>
                                                 @if ($sizes->isNotEmpty())
                                                     @foreach ($sizes as $size)
                                                         <option
@@ -128,8 +128,10 @@
                                                         </div>
                                                     @endif
                                                     <div class="p-card-img position-relative w-100">
-                                                        <img src="{{ asset('uploads/products/' . $product->images[0]->name) }}"
-                                                            alt="" width="100%">
+                                                        @if ($product->images->isNotEmpty())
+                                                            <img
+                                                                src="{{ asset('uploads/products/' . $product->images[0]->name) }}">
+                                                        @endif
                                                     </div>
 
 
@@ -157,19 +159,18 @@
                                                     </div>
                                                     <div class="d-flex flex-wrap gap-2 labels-wrap w-100 mb-2">
                                                         <span><i class="fa-solid fa-car"></i>
-                                                            {{ $product->load_index }}</span>
 
-                                                        @if ($product->season_type == '0')
-                                                            <span><i title="All Season"
-                                                                    class="fa-brands fa-galactic-republic"></i>
-                                                                All Season</span>
-                                                        @elseif($product->season_type == '1')
-                                                            <span><i class="fa-regular fa-sun"></i>
-                                                                Summer</span>
-                                                        @elseif($product->season_type == '2')
-                                                            <span><i class="fa-regular fa-snowflake"></i>
-                                                                Winter</span>
-                                                        @endif
+                                                            @if ($product->season_type == '0')
+                                                                <span><i title="All Season"
+                                                                        class="fa-brands fa-galactic-republic"></i>
+                                                                    All Season</span>
+                                                            @elseif($product->season_type == '1')
+                                                                <span><i class="fa-regular fa-sun"></i>
+                                                                    Summer</span>
+                                                            @elseif($product->season_type == '2')
+                                                                <span><i class="fa-regular fa-snowflake"></i>
+                                                                    Winter</span>
+                                                            @endif
                                                     </div>
 
                                                     <a href="{{ route('shop-detail', ['id' => $product->id]) }}"
@@ -215,6 +216,8 @@
 
                                         </div> --}}
                                     @endforeach
+                                @else
+                                <h3 class="text-center">Not Item Found</h3>
                                 @endif
 
                             </div>

@@ -72,7 +72,9 @@
             <strong>Items Ordered:</strong>
             <ul>
                 @foreach ($data['items'] as $item)
-                    <li><strong>{{ $item->product->name }}</strong> - Quantity: {{ $item->qty }}, Price: {{ $item->product->price }}</li>
+                    <li><strong>{{ $item->product->name }}</strong> - Quantity: {{ $item->qty }}, Price:
+                    </li>
+                    {{ $item->product->price + $item->product->vat_price }}</li>
                 @endforeach
                 {{-- <li>2. <strong>[Product Name 2]</strong> - Quantity: [Qty], Price: [Price]</li> --}}
             </ul>
@@ -81,7 +83,7 @@
         <div class="order-details">
             <strong>Shipping Details:</strong>
             <ul>
-                <li><strong>Shipping Address:</strong> {{ $data["shipping_address"] }}</li>
+                <li><strong>Shipping Address:</strong> {{ $data['shipping_address'] }}</li>
                 <li><strong>Estimated Delivery Date:</strong> within & days.</li>
             </ul>
         </div>
@@ -95,8 +97,8 @@
 
         <div class="footer">
             <p>Best Regards,</p>
-            <p>Tyrezone.com</p>
-            <p><a href="[Website URL]" target="_blank">[Website URL]</a></p>
+            <p>{{ config('app.name') }}</p>
+            <p><a href="{{ config('app.url') }}" target="_blank">{{ config('app.url') }}</a></p>
             <p>[Customer Service Contact]</p>
         </div>
     </div>

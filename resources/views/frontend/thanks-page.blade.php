@@ -46,14 +46,21 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+
                                         @if (!empty($orders?->orderItem))
                                             @foreach ($orders?->orderItem as $order)
                                                 <tr>
                                                     <td>#{{ $order->order_id }}</td>
                                                     <td>{{ $order->product->name }}</td>
                                                     <td>
-                                                        <img src="{{ asset('uploads/products/' . $order->product->images[0]->name) }}"
-                                                            width="40px" style="width: 50px;" alt="">
+                                                        @if (!empty($order->product->images) && count($order->product->images) > 0)
+                                                            <img src="{{ asset('uploads/products/' . $order->product->images[0]->name) }}"
+                                                                width="40px" style="width: 50px;" alt="">
+                                                        @else
+                                                            <img src=""
+                                                                width="40px" style="width: 50px;"
+                                                                alt="No Image Available">
+                                                        @endif
                                                     </td>
                                                     <td>$ {{ $order->product->price + $order->product->vat_price }}</td>
                                                     <td>{{ $orders->payment_status }}</td>
@@ -73,7 +80,7 @@
                                 sure you answer the call for swift solution.</p>
 
                             <div class="d-flex align-items-center justify-content-center  gap-2 flex-wrap mt-3">
-                                <a href="{{ route('home') }}" class="main-btn sm">Go to Home</a>
+                                <a href="{{ route('shop') }}" class="main-btn sm">Continue Shopping</a>
                                 <a href="{{ route('profile') }}" class="main-btn sm">Profile</a>
                             </div>
                         </div>

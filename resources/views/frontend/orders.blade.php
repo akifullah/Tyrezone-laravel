@@ -99,7 +99,8 @@
                                                                                     </th>
                                                                                     <th class="bg-transparent">Size</th>
                                                                                     <th class="bg-transparent">Qty</th>
-                                                                                    <th class="bg-transparent">Vat Price</th>
+                                                                                    <th class="bg-transparent">Vat Price
+                                                                                    </th>
                                                                                     <th class="bg-transparent">Price</th>
                                                                                 </tr>
 
@@ -113,10 +114,12 @@
                                                                                             </a>
                                                                                         </td>
                                                                                         <td>
-                                                                                            <img src="{{ asset('uploads/products/' . $product->product->images[0]->name) }}"
-                                                                                                width="40px"
-                                                                                                style="width: 50px;"
-                                                                                                alt="">
+                                                                                            @if ($product->product->images->isNotEmpty())
+                                                                                                    <img src="{{ asset('uploads/products/' . $product->product->images[0]->name) }}"
+                                                                                                        width="40px"
+                                                                                                        style="width: 50px;"
+                                                                                                        alt="">
+                                                                                            @endif
                                                                                         </td>
                                                                                         <td>{{ $product->product->tyre_size }}
                                                                                         </td>

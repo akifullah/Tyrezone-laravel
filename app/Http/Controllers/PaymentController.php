@@ -305,10 +305,10 @@ class PaymentController extends Controller
 
         // return $orderDetail;
 
+        return view("frontend.thanks-page", ["orders" => $orderDetail]);
 
         // $order = OrderItem::where("order_id", $orderId)->with("order")->get();
         // return $order;
         // session()->forget("order_id");
-        return view("frontend.thanks-page", ["orders" => $orderDetail]);
     }
 }

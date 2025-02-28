@@ -28,11 +28,12 @@ class ShopController extends Controller
     function shopDetail($id){
 
         $product = Product::where("id", $id)->with("manufacturer", "patteren", "images")->first();
-        // return $product;
-        $relatedProduct = Product::where("id", "!=", $product->id)
+        if(!$product){
+            return abort(404);
+        }
+        $relatedProduct = Product::where("id", "!=", $product?->id)
         // ->where("tyre_size", "like", "%$product->width" . " " . " $product->profile%")
         ->where(["manufacturer_id" => $product->manufacturer_id ])->with("images")->get();
-        // return $relatedProduct;
         return view("frontend.shop-detail", ["product"=> $product, "relatedProducts"=> $relatedProduct]);
     }
 

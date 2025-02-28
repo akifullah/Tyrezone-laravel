@@ -194,16 +194,16 @@
 
                                                 <div class="img-row">
 
-                                                    @if ($product->manufacturer->image != '')
+                                                    @if ($relatedProduct->manufacturer->image != '')
                                                         <div class="brand-img">
                                                             <img
-                                                                src="{{ asset('uploads/brands/' . $product->manufacturer->image) }}">
+                                                                src="{{ asset('uploads/brands/' . $relatedProduct->manufacturer->image) }}">
                                                         </div>
                                                     @endif
 
                                                     <div class="p-card-img position-relative w-100">
-                                                        @if ($product->images->isNotEmpty())
-                                                            <img src="{{ asset('uploads/products/' . $product->images[0]->name) }}"
+                                                        @if ($relatedProduct->images->isNotEmpty())
+                                                            <img src="{{ asset('uploads/products/' . $relatedProduct->images[0]->name) }}"
                                                                 alt="" width="100%">
                                                         @endif
                                                     </div>
@@ -218,12 +218,12 @@
                                                         <div class="d-flex justify-space-between">
                                                             <div class="">
                                                                 <h6 class="title">
-                                                                    {{ $product->name }}
+                                                                    {{ $relatedProduct->name }}
                                                                 </h6>
-                                                                <p class="tyre-size">{{ $product->tyre_size }}</p>
+                                                                <p class="tyre-size">{{ $relatedProduct->tyre_size }}</p>
                                                             </div>
                                                             <div class="ms-auto ">
-                                                                <h4 class="price ">£{{ $product->price }}
+                                                                <h4 class="price ">£{{ $relatedProduct->price }}
                                                                     <small>each</small>
                                                                 </h4>
                                                             </div>
@@ -232,23 +232,21 @@
 
                                                     </div>
                                                     <div class="d-flex flex-wrap gap-2 labels-wrap w-100 mb-2">
-                                                        <span><i class="fa-solid fa-car"></i>
-                                                            {{ $product->load_index }}</span>
-
-                                                        @if ($product->season_type == '0')
+                                                        
+                                                        @if ($relatedProduct->season_type == '0')
                                                             <span><i title="All Season"
                                                                     class="fa-brands fa-galactic-republic"></i>
                                                                 All Season</span>
-                                                        @elseif($product->season_type == '1')
+                                                        @elseif($relatedProduct->season_type == '1')
                                                             <span><i class="fa-regular fa-sun"></i>
                                                                 Summer</span>
-                                                        @elseif($product->season_type == '2')
+                                                        @elseif($relatedProduct->season_type == '2')
                                                             <span><i class="fa-regular fa-snowflake"></i>
                                                                 Winter</span>
                                                         @endif
                                                     </div>
 
-                                                    <a href="{{ route('shop-detail', ['id' => $product->id]) }}"
+                                                    <a href="{{ route('shop-detail', ['id' => $relatedProduct->id]) }}"
                                                         class="main-btn sm w-100 d-block text-center">Select</a>
 
                                                 </div>

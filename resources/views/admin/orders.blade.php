@@ -219,14 +219,16 @@
                                                                         <td>{{ $product->product?->id }}</td>
                                                                         <td>
                                                                             <a class="text-black text-decoration-underline"
-                                                                                href="{{ route('shop-detail', ['id' => $product->product?->id] || "") }}">
+                                                                                href="{{ route('shop-detail', ['id' => $product->product?->id]) }}">
                                                                                 {{ $product->product?->name }}
                                                                             </a>
                                                                         </td>
                                                                         <td>
-                                                                            <img src="{{ asset('uploads/products/' . $product->product?->images[0]?->name) }}"
-                                                                                width="40px" style="width: 50px;"
-                                                                                alt="">
+                                                                            @if ($product->product?->images->isNotEmpty())
+                                                                                <img src="{{ asset('uploads/products/' . $product->product?->images[0]?->name) }}"
+                                                                                    width="40px" style="width: 50px;"
+                                                                                    alt="">
+                                                                            @endif
                                                                         </td>
                                                                         <td>{{ $product?->product?->tyre_size }}</td>
                                                                         <td>{{ $product?->qty }}</td>

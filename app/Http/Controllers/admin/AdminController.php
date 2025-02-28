@@ -151,7 +151,6 @@ class AdminController extends Controller
             // "speed" => "required",
             "load_index" => "required",
             "season_type" => "required",
-            "budget_tyre" => "required",
             "price" => "required",
             "in_stock" => "required",
 

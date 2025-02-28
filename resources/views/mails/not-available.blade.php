@@ -56,7 +56,8 @@
     <div class="container">
         <div class="header">Your Order #{{ $data['orderId'] }} – Items Not Available</div>
         <p>Dear {{ $data['c_name'] }},</p>
-        <p>We regret to inform you that, unfortunately, some items in your order #{{ $data['orderId'] }} are currently not available.
+        <p>We regret to inform you that, unfortunately, some items in your order #{{ $data['orderId'] }} are currently
+            not available.
             As a result, we are unable to fulfill your order at this time. We sincerely apologize for any inconvenience
             this may cause.</p>
 
@@ -71,7 +72,9 @@
                 <ul>
                     @foreach ($data['items'] as $item)
                         <li><strong>{{ $item->product->name }}</strong> - Quantity: {{ $item->qty }}, Price:
-                            {{ $item->product->price }}</li>
+                            {{ $item->product->price + $item->product->vat_price }}</li>
+
+                        </li>
                     @endforeach
                 </ul>
             </ul>
@@ -88,8 +91,8 @@
 
         <div class="footer">
             <p>Best Regards,</p>
-            <p>[Your Website Name]</p>
-            <p><a href="[Website URL]" target="_blank">[Website URL]</a></p>
+            <p>{{ config('app.name') }}</p>
+            <p><a href="{{ config('app.url') }}" target="_blank">{{ config('app.url') }}</a></p>
             <p>[Customer Service Contact]</p>
         </div>
     </div>

@@ -80,7 +80,10 @@
             <strong>Items Ordered:</strong>
             <ol>
                 @foreach ($data['items'] as $item)
-                    <li><strong>{{ $item->product->name }}</strong> - Quantity: {{ $item->qty }}, Price: {{ $item->product->price }}</li>
+                    <li><strong>{{ $item->product->name }}</strong> - Quantity: {{ $item->qty }}, Price:
+                        {{ $item->product->price + $item->product->vat_price }}</li>
+
+                    </li>
                 @endforeach
                 {{-- <li><strong>[Product Name 2]</strong> - Quantity: [Qty], Price: [Price]</li> --}}
             </ol>
@@ -98,8 +101,9 @@
 
         <div class="footer">
             <p>Best Regards,</p>
-            <p>Tyrezone</p>
-            <p><a href="[Website URL]" target="_blank">[Website URL]</a></p>
+            <p>{{ config('app.name') }}</p>
+            <p><a href="{{ config('app.url') }}" target="_blank">{{ config('app.url') }}</a></p>
+            <p>[Customer Service Contact]</p>
         </div>
     </div>
 </body>
