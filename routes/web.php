@@ -9,6 +9,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ManufacturerController;
+use App\Http\Controllers\NewsletterController;
 use App\Http\Controllers\PasswordResetController;
 use App\Http\Controllers\PatterenController;
 use App\Http\Controllers\PaymentController;
@@ -30,7 +31,7 @@ Route::get("/manufacturers/{id}", [ManufacturerController::class, "manufacturer"
 
 Route::get("/tyre-patteren/{m_id}/{id}", [PatterenController::class, "index"])->name("tyre-patteren");
 
-
+Route::post('/subscribe', [NewsletterController::class, 'subscribe']);
 Route::view("/booking", "frontend.booking")->name("booking");
 Route::view("/gallery", "frontend.gallery")->name("gallery");
 Route::view("/services", "frontend.services")->name("services");

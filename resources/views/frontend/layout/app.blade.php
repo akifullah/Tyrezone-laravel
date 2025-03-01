@@ -115,7 +115,7 @@
         <nav class="navbar navbar-expand-lg  navbar-dark p-0">
             <div class="container">
                 <a href="{{ route('home') }}" class="navbar-brand">
-                  
+
                     @if (!empty($logo))
                         <img src="{{ asset('uploads/logos/' . $logo->name) }}" class="logo" alt="">
                     @else
@@ -310,9 +310,11 @@
                         <h3>Newsletter Signup</h3>
                         <p>Sign up for exclusive offers, original stories, activism awareness, events and more.</p>
 
-                        <form action="">
+                        <form id="newsletter-form">
+                            @csrf
                             <div class="form-group">
-                                <input type="text" placeholder="E-Mail *" class="form-control">
+                                <input type="email" name="email" id="email" placeholder="Enter your email"
+                                    required class="form-control">
                             </div>
 
                             <div class="">
@@ -425,6 +427,25 @@
     @yield('customjs')
 
     <script>
+        document.getElementById('newsletter-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            let formData = new FormData(this);
+
+            fetch('/subscribe', {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                })
+                .then(response => response.json())
+                .then(data => alert(data.message))
+                .catch(error => console.error('Error:', error));
+        });
+
+
+
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')

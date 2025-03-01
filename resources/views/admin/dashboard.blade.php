@@ -80,11 +80,12 @@
                             @if ($manufacturers->isNotEmpty())
                                 @foreach ($manufacturers as $manufacturer)
                                     <tr>
-                                        <td>{{ $manufacturer->name }}</td>
+                                        <td>{{ $manufacturer?->name }}</td>
                                         <td>
-
-                                            <img src="{{ asset('uploads/brands/' . $manufacturer->image) }}"
-                                                alt="">
+                                            @if (!empty($manufacturer?->image))
+                                                <img src="{{ asset('uploads/brands/' . $manufacturer?->image) }}"
+                                                    alt="">
+                                            @endif
                                         </td>
                                         <td>
                                             {{ $manufacturer->description }}
@@ -122,9 +123,9 @@
                             @if ($patterens->isNotEmpty())
                                 @foreach ($patterens as $patteren)
                                     <tr>
-                                        <td>{{ $patteren->name }}</td>
-                                        <td>{{ $patteren->manufacturer->name }}</td>
-                                        <td>{{ \Carbon\Carbon::parse($patteren->created_at)->format('d M, Y') }}</td>
+                                        <td>{{ $patteren?->name }}</td>
+                                        <td>{{ $patteren?->manufacturer?->name }}</td>
+                                        <td>{{ \Carbon\Carbon::parse($patteren?->created_at)->format('d M, Y') }}</td>
                                     </tr>
                                 @endforeach
                             @endif
@@ -161,18 +162,18 @@
                     @if ($products->isNotEmpty())
                         @foreach ($products as $product)
                             <tr>
-                                <td>{{ $product->name }}</td>
+                                <td>{{ $product?->name }}</td>
                                 <td>
                                     @if ($product->images->isNotEmpty())
                                         <img src="{{ asset('uploads/products/' . $product->images[0]->name) }}"
                                             alt="">
                                     @endif
                                 </td>
-                                <td>{{ $product->manufacturer->name }}</td>
-                                <td>{{ $product->patteren->name }}</td>
-                                <td>{{ $product->tyre_size }}</td>
+                                <td>{{ $product?->manufacturer?->name }}</td>
+                                <td>{{ $product?->patteren?->name }}</td>
+                                <td>{{ $product?->tyre_size }}</td>
 
-                                <td>{{ $product->price }}</td>
+                                <td>{{ $product?->price }}</td>
 
                             </tr>
                         @endforeach

@@ -20,7 +20,7 @@
         <section class="shop">
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-9 mb-5 pe-lg-5 ">
+                    <div class="col-lg-9 mb-5 pe-lg-5 order-1 order-lg-0">
                         <div class="shop-content">
                             <h2>Tyres</h2>
 
@@ -95,6 +95,10 @@
 
                                         </div>
                                     @endforeach
+
+                                    @else
+                                    <h3 class="h3 mt-5 text-center">Items Not available</h3>
+                                    
                                 @endif
 
                             </div>

@@ -72,7 +72,7 @@
                                     <div class="col-lg-2 col-6 mb-2 px-1">
                                         <div class="form-group">
                                             <select name="speed" class="form-select">
-                                                <option >Speed</option>
+                                                <option value="" >Speed</option>
                                                 @if ($sizes->isNotEmpty())
                                                     @foreach ($sizes as $size)
                                                         <option
@@ -217,7 +217,7 @@
                                         </div> --}}
                                     @endforeach
                                 @else
-                                <h3 class="text-center">Not Item Found</h3>
+                                <h3 class="text-center my-4">Item Not Found</h3>
                                 @endif
 
                             </div>
