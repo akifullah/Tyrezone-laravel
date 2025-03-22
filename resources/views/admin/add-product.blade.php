@@ -11,7 +11,7 @@
 
 @section('maincontent')
     <div class="content-area mt-5">
-        <div class="col-md-9 mx-auto">
+        <div class="col-md-12 mx-auto">
             <div class="d-flex justify-content-between align-items-center">
                 <h5 class="m-0">Add Product</h5>
                 <a class="main-btn sm" href="{{ route('admin.products') }}">All Products</a>
@@ -35,7 +35,7 @@
                             <div class="form-group">
                                 <label for="">Manufacture Name:</label>
                                 <select id="manufacturer_id" name="manufacturer_id" onchange="getPatteren()"
-                                    class="form-select @error('manufacturer_id') is-invalid @enderror">
+                                    class="form-select select2 @error('manufacturer_id') is-invalid @enderror">
                                     <option selected disabled>Select Manufacture</option>
                                     @if ($manufacturers->isNotEmpty())
                                         @foreach ($manufacturers as $manufacturer)
@@ -173,8 +173,7 @@
                                     <div class="form-group">
                                         <label for="">In Stock:</label>
                                         <input type="number" name="in_stock" value="{{ old('in_stock') }}"
-                                            class="form-control @error('in_stock') is-invalid @enderror"
-                                            placeholder="10 ">
+                                            class="form-control @error('in_stock') is-invalid @enderror" placeholder="10 ">
                                     </div>
                                 </div>
                             </div>
@@ -187,8 +186,7 @@
                                     <div class="form-group">
                                         <label for="">Price:</label>
                                         <input type="text" name="price" value="{{ old('price') }}"
-                                            class="form-control  @error('price') is-invalid @enderror"
-                                            placeholder="Price">
+                                            class="form-control  @error('price') is-invalid @enderror" placeholder="Price">
                                     </div>
                                 </div>
 
@@ -200,15 +198,28 @@
                                             placeholder="VAT Price">
                                     </div>
                                 </div>
-                                
+
                             </div>
 
                         </div>
 
-                        <div class="col-md-5 mb-2">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="">Vehicle Category</label>
+                                <select name="v_category" class="form-select @error('v_category') is-invalid @enderror">
+                                    <option disabled selected>Select Category</option>
+                                    <option value="passenger car" {{ old('v_category') == 'passenger car' ? 'selected' : '' }}>Passenger Car</option>
+                                    <option value="passenger 4x4" {{ old('v_category') == 'passenger 4x4' ? 'selected' : '' }}>Passenger 4x4</option>
+                                    <option value="commercial van" {{ old('v_category') == 'commercial van' ? 'selected' : '' }}>Commercial Van</option>
+                                    <option value="truck" {{ old('v_category') == 'truck' ? 'selected' : '' }}>Truck</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4  mb-2">
                             <label for="">Season Type:</label>
                             <div class="">
-                                <div class="form-check form-check-inline mt-0">
+                                <div class="form-check form-check form-check-inline mt-0">
                                     <label for="winter" class="form-check-label">Winter</label>
                                     <input type="radio"
                                         class="form-check-input @error('season_type') is-invalid @enderror"
@@ -216,7 +227,7 @@
                                         value="2" id="winter">
                                 </div>
 
-                                <div class="form-check form-check-inline mt-0">
+                                <div class="form-check form-check form-check-inline mt-0">
                                     <label for="summer" class="form-check-label">Summer</label>
                                     <input type="radio"
                                         class="form-check-input @error('season_type') is-invalid @enderror"
@@ -224,7 +235,7 @@
                                         value="1" id="summer">
                                 </div>
 
-                                <div class="form-check form-check-inline mt-0">
+                                <div class="form-check form-check form-check-inline mt-0">
                                     <label for="all" class="form-check-label ">All Season</label>
                                     <input type="radio"
                                         class="form-check-input @error('season_type') is-invalid @enderror"
@@ -234,15 +245,36 @@
                             </div>
                         </div>
 
-                        <div class="col-md-3 mb-2">
-                            <label for="budget">Budget Tyre</label>
-                            <div class="form-check mt-0">
-                                <label for="budget">Yes Budget Tyre</label>
-                                <input id="budget" type="checkbox" name="budget_tyre"
-                                    {{ old('budget_tyre') == '1' ? 'checked' : '' }} value="1"
+                        <div class="col-md-5  mb-2">
+                            <div class="">
+                                <label for="budget">Brand Category</label>
+                            </div>
+                            
+                            <div class="form-check form-check-inline mt-0">
+                                <input id="budget" type="radio" name="budget_tyre"
+                                    {{ old('budget_tyre') == 'budget' ? 'checked' : '' }} value="budget"
                                     class="form-check-input @error('budget_tyre') is-invalid @enderror">
+                                <label for="budget">Budget</label>
+                            </div>
+                            <div class="form-check form-check-inline mt-0">
+                                <input id="mid-range" type="radio" name="budget_tyre"
+                                    {{ old('budget_tyre') == 'mid range' ? 'checked' : '' }} value="mid range"
+                                    class="form-check-input @error('budget_tyre') is-invalid @enderror">
+                                <label for="mid-range">Mid Range</label>
+                            </div>
+                            <div class="form-check form-check-inline mt-0 pe-5">
+                                <input id="premium" type="radio" name="budget_tyre"
+                                    {{ old('budget_tyre') == 'premium' ? 'checked' : '' }} value="premium"
+                                    class="form-check-input @error('budget_tyre') is-invalid @enderror">
+                                <label for="premium">Premium</label>
+                            </div>
+                            <div class="form-check form-check-inline mt-0">
+                                <input type="checkbox" class="form-check-input" name="run_flat" id="run_flat" value="1">
+                                <label for="run_flat">Run Flat</label>
                             </div>
                         </div>
+
+                    
 
                         <div class="col-12">
                             <div id="image" class="dropzone dz-clickable">

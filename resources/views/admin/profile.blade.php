@@ -158,7 +158,7 @@
                     </div>
                 </section>
 
-                {{-- <div class="col-md-12 px-5 sign-up-wrap form-wrap">
+                <div class="col-md-12 px-5 sign-up-wrap form-wrap">
 
                     <h5>SMTP Settings</h5>
 
@@ -223,7 +223,7 @@
 
                     </form>
 
-                </div> --}}
+                </div>
 
                 <div class="col-md-12 ms-auto px-5 sign-up-wrap form-wrap">
 

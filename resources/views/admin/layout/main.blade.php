@@ -16,7 +16,7 @@
 
     <!-- include summernote css/js -->
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
-<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
 
 
 
@@ -26,6 +26,9 @@
     <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css" />
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css"
+        integrity="sha512-nMNlpuaDPrqlEls3IX/Q56H36qvBASwb3ipuo3MxeWbsQB1881ox0cRv7UPTgBlriqoynt35KjEwgGUeUXIPnw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- CUSTOM CSS -->
     <link rel="stylesheet" href="{{ asset('admin/assets/css/style.css') }}">
 
@@ -84,7 +87,7 @@
                     </ul>
                 </div>
 
-              
+
 
             </aside>
 
@@ -102,7 +105,7 @@
                                 class="fa-solid fa-user-tie"></i></a>
 
                         <ul class="dropdown-menu dropdown-menu-end">
-                            <a href="{{ route("admin.profile") }}" class="dropdown-item">Profile</a>
+                            <a href="{{ route('admin.profile') }}" class="dropdown-item">Profile</a>
                             <a href="{{ route('logout') }}" class="dropdown-item">Logout</a>
                         </ul>
                     </div>
@@ -129,14 +132,21 @@
 
     <!-- BOOTSTRAP 5 JS CDN -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"
+        integrity="sha512-2ImtlRlf2VVmiGZsjm9bEyhjGW4dU7B6TNwh/hx/iSByxNENtj3WVE6o/9Lj4TJeVXPi4bnOIMXFIJJAeufa0A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 
     <script>
+        // $(document).ready(function() {
+        //     setTimeout(() => {
+        //         $('.select2').select2();
+        //     }, 500);
+        // });
         $(document).ready(function() {
             $(document).ready(function() {
                 $('.summernote').summernote();
-                
+
             });
         });
 

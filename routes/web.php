@@ -93,7 +93,7 @@ Route::group(["middleware" => "isAdmin"], function () {
         // CHANGE LOGO
         Route::post("change-logo", [AdminController::class, "changeLogo"])->name("admin.change.logo");
         // SMTP
-        Route::post('/admin/smtp/update', [SmtpSettingsController::class, 'update'])->name('admin.smtp.update');
+        Route::post('smtp/update', [SmtpSettingsController::class, 'update'])->name('admin.smtp.update');
         // Route::post("admin/smtp/update", [])
 
         // STIPE KEY

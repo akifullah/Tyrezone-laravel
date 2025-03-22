@@ -29,9 +29,10 @@ return new class extends Migration
             $table->string("speed");
             $table->string("load_index");
             $table->string("season_type");
-            $table->string("budget_tyre");
+            $table->string("budget_tyre")->nullable();
             $table->string("in_stock");
-            $table->string("vat_price")->nullable();
+            $table->string("vat_price")->nullable()->default(0);
+            $table->string("v_category")->nullable();
             $table->string("price");
             $table->text("description")->nullable();
             $table->timestamps();
