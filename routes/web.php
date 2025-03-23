@@ -5,6 +5,7 @@ use App\Http\Controllers\admin\OrderController;
 use App\Http\Controllers\admin\ProductImageController;
 use App\Http\Controllers\admin\TempImageController;
 use App\Http\Controllers\admin\TyreSizeController;
+use App\Http\Controllers\admin\VehicleCategoryContoller;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\HomeController;
@@ -130,6 +131,15 @@ Route::group(["middleware" => "isAdmin"], function () {
         Route::get("tyre-patteren/edit/{id}", [AdminController::class, "editTyrePatteren"])->name("admin.editTyrePatteren");
         Route::post("tyre-patteren/update", [AdminController::class, "updateTyrePatteren"])->name("admin.updateTyrePatteren");
         Route::post("tyre-patteren/delete", [AdminController::class, "deleteTyrePatteren"])->name("admin.deleteTyrePatteren");
+
+        // VEHICLE CATEGORY
+        Route::get("vehicle-category", [VehicleCategoryContoller::class, "index"])->name("admin.vehicleCategory");
+        Route::get("add-vehicle-category", [VehicleCategoryContoller::class, "create"])->name("admin.addVehicleCategory");
+        Route::post("save-vehicle-category", [VehicleCategoryContoller::class, "store"])->name("admin.saveVehicleCategory");
+        Route::get("edit-vehicle-category/{id}", [VehicleCategoryContoller::class, "edit"])->name("admin.editVehicleCategory");
+        Route::post("update-vehicle-category", [VehicleCategoryContoller::class, "update"])->name("admin.updateVehicleCategory");
+        Route::post("delete-vehicle-category", [VehicleCategoryContoller::class, "destroy"])->name("admin.deleteVehicleCategory");
+
 
         // USERS
         Route::get("users", [AdminController::class, "users"])->name("admin.users");

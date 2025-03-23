@@ -12,6 +12,7 @@ use App\Models\ProductImage;
 use App\Models\Size;
 use App\Models\TempImage;
 use App\Models\User;
+use App\Models\VehicleCategory;
 use Doctrine\Inflector\Rules\Pattern;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -120,13 +121,15 @@ class AdminController extends Controller
     {
         $patterens = Patteren::orderBy("manufacturer_id")->with("manufacturer")->get();
         $manufacturers = Manufacturer::all();
+        $vehicleCategories = VehicleCategory::all();
 
         $sizes = Size::all();
 
         return view("admin.add-product", [
             "manufacturers" => $manufacturers,
             "patterens" => $patterens,
-            "sizes" => $sizes
+            "sizes" => $sizes,
+            "vehicleCategories" => $vehicleCategories
         ]);
     }
 
@@ -214,6 +217,7 @@ class AdminController extends Controller
             $product->season_type = $req->season_type;
             $product->budget_tyre = $req->budget_tyre;
             $product->v_category = $req->v_category;
+            $product->run_flat = $req->run_flat;
             $product->price = $req->price;
             $product->in_stock = $req->in_stock;
             $product->vat_price = $req->vat_price;

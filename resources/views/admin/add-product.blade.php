@@ -208,10 +208,15 @@
                                 <label for="">Vehicle Category</label>
                                 <select name="v_category" class="form-select @error('v_category') is-invalid @enderror">
                                     <option disabled selected>Select Category</option>
-                                    <option value="passenger car" {{ old('v_category') == 'passenger car' ? 'selected' : '' }}>Passenger Car</option>
-                                    <option value="passenger 4x4" {{ old('v_category') == 'passenger 4x4' ? 'selected' : '' }}>Passenger 4x4</option>
-                                    <option value="commercial van" {{ old('v_category') == 'commercial van' ? 'selected' : '' }}>Commercial Van</option>
-                                    <option value="truck" {{ old('v_category') == 'truck' ? 'selected' : '' }}>Truck</option>
+                                    @if($vehicleCategories->isNotEmpty())
+                                        @foreach ($vehicleCategories as $v_cat)
+                                            <option value="{{ $v_cat->v_cat_name }}"
+                                                {{ old('v_category') == $v_cat->v_cat_name ? 'selected' : '' }}>
+                                                {{ ucwords($v_cat->v_cat_name) }}</option>
+                                        @endforeach
+                                    @endif
+                                    {{-- <option value="passenger car" {{ old('v_category') == 'passenger car' ? 'selected' : '' }}>Passenger Car</option> --}}
+                                    
                                 </select>
                             </div>
                         </div>
@@ -269,7 +274,7 @@
                                 <label for="premium">Premium</label>
                             </div>
                             <div class="form-check form-check-inline mt-0">
-                                <input type="checkbox" class="form-check-input" name="run_flat" id="run_flat" value="1">
+                                <input type="checkbox" class="form-check-input" name="run_flat" id="run_flat" value="1" {{ old('run_flat') == '1' ? 'checked' : '' }}>
                                 <label for="run_flat">Run Flat</label>
                             </div>
                         </div>

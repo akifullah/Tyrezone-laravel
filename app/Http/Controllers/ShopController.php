@@ -6,6 +6,7 @@ use App\Models\Manufacturer;
 use App\Models\Patteren;
 use App\Models\Product;
 use App\Models\Size;
+use App\Models\VehicleCategory;
 use Illuminate\Http\Request;
 
 class ShopController extends Controller
@@ -19,10 +20,11 @@ class ShopController extends Controller
 
         $sizes = Size::get();
         $patterens = Patteren::get();
-        $manufacturers = Manufacturer::get();
+        $manufacturers = Manufacturer::with("products")->has("products")->get();
         $products = Product::with("manufacturer", "patteren", "images")->get();
-        // return $products;
-        return view("frontend.shop", ["products" => $products, "patterens" => $patterens, "manufacturers" => $manufacturers, "sizes" => $sizes]);
+        $vehicleCategory = VehicleCategory::with("products")->has("products")->get();
+        // return $vehicleCategory;
+        return view("frontend.shop", ["products" => $products, "patterens" => $patterens, "manufacturers" => $manufacturers, "sizes" => $sizes, "vehicleCategory" => $vehicleCategory]);
     }
 
     function shopDetail($id){
@@ -42,6 +44,7 @@ class ShopController extends Controller
         $sizes = Size::get();
         $patterens = Patteren::get();
         $manufacturers = Manufacturer::get();
+        $vehicleCategory = VehicleCategory::with("products")->has("products")->get();
 
         // $products = Product::where("manufacturer_id", $req->manufacturer)->with("manufacturer", "patteren")->with("manufacturer", "patteren")->get();
 
@@ -53,11 +56,14 @@ class ShopController extends Controller
         if ($req->patteren != null) {
             $products->where("patteren_id", "$req->patteren");
         }
+        if ($req->v_cat != null) {
+            $products->where("v_category", "$req->v_cat");
+        }
         if ($req->size != null) {
             $products->where("tyre_size", "$req->size");
         }
         $products = $products->with("manufacturer", "patteren")->get();
 
-        return view("frontend.shop", ["products" => $products, "patterens" => $patterens, "manufacturers" => $manufacturers, "sizes" => $sizes]);
+        return view("frontend.shop", ["products" => $products, "patterens" => $patterens, "manufacturers" => $manufacturers, "sizes" => $sizes, "vehicleCategory" => $vehicleCategory]);
     }
 }

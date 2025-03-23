@@ -142,6 +142,26 @@
                                         </select>
                                     </div>
                                     <div class="form-group mb-3">
+                                        <label for="">Vehicle Category</label>
+                                        <select name="v_cat" class=" form-select shadow-none">
+                                            <option selected="selected" value="">Select Vehicle Category</option>
+                                            @if ($vehicleCategory->isNotEmpty())
+                                                @foreach ($vehicleCategory as $v_cat)
+                                                    <option
+                                                        {{ Request::get('v_cat') == $v_cat->v_cat_name ? 'selected' : '' }}
+                                                        value="{{ $v_cat->v_cat_name }}">{{ $v_cat->v_cat_name }}
+                                                    </option>
+                                                @endforeach
+                                                    {{-- <option
+                                                        {{ Request::get('patteren') == $patteren->id ? 'selected' : '' }}
+                                                        value="{{ $patteren->id }}">{{ $patteren->name }}
+                                                    </option>
+                                                @endforeach --}}
+                                            @endif
+
+                                        </select>
+                                    </div>
+                                    <div class="form-group mb-3">
                                         <label for="">Tyre Size</label>
                                         <select name="size" class="form-select shadow-none">
                                             <option selected="selected" value="">Select Size</option>
@@ -155,6 +175,17 @@
                                                 @endforeach
                                             @endif
                                         </select>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input"
+                                            @if (Request::get('run_flat') == '1') checked @endif type="checkbox" name="run_flat"
+                                                id="run_flat"  value="1">
+                                            <label class="form-check-label
+                                            @if (Request::get('run_flat') == '1') checked @endif" for="run_flat">Run Flat</label>
+
+                                        </div>
                                     </div>
 
                                     <div class="text-end">

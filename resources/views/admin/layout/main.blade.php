@@ -73,12 +73,16 @@
                                 Patteren</a>
                         </li>
                         <li>
-                            <a class="{{ Route::is('admin.users') ? 'active' : '' }}"
-                                href="{{ route('admin.users') }}"><i class="fa-solid fa-users"></i> All users</a>
+                            <a class="{{ Route::is('admin.tyreSize') ? 'active' : '' }}"
+                            href="{{ route('admin.tyreSize') }}"><i class="fa-solid fa-users"></i> Tyre Sizes</a>
                         </li>
                         <li>
-                            <a class="{{ Route::is('admin.tyreSize') ? 'active' : '' }}"
-                                href="{{ route('admin.tyreSize') }}"><i class="fa-solid fa-users"></i> Tyre Sizes</a>
+                            <a class="{{ Route::is('admin.vehicleCategory') ? 'active' : '' }}"
+                            href="{{ route('admin.vehicleCategory') }}"><i class="fa-solid fa-users"></i> Vehicle Category</a>
+                        </li>
+                        <li>
+                            <a class="{{ Route::is('admin.users') ? 'active' : '' }}"
+                                href="{{ route('admin.users') }}"><i class="fa-solid fa-users"></i> All users</a>
                         </li>
                         <li>
                             <a class="{{ Route::is('admin.orders') ? 'active' : '' }}"
