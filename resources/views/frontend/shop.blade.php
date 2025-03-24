@@ -20,14 +20,14 @@
         <section class="shop">
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-9 mb-5 pe-lg-5 order-1 order-lg-0">
+                    <div class="col-lg-8 col-xl-9 mb-5 pe-lg-5 order-1 order-lg-0">
                         <div class="shop-content">
                             <h2>Tyres</h2>
 
                             <div class="row">
                                 @if ($products->isNotEmpty())
                                     @foreach ($products as $product)
-                                        <div class="col-md-4 col-sm-6 px-2">
+                                        <div class="col-xl-4 col-lg-6 col-md-4  col-sm-6 px-2">
 
                                             <div class="product-card position-relative overflow-hidden">
                                                 @if ($product->in_stock < 1)
@@ -95,16 +95,14 @@
 
                                         </div>
                                     @endforeach
-
-                                    @else
-                                    <h3 class="h3 mt-5 text-center">Items Not available</h3>
-                                    
+                                @else
+                                    <h3 class=" mt-5 fw-normal text-center">Item Not Found</h3>
                                 @endif
 
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-3">
+                    <div class="col-lg-4 col-xl-3">
                         <div class="shop-sidebar mb-5 ">
                             <div class="product-search">
                                 <h2>Search Tyre</h2>
@@ -152,7 +150,7 @@
                                                         value="{{ $v_cat->v_cat_name }}">{{ $v_cat->v_cat_name }}
                                                     </option>
                                                 @endforeach
-                                                    {{-- <option
+                                                {{-- <option
                                                         {{ Request::get('patteren') == $patteren->id ? 'selected' : '' }}
                                                         value="{{ $patteren->id }}">{{ $patteren->name }}
                                                     </option>
@@ -180,16 +178,21 @@
                                     <div class="form-group">
                                         <div class="form-check form-check-inline">
                                             <input class="form-check-input"
-                                            @if (Request::get('run_flat') == '1') checked @endif type="checkbox" name="run_flat"
-                                                id="run_flat"  value="1">
-                                            <label class="form-check-label
-                                            @if (Request::get('run_flat') == '1') checked @endif" for="run_flat">Run Flat</label>
+                                                @if (Request::get('run_flat') == '1') checked @endif type="checkbox"
+                                                name="run_flat" id="run_flat" value="1">
+                                            <label
+                                                class="form-check-label
+                                            @if (Request::get('run_flat') == '1') checked @endif"
+                                                for="run_flat">Run Flat</label>
 
                                         </div>
                                     </div>
+                                    <div class="d-flex align-items-center justify-content-between mt-3">
 
-                                    <div class="text-end">
-                                        <button class="main-btn sm"> Show Result</button>
+                                        <a href="{{ route('shop') }}">Clear Filter</a>
+                                        <div class="text-end">
+                                            <button class="main-btn sm"> Show Result</button>
+                                        </div>
                                     </div>
 
                                 </form>

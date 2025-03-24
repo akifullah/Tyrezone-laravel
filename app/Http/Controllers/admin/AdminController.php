@@ -294,14 +294,15 @@ class AdminController extends Controller
         $manufacturers = Manufacturer::all();
         $patterens = Patteren::all();
         $sizes = Size::all();
-
+        $vehicleCategories = VehicleCategory::all();
 
         return view("admin.edit-product", [
             "product" => $product,
             "images" => $productImage,
             "manufacturers" => $manufacturers,
             "patterens" => $patterens,
-            "sizes" => $sizes
+            "sizes" => $sizes,
+            "vehicleCategories" => $vehicleCategories
         ]);
     }
 
@@ -370,6 +371,8 @@ class AdminController extends Controller
             $product->load_index = $req->load_index;
             $product->season_type = $req->season_type;
             $product->budget_tyre = $req->budget_tyre;
+            $product->v_category = $req->v_category;
+            $product->run_flat = $req->run_flat;
             $product->in_stock = $req->in_stock;
             $product->vat_price = $req->vat_price;
             $product->price = $req->price;

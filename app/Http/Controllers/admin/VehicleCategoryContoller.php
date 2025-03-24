@@ -46,7 +46,7 @@ class VehicleCategoryContoller extends Controller
         $vehicleCategory = new VehicleCategory();
         $vehicleCategory->v_cat_name = strtolower($request->v_cat_name);
         $vehicleCategory->save();
-        return redirect()->route('admin.addVehicleCategory')->with('success', 'Vehicle Category created successfully');
+        return redirect()->route('admin.vehicleCategory')->with('success', 'Vehicle Category created successfully');
         
     }
 

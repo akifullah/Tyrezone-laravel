@@ -62,6 +62,9 @@ class ShopController extends Controller
         if ($req->size != null) {
             $products->where("tyre_size", "$req->size");
         }
+        if ($req->run_flat != null) {
+            $products->where("run_flat", "$req->run_flat");
+        }
         $products = $products->with("manufacturer", "patteren")->get();
 
         return view("frontend.shop", ["products" => $products, "patterens" => $patterens, "manufacturers" => $manufacturers, "sizes" => $sizes, "vehicleCategory" => $vehicleCategory]);

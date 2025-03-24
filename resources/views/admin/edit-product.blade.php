@@ -12,7 +12,7 @@
 @section('maincontent')
 
     <div class="content-area mt-5">
-        <div class="col-md-9 mx-auto">
+        <div class="col-md-12 mx-auto">
 
             <div class="d-flex justify-content-between align-items-center">
                 <h5 class="m-0">Edit Product</h5>
@@ -243,10 +243,28 @@
                             </div>
                         </div> --}}
 
-                        <div class="col-md-5 mb-4">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="">Vehicle Category</label>
+                                <select name="v_category" class="form-select @error('v_category') is-invalid @enderror">
+                                    <option disabled selected>Select Category</option>
+                                    @if($vehicleCategories->isNotEmpty())
+                                        @foreach ($vehicleCategories as $v_cat)
+                                            <option value="{{ $v_cat->v_cat_name }}"
+                                                {{ $product->v_category == $v_cat->v_cat_name ? 'selected' : '' }}>
+                                                {{ ucwords($v_cat->v_cat_name) }}</option>
+                                        @endforeach
+                                    @endif
+                                    {{-- <option value="passenger car" {{ old('v_category') == 'passenger car' ? 'selected' : '' }}>Passenger Car</option> --}}
+                                    
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 ">
                             <label for="">Season Type:</label>
                             <div class="">
-                                <div class="form-check form-check-inline mt-2">
+                                <div class="form-check form-check-inline ">
                                     <label for="winter" class="form-check-label">Winter</label>
                                     <input type="radio"
                                         class="form-check-input @error('season_type') is-invalid @enderror"
@@ -254,7 +272,7 @@
                                         value="2" id="winter">
                                 </div>
 
-                                <div class="form-check form-check-inline mt-2">
+                                <div class="form-check form-check-inline ">
                                     <label for="summer" class="form-check-label">Summer</label>
                                     <input type="radio"
                                         class="form-check-input @error('season_type') is-invalid @enderror"
@@ -262,7 +280,7 @@
                                         value="1" id="summer">
                                 </div>
 
-                                <div class="form-check form-check-inline mt-2">
+                                <div class="form-check form-check-inline ">
                                     <label for="all" class="form-check-label ">All Season</label>
                                     <input type="radio"
                                         class="form-check-input @error('season_type') is-invalid @enderror"
@@ -272,19 +290,39 @@
                             </div>
                         </div>
 
-                        <div class="col-md-3 mb-3">
-                            <label for="budget">Budget Tyre</label>
-                            <div class="form-check mt-2">
-                                <label for="budget">Yes Budget Tyre</label>
-                                <input id="budget" type="checkbox" name="budget_tyre"
-                                    {{ $product->budget_tyre == '1' ? 'checked' : '' }} value="1"
+                         <div class="col-md-5  mb-2">
+                            <div class="">
+                                <label for="budget">Brand Category</label>
+                            </div>
+                            
+                            <div class="form-check form-check-inline mt-0">
+                                <input id="budget" type="radio" name="budget_tyre"
+                                    {{ $product->budget_tyre == 'budget' ? 'checked' : '' }} value="budget"
                                     class="form-check-input @error('budget_tyre') is-invalid @enderror">
+                                <label for="budget">Budget</label>
+                            </div>
+                            <div class="form-check form-check-inline mt-0">
+                                <input id="mid-range" type="radio" name="budget_tyre"
+                                    {{ $product->budget_tyre == 'mid range' ? 'checked' : '' }} value="mid range"
+                                    class="form-check-input @error('budget_tyre') is-invalid @enderror">
+                                <label for="mid-range">Mid Range</label>
+                            </div>
+                            <div class="form-check form-check-inline mt-0 pe-3">
+                                <input id="premium" type="radio" name="budget_tyre"
+                                    {{ $product->budget_tyre == 'premium' ? 'checked' : '' }} value="premium"
+                                    class="form-check-input @error('budget_tyre') is-invalid @enderror">
+                                <label for="premium">Premium</label>
+                            </div>
+                            <div class="form-check form-check-inline mt-0">
+                                <input type="checkbox" class="form-check-input" name="run_flat" id="run_flat" value="1" {{ $product->run_flat == '1' ? 'checked' : '' }}>
+                                <label for="run_flat">Run Flat</label>
                             </div>
                         </div>
 
 
 
-                        <div class="col-12">
+
+                        <div class="col-12 mt-3">
                             <div id="image" class="dropzone dz-clickable">
                                 <div class="dz-message needsclick">
                                     <br>Drop files here or click to upload.<br><br>
