@@ -263,7 +263,7 @@
                             </div>
                             <div class="form-check form-check-inline mt-0">
                                 <input id="mid-range" type="radio" name="budget_tyre"
-                                    {{ old('budget_tyre') == 'mid range' ? 'checked' : '' }} value="mid range"
+                                    {{ old('budget_tyre') == 'mid range' ? 'checked' : '' }} value="mid_range"
                                     class="form-check-input @error('budget_tyre') is-invalid @enderror">
                                 <label for="mid-range">Mid Range</label>
                             </div>

@@ -3674,6 +3674,20 @@ HERO BANNER SECTION START
   margin-bottom: 0;
 }
 
+.product-search label:not(.inp-label) {
+  font-size: 12px;
+}
+
+.product-search .inp-label {
+  font-weight: 600;
+  font-size: 12px;
+}
+
+.product-search select {
+  height: 40px !important;
+  font-size: 14px;
+}
+
 .shop-sidebar h2,
 .shop .shop-content h2 {
   border-bottom: 1px solid var(--grey);
@@ -3824,6 +3838,33 @@ HERO BANNER SECTION START
   -webkit-line-clamp: 3;
   overflow: hidden;
   font-size: 14px;
+}
+
+@media (max-width: 991px) {
+  .product-search select {
+    height: 35px !important;
+    font-size: 14px;
+    padding: 0 10px;
+  }
+}
+
+@media (max-width: 575px) {
+
+  .product-search select {
+    height: 32px !important;
+    font-size: 14px;
+    padding: 0 10px;
+  }
+
+  .clear-btn {
+    font-size: 12px;
+  }
+
+  .search-wrap button.search-btn,
+  .search-wrap button.main-btn {
+    padding: 3px 10px;
+    font-size: 12px;
+  }
 }
 
 
