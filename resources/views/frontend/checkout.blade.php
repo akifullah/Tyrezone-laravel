@@ -69,7 +69,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-sm-6 mb-3">
+                                    {{-- <div class="col-sm-6 mb-3">
                                         <div class="form-group">
                                             <label for="">Reg. No. <span>*</span></label>
                                             <div class="input-group">
@@ -81,7 +81,7 @@
                                                 </button>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> --}}
 
                                 </div>
 
@@ -95,9 +95,9 @@
                                                 <input type="text" name="post_code"
                                                     class="form-control @error('post_code') is-invalid @enderror"
                                                     placeholder="Post Code">
-                                                <button type="button" class="input-group-text igt-btn">
+                                                {{-- <button type="button" class="input-group-text igt-btn">
                                                     Lookup
-                                                </button>
+                                                </button> --}}
                                             </div>
                                         </div>
                                     </div>

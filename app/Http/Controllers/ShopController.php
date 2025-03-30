@@ -89,6 +89,6 @@ class ShopController extends Controller
         }
         
         $products = $products->with("manufacturer", "patteren")->get();
-        return view("frontend.shop", ["products" => $products, "patterens" => $patterens, "manufacturers" => $manufacturers, "sizes" => $sizes, "vehicleCategory" => $vehicleCategory]);
+            return view("frontend.shop", ["products" => $products, "patterens" => $patterens, "manufacturers" => $manufacturers, "sizes" => $sizes, "vehicleCategory" => $vehicleCategory]);
     }
 }

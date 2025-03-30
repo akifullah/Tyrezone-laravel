@@ -133,7 +133,7 @@ Route::group(["middleware" => "isAdmin"], function () {
         Route::post("tyre-patteren/delete", [AdminController::class, "deleteTyrePatteren"])->name("admin.deleteTyrePatteren");
 
         // VEHICLE CATEGORY
-        Route::get("vehicle-category", [VehicleCategoryContoller::class, "index"])->name("admin.vehicleCategory");
+        Route::get("vehicle-category", [VehicleCategoryContoller::class, "index"])->name("admin.post");
         Route::get("add-vehicle-category", [VehicleCategoryContoller::class, "create"])->name("admin.addVehicleCategory");
         Route::post("save-vehicle-category", [VehicleCategoryContoller::class, "store"])->name("admin.saveVehicleCategory");
         Route::get("edit-vehicle-category/{id}", [VehicleCategoryContoller::class, "edit"])->name("admin.editVehicleCategory");

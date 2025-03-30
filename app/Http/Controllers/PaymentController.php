@@ -56,7 +56,6 @@ class PaymentController extends Controller
             "lname" => "required",
             "email" => "required",
             "phone" => "required",
-            "reg_no" => "required",
             "post_code" => "required",
             "company" => "required",
             "address" => "required",
@@ -78,7 +77,7 @@ class PaymentController extends Controller
             $orderDetail->order_id = $order_id;
             $orderDetail->o_id = "null";
             $orderDetail->phone = $request->phone;
-            $orderDetail->reg_no = $request->reg_no;
+            $orderDetail->reg_no = "-";
             $orderDetail->post_code = $request->post_code;
             $orderDetail->company = $request->company;
             $orderDetail->address = $request->address;
