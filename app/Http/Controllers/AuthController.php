@@ -51,6 +51,7 @@ class AuthController extends Controller
             $user->lname = $req->lname;
             $user->email = $req->email;
             $user->phone = $req->phone;
+            $user->role = base64_decode($req->role);
             $user->password = Hash::make($req->password);
             $user->save();
             return redirect()->route("login")->with("success", "Registration Successful!");
@@ -101,6 +102,12 @@ class AuthController extends Controller
         $user->fname = $req->fname;
         $user->lname = $req->lname;
         $user->phone = $req->phone;
+        $user->city = $req->city ?? "";
+        $user->post_code = $req->post_code ?? "";
+        $user->address = $req->address ?? "";
+        $user->company = $req->company ?? "";
+        $user->state = $req->state ?? "";
+        $user->country = $req->country ?? "";
         $save = $user->save();
 
         if($save){

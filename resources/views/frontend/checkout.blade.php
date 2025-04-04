@@ -31,7 +31,7 @@
                                     <div class="col-sm-6 mb-3">
                                         <div class="form-group">
                                             <label for="">First Name <span>*</span></label>
-                                            <input type="text" name="fname"
+                                            <input type="text" name="fname" value="{{ Auth::user()?->fname }}"
                                                 class="form-control @error('fname') is-invalid @enderror"
                                                 placeholder="First Name">
                                         </div>
@@ -40,7 +40,7 @@
                                     <div class="col-sm-6 mb-3">
                                         <div class="form-group">
                                             <label for="">Last Name <span>*</span></label>
-                                            <input type="text" name="lname"
+                                            <input type="text" name="lname" value="{{ Auth::user()?->lname }}"
                                                 class="form-control @error('lname') is-invalid @enderror"
                                                 placeholder="Last Name">
                                         </div>
@@ -48,8 +48,8 @@
 
                                     <div class="col-sm-6 mb-3">
                                         <div class="form-group">
-                                            <label for="">Email Name <span>*</span></label>
-                                            <input type="email" name="email"
+                                            <label for="">Email <span>*</span></label>
+                                            <input type="email" name="email" value="{{ Auth::user()?->email }}"
                                                 class="form-control @error('email') is-invalid @enderror"
                                                 placeholder="Email">
                                         </div>
@@ -62,7 +62,7 @@
                                                 <div class="input-group-text">
                                                     +44
                                                 </div>
-                                                <input type="number" name="phone"
+                                                <input type="number" name="phone" value="{{ Auth::user()?->phone }}"
                                                     class="form-control @error('phone') is-invalid @enderror"
                                                     placeholder="Telephone">
                                             </div>
@@ -92,7 +92,7 @@
                                         <div class="form-group">
                                             <label for="">Post Code <span>*</span></label>
                                             <div class="input-group">
-                                                <input type="text" name="post_code"
+                                                <input type="text" name="post_code" value="{{ Auth::user()?->post_code }}"
                                                     class="form-control @error('post_code') is-invalid @enderror"
                                                     placeholder="Post Code">
                                                 {{-- <button type="button" class="input-group-text igt-btn">
@@ -105,7 +105,7 @@
                                     <div class="col-sm-6 mb-3">
                                         <div class="form-group">
                                             <label for="">Company <span>*</span></label>
-                                            <input type="text" name="company"
+                                            <input type="text" name="company" value="{{ Auth::user()?->company }}"
                                                 class="form-control @error('company') is-invalid @enderror"
                                                 placeholder="Company">
                                         </div>
@@ -114,16 +114,16 @@
                                     <div class="col-sm-12 mb-3">
                                         <div class="form-group">
                                             <label for="">Address <span>*</span></label>
-                                            <input type="text" name="address"
+                                            <input type="text" name="address" value="{{ Auth::user()?->address }}"
                                                 class="form-control @error('address') is-invalid @enderror"
-                                                placeholder="Company">
+                                                placeholder="Address">
                                         </div>
                                     </div>
 
                                     <div class="col-sm-6 mb-3">
                                         <div class="form-group">
                                             <label for="">City <span>*</span></label>
-                                            <input type="text" name="city"
+                                            <input type="text" name="city" value="{{ Auth::user()?->city }}"
                                                 class="form-control @error('city') is-invalid @enderror" placeholder="City">
                                         </div>
                                     </div>
@@ -243,7 +243,7 @@
                                             <select class="form-select @error('country') is-invalid @enderror"
                                                 name="country">
                                                 <!-- <option value=""></option> -->
-                                                <option value="uk" selected="">United Kingdom
+                                                <option {{ Auth::user()?->country == "uk" ? "selected": "" }} value="uk" selected="">United Kingdom
                                                 </option>
                                             </select>
                                         </div>

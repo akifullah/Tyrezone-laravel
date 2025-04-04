@@ -36,7 +36,13 @@ function isCartEmpt() {
 
             }
 
+        } else {
+            if (document.getElementById("sideCartBtnWrap") != null) {
+                document.getElementById("sideCartBtnWrap").classList.remove("d-none")
+
+            }
         }
+        
     }
 
 }
@@ -72,7 +78,7 @@ function totalAmount() {
     if (document.querySelector("#totalPayAmount") != null) {
         document.querySelector("#totalPayAmount").value = totalWithTax.toFixed(2);
     }
-
+    
 }
 
 // INIT CART IF IT'S EMPTY 
@@ -89,6 +95,7 @@ function cartLength() {
 
     let count = document.getElementById("count");
     count.innerHTML = cart.length;
+
 }
 
 //  GET SIDEBAR CART ITEMS WRAPPER WHERE ITEMS WILL BE DISPLAY 
@@ -252,6 +259,8 @@ function callData() {
 
 
     })
+
+   
 
     totalAmount();
     isCartEmpt();

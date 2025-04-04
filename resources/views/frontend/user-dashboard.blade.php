@@ -48,11 +48,29 @@
 
                                 <div class="row">
 
-                                    <div class="col-md-12">
+                                    <div class="col-md-6">
                                         <p><strong>Email:</strong> {{ Auth::user()->email }}</p>
                                     </div>
-                                    <div class="col-md-12">
+                                    <div class="col-md-6">
                                         <p><strong>Phone:</strong> {{ Auth::user()->phone }}</p>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p><strong>Company:</strong> {{ Auth::user()->company }}</p>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p><strong>City:</strong> {{ Auth::user()->city }}</p>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p><strong>Postal Code:</strong> {{ Auth::user()->post_code }}</p>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p><strong>State:</strong> {{ Auth::user()->state }}</p>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p><strong>Country:</strong> {{ Auth::user()->country }}</p>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <p><strong>Address:</strong> {{ Auth::user()->address }}</p>
                                     </div>
 
 

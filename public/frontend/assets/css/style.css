@@ -169,7 +169,7 @@ a {
   padding: 3px 10px;
   text-transform: capitalize;
   border-radius: 4px;
-  font-size: 15px;
+  font-size: 13px;
   transition: 0.5s ease;
 }
 
@@ -4044,3 +4044,28 @@ HERO BANNER SECTION START
 }
 
 /* ====================================    SHOP PAGE END   ====================================== */
+
+
+table thead tr th {
+  font-size: 12px;
+  white-space: nowrap;
+}
+table tbody tr td {
+  font-size: 12px;
+  vertical-align: middle;
+}
+
+.item-qty-inp{
+  width: 80px;
+}
+.filter-table td,
+.filter-table th{
+  padding: 2px;
+}
+.filter-table table{
+    min-width: 500px;
+}
+.filter-table input{
+  font-size: 12px;
+  padding: 3px !important;
+}

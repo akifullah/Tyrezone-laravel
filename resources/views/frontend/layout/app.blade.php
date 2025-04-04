@@ -88,7 +88,7 @@
                     </div>
                     <div class="top-card-text">
                         <h4 class="top-text-title">FEEL FREE TO CONTACT</h4>
-                        <span class="top-card-desc">07563896325</span>
+                        <a href="tel:07563896325"><span class="top-card-desc">0756 389 6325</span></a>
                     </div>
                 </div>
                 <!-- CARD START -->
@@ -215,8 +215,15 @@
                     <ul class="navs d-flex list-unstyled gap-3 m-0">
                         {{-- <li><button class="nav-item"><i class="fa-solid fa-magnifying-glass"></i></button></li> --}}
                         <li class="dropdown">
-                            <a href="#" data-bs-toggle="dropdown" class=" nav-item"><i
-                                    class="fa-solid fa-user"></i></a>
+                            <a href="#" data-bs-toggle="dropdown" class=" nav-item">
+                                <span>
+                                    @if (Auth::check())
+                                        Hi, {{ Auth::user()?->fname }}
+                                    @endif
+                                </span>
+                                <i class="fa-solid fa-user"></i>
+
+                            </a>
                             <ul class="dropdown-menu">
                                 @if (Auth::check())
                                     <a href="{{ route('profile') }}" class="dropdown-item">Profile</a>

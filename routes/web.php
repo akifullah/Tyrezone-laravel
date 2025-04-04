@@ -19,6 +19,7 @@ use App\Http\Controllers\ShopController;
 use App\Http\Controllers\SizeController;
 use App\Http\Controllers\SmtpSettingsController;
 use App\Http\Controllers\StripeSettingController;
+use App\Http\Controllers\WholeSaleController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -51,6 +52,10 @@ Route::get("/search", [SearchController::class, "search"])->name("search");
 Route::get("/shop", [ShopController::class, "index"])->name("shop");
 Route::get("/shop/detail/{id}", [ShopController::class, "shopDetail"])->name("shop-detail");
 Route::get("/shop/search", [ShopController::class, "search"])->name("shopSearch");
+
+// WHOLE SALE CONTROLLERE
+Route::get("/wholesale", [WholeSaleController::class, "index"])->name("wholesale");
+Route::get("/wholesale/filter", [WholeSaleController::class, "filter"])->name("wholesale.filter");
 
 
 
@@ -133,7 +138,7 @@ Route::group(["middleware" => "isAdmin"], function () {
         Route::post("tyre-patteren/delete", [AdminController::class, "deleteTyrePatteren"])->name("admin.deleteTyrePatteren");
 
         // VEHICLE CATEGORY
-        Route::get("vehicle-category", [VehicleCategoryContoller::class, "index"])->name("admin.post");
+        Route::get("vehicle-category", [VehicleCategoryContoller::class, "index"])->name("admin.vehicleCategory");
         Route::get("add-vehicle-category", [VehicleCategoryContoller::class, "create"])->name("admin.addVehicleCategory");
         Route::post("save-vehicle-category", [VehicleCategoryContoller::class, "store"])->name("admin.saveVehicleCategory");
         Route::get("edit-vehicle-category/{id}", [VehicleCategoryContoller::class, "edit"])->name("admin.editVehicleCategory");

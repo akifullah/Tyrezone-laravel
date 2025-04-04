@@ -17,9 +17,15 @@ return new class extends Migration
             $table->string('lname');
             $table->string('email')->unique();
             $table->string('phone');
+            $table->string('city')->nullable();
+            $table->string('post_code')->nullable();
+            $table->string('address')->nullable();
+            $table->string('state')->nullable();
+            $table->string('country')->nullable();
+            $table->string('company')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->string('role')->default(0);
+            $table->string('role')->default(0)->comment("0:-> User, 1:-> Admin, 2:-> wholesaler");
             $table->rememberToken();
             $table->timestamps();
         });
