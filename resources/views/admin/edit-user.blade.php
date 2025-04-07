@@ -78,8 +78,9 @@
                                     <select name="role" id=""
                                         class="form-select  @error('role') is-invalid @enderror">
                                         <option disabled selected>Select Role</option>
-                                        <option {{ $user->role == "0"? "selected" : null }} value="0">User</option>
+                                        <option {{ $user->role == "0"? "selected" : null }} value="0">Customer</option>
                                         <option {{ $user->role == "1"? "selected" : null }} value="1">Admin</option>
+                                        <option {{ $user->role == "2"? "selected" : null }} value="2">Wholesaler</option>
                                     </select>
                                     @error('role')
                                         <p class="d-block invalid-feedback">{{ $message }}</p>

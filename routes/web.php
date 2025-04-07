@@ -39,7 +39,7 @@ Route::view("/gallery", "frontend.gallery")->name("gallery");
 Route::view("/services", "frontend.services")->name("services");
 Route::view("/about", "frontend.about")->name("about");
 Route::view("/contact", "frontend.contact")->name("contact");
-Route::post("/contact", [ContactController::class , "submit"])->name("contact.send");
+Route::post("/contact", [ContactController::class, "submit"])->name("contact.send");
 Route::view("/cart", "frontend.cart")->name("cart");
 // Route::view("/shop-detail", "frontend.shop-detail")->name("shop-detail");
 
@@ -95,7 +95,13 @@ Route::group(["middleware" => "isAdmin"], function () {
     Route::group(["prefix" => "admin"], function () {
         Route::get("dashboard", [AdminController::class, "index"])->name("admin.dashboard");
         Route::get("profile", [AdminController::class, "profile"])->name("admin.profile");
+
         
+        
+
+        // PRIVACY CONTROLLER
+        Route::post("privacy", [AdminController::class, "privacyPolicy"])->name("admin.privacy");
+
         // CHANGE LOGO
         Route::post("change-logo", [AdminController::class, "changeLogo"])->name("admin.change.logo");
         // SMTP
@@ -120,6 +126,11 @@ Route::group(["middleware" => "isAdmin"], function () {
         Route::post("temp/upload", [TempImageController::class, "store"])->name("temp.image.upload");
         Route::post("temp/delete", [TempImageController::class, "destroy"])->name("temp.image.delete");
 
+        // VEHICLE BRNDS
+        Route::get("vehicle-brands", [AdminController::class, "vehicleBrands"])->name("admin.vehicle-brands");
+        Route::post("vehicle-brands/add", [AdminController::class, "addVehicleBrands"])->name("admin.addBrands");
+        Route::post("vehicle-brands/update", [AdminController::class, "updateVehicleBrands"])->name("admin.updateBrands");
+        Route::post("vehicle-brands/delete", [AdminController::class, "deleteVehicleBrands"])->name("admin.deleteBrands");
 
         // MANFUACTURES
         Route::get("manufacturers", [AdminController::class, "manufacturers"])->name("admin.manufacturers");
@@ -175,9 +186,9 @@ Route::group(["middleware" => "isAdmin"], function () {
 
         Route::post("/get-profile", [HomeController::class, "getProfiles"])->name("get.profiles");
         Route::post("/get-rim-size", [HomeController::class, "getRimSize"])->name("get.rim.size");
-        
 
-        
+
+
 
         // ORDERS
         Route::get("orders", [OrderController::class, "orders"])->name("admin.orders");
@@ -192,4 +203,9 @@ Route::controller(PaymentController::class)->group(function () {
     Route::get('thanks', 'thanks')->name('thanks');
 
     Route::post('stripe', 'stripePost')->name('stripe.post');
+
+
+    Route::post('/create-checkout-session', 'createCheckoutSession')->name('checkout.session');
+    Route::get('/checkout/success', 'success')->name('checkout.success');
+    Route::get('/checkout/cancel', 'cancel')->name('checkout.cancel');
 });

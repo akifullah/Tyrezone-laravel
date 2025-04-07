@@ -116,171 +116,71 @@ class PaymentController extends Controller
                 $orderItem->save();
             }
 
-            if ($request->payment == "stripe") {
-                $settings = StripeSetting::first();
-                if ($settings) {
-                    \Stripe\Stripe::setApiKey($settings->stripe_secret_key);
+            try {
+
+
+                if ($request->payment == "stripe") {
+                    $settings = StripeSetting::first();
+                    if ($settings) {
+                        \Stripe\Stripe::setApiKey($settings->stripe_secret_key);
+                    }
+
+
+
+                    Stripe\Charge::create([
+
+                        "amount" => $request->pay_amount * 100,
+
+                        "currency" => "eur",
+
+                        "source" => $request->stripeToken,
+
+                        "description" => $request->email
+
+                    ]);
+                    $order->payment_status = "Paid Online";
+                } else {
+                    $order->payment_status = "Cash on Delivery";
                 }
-                // Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
+
+                $order->save();
 
 
 
-                Stripe\Charge::create([
+                $orderDetail->o_id = $order->id;
+                $orderDetail->save();
 
-                    "amount" => $request->pay_amount * 100,
 
-                    "currency" => "eur",
+                $orderItem = Order::where("order_id", $order_id)->with("orderDetail", "orderItem", "orderItem.product", "orderItem.product.images", "user")->first();
+                // return $orderItem;
 
-                    "source" => $request->stripeToken,
+                $orderDetail = [
+                    "c_name" => $orderItem->user->fname . " " . $orderItem->user->lname,
+                    "c_phone" => $orderItem->user->phone,
+                    "email" => $orderItem->user->email,
+                    "items" => $orderItem->orderItem,
+                    "orderId" => $orderItem->order_id,
+                    "total_price" => $orderItem->total_price,
+                    "order_date" => $orderItem->created_at,
+                    "payment_method" => $orderItem->payment_status,
+                    "shipping_address" => $orderItem->orderDetail->address
+                ];
 
-                    "description" => "HEllo"
+                // return $orderItem;
 
-                ]);
-                $order->payment_status = "Paid Online";
-            } else {
-                $order->payment_status = "Cash on Delivery";
+
+                Mail::to(Auth::user()->email)->send(new OrderConfirmationMail($orderDetail));
+                Mail::to("akifullah0317@gmail.com")->send(new NewOrderMail($orderDetail));
+
+                session(["order_id" => $order_id]);
+                // DB::table('orders')->insert($products);
+
+                session()->flash('success', "Pay Delivery");
+                return redirect()->route("thanks");
+            } catch (\Exception $e) {
+                // Handle error
+               return redirect()->back()->withInput()->withErrors($validator)->with(['pay_error' => $e->getMessage()]);
             }
-
-            $order->save();
-            // if ($request->payment == "stripe") {
-
-
-            //     $settings = StripeSetting::first();
-            //     if ($settings) {
-            //         \Stripe\Stripe::setApiKey($settings->stripe_secret_key);
-            //     }
-            //     // Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
-
-
-
-            //     Stripe\Charge::create([
-
-            //         "amount" => $request->pay_amount * 100,
-
-            //         "currency" => "eur",
-
-            //         "source" => $request->stripeToken,
-
-            //         "description" => "HEllo"
-
-            //     ]);
-
-
-            //     // $order = new Order();
-            //     // $order->order_id = $order_id;
-            //     // $order->order_detail_id = $orderDetail->id;
-            //     // $order->user_id = Auth::user()->id;
-            //     // $order->order_status = "Pending";
-            //     $order->payment_status = "Paid Online";
-            //     // $order->total_price = $request->pay_amount;
-
-            //     $order->save();
-
-
-            //     // $product_ids = $request->product_id;
-            //     // $qtys = $request->qty;
-            //     // foreach ($product_ids as $index => $product_id) {
-
-            //     //     $orderItem = new OrderItem();
-            //     //     $product = OrderItem::find($product_id);
-            //     //     $product->in_stock = $product->in_stock - $qtys[$index];
-            //     //     $product->save();
-
-            //     //     $orderItem->o_id = $order->id;
-            //     //     $orderItem->order_id = $order_id;
-            //     //     $orderItem->product_id = $product_id;
-            //     //     $orderItem->qty = $qtys[$index];
-
-
-
-            //     //     $orderItem->save();
-            //     // }
-            //     // session(["order_id" => $order_id]);
-
-            //     // DB::table('orders')->insert($products);
-
-            //     session()->flash('success', 'Payment Online successful!');
-            //     // session()->flash('success', "Pay Online");
-            //     return redirect()->route("thanks");
-            // } else {
-
-
-
-            //     // $orderDetailId = OrderDetail::where("user_id", Auth::user()->id)->first();
-
-            //     // $order = new Order();
-            //     // $order->order_id = $order_id;
-            //     // $order->order_detail_id = $orderDetail->id;
-            //     // $order->user_id = Auth::user()->id;
-            //     // $order->order_status = "Pending";
-            //     $order->payment_status = "Cash on Delivery";
-            //     // $order->total_price = $request->pay_amount;
-
-            //     $order->save();
-
-
-            //     // $product_ids = $request->product_id;
-            //     // $qtys = $request->qty;
-
-            //     // // $products = [];
-            //     // foreach ($product_ids as $index => $product_id) {
-
-            //     //     $orderItem = new OrderItem();
-            //     //     $product = Product::find($product_id);
-            //     //     $product->in_stock = $product->in_stock - $qtys[$index];
-            //     //     $product->save();
-
-            //     //     $orderItem->o_id = $order->id;
-            //     //     $orderItem->order_id = $order_id;
-            //     //     $orderItem->product_id = $product_id;
-            //     //     $orderItem->qty = $qtys[$index];
-            //     //     $orderItem->save();
-
-            //         // $products[] = [
-            //         //     "order_id" => $order_id,
-            //         //     "user_id" => Auth::user()->id,
-            //         //     "order_detail_id" => $orderDetail->id,
-
-            //         //     "total_price" => $request->pay_amount,
-            //         // ];
-            //     }
-            // }
-
-            // $order->save();
-
-
-            $orderDetail->o_id = $order->id;
-            $orderDetail->save();
-
-
-            $orderItem = Order::where("order_id", $order_id)->with("orderDetail", "orderItem", "orderItem.product", "orderItem.product.images", "user")->first();
-            // return $orderItem;
-
-            $orderDetail = [
-                "c_name" => $orderItem->user->fname . " " . $orderItem->user->lname,
-                "c_phone" => $orderItem->user->phone,
-                "email" => $orderItem->user->email,
-                "items" => $orderItem->orderItem,
-                "orderId" => $orderItem->order_id,
-                "total_price" => $orderItem->total_price,
-                "order_date" => $orderItem->created_at,
-                "payment_method" => $orderItem->payment_status,
-                "shipping_address" => $orderItem->orderDetail->address
-            ];
-
-            // return $orderItem;
-
-            // $mailData = [
-
-            // ];
-            // Mail::to(Auth::user()->email)->send(new OrderConfirmationMail($orderDetail));
-            // Mail::to("akifullah0317@gmail.com")->send(new NewOrderMail($orderDetail));
-
-            session(["order_id" => $order_id]);
-            // DB::table('orders')->insert($products);
-
-            session()->flash('success', "Pay Delivery");
-            return redirect()->route("thanks");
         } else {
             return redirect()->route("checkout")->withInput()->withErrors($validator);
         }

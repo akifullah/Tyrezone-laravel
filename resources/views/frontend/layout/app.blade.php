@@ -177,6 +177,13 @@
                             <li><a class="{{ Route::is('shop') ? 'active' : '' }}"
                                     href="{{ route('shop') }}">Shop</a>
                             </li>
+
+                            @if (in_array(Auth::user()?->role, ['1', '2']))
+                                <li><a class="{{ Route::is('wholesale') ? 'active' : '' }}"
+                                        href="{{ route('wholesale') }}">Wholesales</a>
+                                </li>
+                            @endif
+
                             {{-- <li><a href="blogs.html">Blog</a></li> --}}
                             {{-- <li><a class="{{ Route::is('about') ? 'active' : '' }}"
                                     href="{{ route('about') }}">About</a></li> --}}

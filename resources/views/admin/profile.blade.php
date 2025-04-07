@@ -158,7 +158,7 @@
                     </div>
                 </section>
 
-                <div class="col-md-12 px-5 sign-up-wrap form-wrap">
+                {{-- <div class="col-md-12 px-5 sign-up-wrap form-wrap">
 
                     <h5>SMTP Settings</h5>
 
@@ -223,7 +223,7 @@
 
                     </form>
 
-                </div>
+                </div> --}}
 
                 <div class="col-md-12 ms-auto px-5 sign-up-wrap form-wrap">
 
@@ -235,7 +235,7 @@
                             <label for="stripe_publishable_key">Stripe Publishable Key</label>
                             <input type="text" name="stripe_publishable_key" id="stripe_publishable_key"
                                 class="form-control"
-                                value="{{ old('stripe_publishable_key', $settings->stripe_publishable_key ?? '') }}">
+                                value="{{ old('stripe_publishable_key', $stripeKeys->stripe_publishable_key ?? '') }}">
                             @error('stripe_publishable_key')
                                 <small class="text-danger">{{ $message }}</small>
                             @enderror
@@ -243,7 +243,7 @@
                         <div class="form-group">
                             <label for="stripe_secret_key">Stripe Secret Key</label>
                             <input type="text" name="stripe_secret_key" id="stripe_secret_key" class="form-control"
-                                value="{{ old('stripe_secret_key', $settings->stripe_secret_key ?? '') }}">
+                                value="{{ old('stripe_secret_key', $stripeKeys->stripe_secret_key ?? '') }}">
                             @error('stripe_secret_key')
                                 <small class="text-danger">{{ $message }}</small>
                             @enderror
@@ -337,6 +337,16 @@
 
         </div>
 
+
+        <div class="row col-12 sign-up-wrap form-wrap">
+            <h5>Privacy Policy</h5>
+            <form action="{{ route('admin.privacy') }}" method="POST">
+                @csrf
+                <textarea class="summernote" name="privacy" id="" cols="30" rows="10">{{ $privacy?->privacy }}</textarea>
+                <button class="main-btn sm mt-2 px-4 mx-auto d-block">Save</button>
+            </form>
+            
+        </div>
 
 
     </div>

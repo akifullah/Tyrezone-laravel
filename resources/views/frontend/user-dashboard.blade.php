@@ -22,7 +22,7 @@
                     style="background-image: url({{ asset('frontend/assets/imgs/profile-bg.jpg') }});">
                     <div class="container">
                         <div class="banner-text text-center">
-                            <h1>Welcome Back {{ Auth::user()->fname . ' ' . Auth::user()->lname }}
+                            <h1>Welcome Back {{ Auth::user()->fname . ' ' . Auth::user()->lname }}</h1>
                             </h1>
                         </div>
                     </div>
@@ -43,7 +43,10 @@
                         <div class="user-main border rounded my-5">
                             <h5>User Information</h5>
                             <div class="user-profile">
-                                <h4>{{ Auth::user()->fname . ' ' . Auth::user()->lname }}</h4>
+                                <h4>{{ Auth::user()->fname . ' ' . Auth::user()->lname }}
+                                    ({{ getUserRoleName(Auth::user()->role) }})
+
+                                </h4>
 
 
                                 <div class="row">

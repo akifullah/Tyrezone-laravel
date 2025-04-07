@@ -47,11 +47,7 @@
                                 <td>{{ $user->lname }}</td>
                                 <td>{{ $user->email }}</td>
                                 <td>
-                                    @if ($user->role == '1')
-                                        Admin
-                                    @else
-                                        User
-                                    @endif
+                                    {{ getUserRoleName($user->role) }}
                                 </td>
                                 <td>{{ \Carbon\Carbon::parse($user->created_at)->format('d M, Y') }}</td>
 

@@ -2,6 +2,140 @@
 
 @section('style')
     {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" /> --}}
+    <style>
+        /* Reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+
+        /* body {
+                                background-color: #f5f5f5;
+                                display: flex;
+                                justify-content: center;
+                                align-items: center;
+                                min-height: 100vh;
+                                padding: 1rem;
+                            } */
+
+        /* Card container */
+        .payment-card.card {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            /* max-width: 450px; */
+            overflow: hidden;
+        }
+
+        /* Card header */
+        .payment-card .card-header {
+            padding: 1.5rem 1.5rem 1rem;
+            background: #fff
+        }
+
+        .payment-card .card-title-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .payment-card .card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .payment-card .card-description {
+            font-size: 0.875rem;
+            color: #666;
+        }
+
+        /* Card content */
+        .payment-card .card-content {
+            padding: 1rem 1.5rem 1rem 1.5rem;
+        }
+
+        .payment-card .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .payment-card .form-label {
+            display: block;
+            font-size: 0.875rem;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            color: #333;
+        }
+
+        .payment-card .form-input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 0.875rem;
+            transition: all 0.2s ease;
+        }
+
+        .payment-card .form-input:focus {
+            outline: none;
+            border-color: #f59e0b;
+            box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.2);
+        }
+
+        .payment-card .form-input::placeholder {
+            color: #aaa;
+        }
+
+        /* Grid layout for card details */
+        .payment-card .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 1rem;
+        }
+
+        /* Card footer */
+        .payment-card .card-footer {
+            padding: 0 1.5rem 1.5rem;
+            border-top: 0px;
+            background: #fff;
+        }
+
+        .payment-card .btn-pay {
+            width: 100%;
+            background-color: #f59e0b;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 1rem;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+
+        .payment-card .btn-pay:hover {
+            background-color: #d97706;
+        }
+
+        /* Credit card icon */
+        .payment-card .icon {
+            width: 20px;
+            height: 20px;
+        }
+
+        /* Select styling */
+        .payment-card select {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23666' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 0.75rem center;
+            background-size: 16px;
+        }
+    </style>
 @endsection
 
 
@@ -31,7 +165,8 @@
                                     <div class="col-sm-6 mb-3">
                                         <div class="form-group">
                                             <label for="">First Name <span>*</span></label>
-                                            <input type="text" name="fname" value="{{ Auth::user()?->fname }}"
+                                            <input type="text" name="fname"
+                                                value="{{ old('fname') ?? Auth::user()?->fname }}"
                                                 class="form-control @error('fname') is-invalid @enderror"
                                                 placeholder="First Name">
                                         </div>
@@ -40,7 +175,8 @@
                                     <div class="col-sm-6 mb-3">
                                         <div class="form-group">
                                             <label for="">Last Name <span>*</span></label>
-                                            <input type="text" name="lname" value="{{ Auth::user()?->lname }}"
+                                            <input type="text" name="lname"
+                                                value="{{ old('lname') ?? Auth::user()?->lname }}"
                                                 class="form-control @error('lname') is-invalid @enderror"
                                                 placeholder="Last Name">
                                         </div>
@@ -49,7 +185,8 @@
                                     <div class="col-sm-6 mb-3">
                                         <div class="form-group">
                                             <label for="">Email <span>*</span></label>
-                                            <input type="email" name="email" value="{{ Auth::user()?->email }}"
+                                            <input type="email" name="email"
+                                                value="{{ old('email') ?? Auth::user()?->email }}"
                                                 class="form-control @error('email') is-invalid @enderror"
                                                 placeholder="Email">
                                         </div>
@@ -62,7 +199,8 @@
                                                 <div class="input-group-text">
                                                     +44
                                                 </div>
-                                                <input type="number" name="phone" value="{{ Auth::user()?->phone }}"
+                                                <input type="number" name="phone"
+                                                    value="{{ old('phone') ?? Auth::user()?->phone }}"
                                                     class="form-control @error('phone') is-invalid @enderror"
                                                     placeholder="Telephone">
                                             </div>
@@ -92,7 +230,8 @@
                                         <div class="form-group">
                                             <label for="">Post Code <span>*</span></label>
                                             <div class="input-group">
-                                                <input type="text" name="post_code" value="{{ Auth::user()?->post_code }}"
+                                                <input type="text" name="post_code"
+                                                    value="{{ old('post_code') ?? Auth::user()?->post_code }}"
                                                     class="form-control @error('post_code') is-invalid @enderror"
                                                     placeholder="Post Code">
                                                 {{-- <button type="button" class="input-group-text igt-btn">
@@ -105,7 +244,8 @@
                                     <div class="col-sm-6 mb-3">
                                         <div class="form-group">
                                             <label for="">Company <span>*</span></label>
-                                            <input type="text" name="company" value="{{ Auth::user()?->company }}"
+                                            <input type="text" name="company"
+                                                value="{{ old('company') ?? Auth::user()?->company }}"
                                                 class="form-control @error('company') is-invalid @enderror"
                                                 placeholder="Company">
                                         </div>
@@ -114,7 +254,8 @@
                                     <div class="col-sm-12 mb-3">
                                         <div class="form-group">
                                             <label for="">Address <span>*</span></label>
-                                            <input type="text" name="address" value="{{ Auth::user()?->address }}"
+                                            <input type="text" name="address"
+                                                value="{{ old('address') ?? Auth::user()?->address }}"
                                                 class="form-control @error('address') is-invalid @enderror"
                                                 placeholder="Address">
                                         </div>
@@ -123,7 +264,8 @@
                                     <div class="col-sm-6 mb-3">
                                         <div class="form-group">
                                             <label for="">City <span>*</span></label>
-                                            <input type="text" name="city" value="{{ Auth::user()?->city }}"
+                                            <input type="text" name="city"
+                                                value="{{ old('city') ?? Auth::user()?->city }}"
                                                 class="form-control @error('city') is-invalid @enderror" placeholder="City">
                                         </div>
                                     </div>
@@ -243,7 +385,8 @@
                                             <select class="form-select @error('country') is-invalid @enderror"
                                                 name="country">
                                                 <!-- <option value=""></option> -->
-                                                <option {{ Auth::user()?->country == "uk" ? "selected": "" }} value="uk" selected="">United Kingdom
+                                                <option {{ Auth::user()?->country == 'uk' ? 'selected' : '' }}
+                                                    value="uk" selected="">United Kingdom
                                                 </option>
                                             </select>
                                         </div>
@@ -252,7 +395,7 @@
                                     <div class="col-12 mb-3">
                                         <div class="form-group ">
                                             <label for="">Comment/Notes</label>
-                                            <textarea name="comments" class="form-control" rows="4" id=""></textarea>
+                                            <textarea name="comments" class="form-control" rows="4" id="">{{ old('comments') }}</textarea>
                                         </div>
                                     </div>
 
@@ -388,27 +531,27 @@
                             </div> --}}
                             <!-- APPOINTMENT DETAIL END-->
 
-                            <div class="form-check my-3">
-                                <input type="radio" checked class="form-check-input" name="payment" value="ondelivery"
+                            {{-- <div class="form-check my-3">
+                                <input type="radio"  class="form-check-input" name="payment" value="ondelivery"
                                     id="atFitting">
                                 <label for="atFitting">Pay at Fitting Time</label>
-                            </div>
+                            </div> --}}
 
                             @if ($stripe_publishable_key != '')
                                 <div class="form-check my-3">
-                                    <input type="radio" class="form-check-input" name="payment" value="stripe"
-                                        id="payOnline">
-                                    <label for="payOnline">Pay
-                                        Now</label>
-                                @else
-                                    @if (Auth::check())
+                                    <input type="radio" checked class="form-check-input d-none" name="payment"
+                                        value="stripe" id="payOnline">
+                                    {{-- <label for="payOnline">Pay
+                                        Now</label> --}}
+                                    {{-- @else --}}
+                                    {{-- @if (Auth::check())
                                         <button id="onDeliveryBtn" class="main-btn ">PROCEED TO
                                             BOOKING</button>
                                     @else
                                         <button type="button" class="main-btn "
                                             style="cursor: not-allowed; pointer-events: all; opacity: .7; ">Please Login to
                                             Continue</button>
-                                    @endif
+                                    @endif --}}
                             @endif
                         </div>
 
@@ -423,117 +566,77 @@
                         <div class="mt-4">
                             @if (Auth::check())
                                 @if ($stripe_publishable_key != '')
-                                    <div class="collapse" id="collapseExample">
-                                        <div class="card  credit-card-box">
-
-                                            <div class="card-header display-table">
-
-                                                <h5 class="card-title my-1">Payment Details</h5>
-
+                                    <div class="card payment-card ">
+                                        <div class="card-header px-3 py-2">
+                                            <div class="card-title-wrapper">
+                                                <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="24"
+                                                    height="24" viewBox="0 0 24 24" fill="none"
+                                                    stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                                    stroke-linejoin="round">
+                                                    <rect x="1" y="4" width="22" height="16" rx="2"
+                                                        ry="2"></rect>
+                                                    <line x1="1" y1="10" x2="23" y2="10">
+                                                    </line>
+                                                </svg>
+                                                <h2 class="card-title mb-0">Payment Method</h2>
                                             </div>
-
-                                            <div class="card-body">
-
-
-
-                                                @if (Session::has('success'))
-                                                    <div class="alert alert-success text-center">
-
-                                                        <a href="#" class="close" data-dismiss="alert"
-                                                            aria-label="close">×</a>
-
-                                                        <p>{{ Session::get('success') }}</p>
-
-                                                    </div>
-                                                @endif
-
-
-
-
-
-                                                <div class='row'>
-
-                                                    <div class='col-12 form-group required'>
-
-                                                        <label class='control-label'>Card Holder Name</label> <input
-                                                            class='form-control' size='4' type='text'>
-
-                                                    </div>
-
-                                                </div>
-
-
-
-                                                <div class='form-row row'>
-
-                                                    <div class='col-xs-12 form-group  required'>
-
-                                                        <label class='control-label'>Card Number</label> <input
-                                                            autocomplete='off' class='form-control card-number'
-                                                            size='20' type='text'>
-
-                                                    </div>
-
-                                                </div>
-
-
-
-                                                <div class='form-row row'>
-
-                                                    <div class='col-12 col-md-4 form-group cvc required'>
-
-                                                        <label class='control-label'>CVC</label> <input autocomplete='off'
-                                                            class='form-control card-cvc' placeholder='ex. 311'
-                                                            size='4' type='text'>
-
-                                                    </div>
-
-                                                    <div class='col-12 col-md-4 form-group expiration required'>
-
-                                                        <label class='control-label'>Exp. Mon.</label> <input
-                                                            class='form-control card-expiry-month' placeholder='MM'
-                                                            size='2' type='text'>
-
-                                                    </div>
-
-                                                    <div class='col-12 col-md-4 form-group expiration required'>
-
-                                                        <label class='control-label'>Exp. Year</label> <input
-                                                            class='form-control card-expiry-year' placeholder='YYYY'
-                                                            size='4' type='text'>
-
-                                                    </div>
-
-                                                </div>
-
-
-
-                                                <div class='form-row row mt-3'>
-                                                    <div class='col-md-12 error form-group hide d-none' id="error">
-
-                                                        <div class='alert-danger alert payment-alert'>Please correct
-                                                            the
-                                                            errors and
-                                                            try again.
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-
-                                                <div class="">
-
-                                                    <button class="main-btn w-100" type="submit">Pay Now
-                                                        <span id="totalPay"></span></button>
-
-                                                </div>
-
+                                            <p class="card-description mb-0">Enter your card details to complete payment
+                                            </p>
+                                        </div>
+                                        <div class="card-content">
+                                            <div class="form-group">
+                                                <label for="cardHolder" class="form-label">Card Holder Name</label>
+                                                <input type="text" id="cardHolder" class="form-input"
+                                                    placeholder="Name on Card" required>
                                             </div>
+                                            <div class="form-group">
+                                                <label for="cardNumber" class="form-label">Card Number</label>
+                                                <input type="text" id="cardNumber" class="form-input card-number"
+                                                    placeholder="1234 1234 1234 1234" maxlength="19" required>
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="form-group">
+                                                    <label for="cvc" class="form-label">CVC</label>
+                                                    <input type="text" id="cvc" class="form-input card-cvc"
+                                                        placeholder="ex. 311" maxlength="4" required>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="expMonth" class="form-label">Exp. Month</label>
+                                                    <select id="expMonth" class="form-input card-expiry-month" required>
+                                                        <option value="" disabled selected>MM</option>
+                                                        <!-- Months will be populated by JavaScript -->
+                                                    </select>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="expYear" class="form-label">Exp. Year</label>
+                                                    <select id="expYear" class="form-input card-expiry-year" required>
+                                                        <option value="" disabled selected>YYYY</option>
+                                                        <!-- Years will be populated by JavaScript -->
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            @if (Session::has('pay_error'))
+                                                <p class="m-0 text-danger">
+                                                    {{ Session::get('pay_error') == 'Must provide source or customer.' ? 'Please enter valid payment details.' : '' }}
+                                                </p>
+                                            @endif
+                                        </div>
+                                        <div class='form-row row mt-3'>
+                                            <div class='col-md-12 error form-group hide d-none' id="error">
 
+                                                <div class='alert-danger alert payment-alert'>Please correct
+                                                    the
+                                                    errors and
+                                                    try again.
+                                                </div>
+                                            </div>
                                         </div>
 
+                                        <div class="card-footer  p-0 p-2">
+                                            <button class="main-btn w-100" type="submit">Pay Now
+                                                <span id="totalPay"></span></button>
+                                        </div>
                                     </div>
-                                    <button id="onDeliveryBtn" class="main-btn ">PROCEED TO
-                                        BOOKING</button>
                                 @endif
                             @else
                                 <button type="button" class="main-btn "
@@ -566,27 +669,42 @@
     <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
 
     <script>
-        // $("document").ready(function() {
-        //     $("#onDeliveryBtn").click(() => {
-        //        let cart = JSON.parse(localStorage.getItem("tyreZoneCart"));
+        // Format card number with spaces
+        const cardNumberInput = document.getElementById('cardNumber');
+        cardNumberInput.addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\s/g, '');
+            value = value.replace(/[^\d]/g, '').substring(0, 16);
 
-        //        if(cart != null){
-        //         $.ajax({
-        //             url: "{{ route('saveCart') }}",
-        //             type: "get", 
-        //             data: {"cart": cart},
-        //             dataType: "json",
-        //             success: function(res){
-        //                 console.log(res);
-        //             }
-        //         })
-        //        }
+            // Add spaces every 4 digits
+            const formattedValue = value.replace(/(.{4})/g, '$1 ').trim();
+            e.target.value = formattedValue;
+        });
 
-        //     })
-        // })
+        // Restrict CVC to numbers only
+        const cvcInput = document.getElementById('cvc');
+        cvcInput.addEventListener('input', function(e) {
+            e.target.value = e.target.value.replace(/[^\d]/g, '').substring(0, 4);
+        });
 
+        // Populate month dropdown
+        const expMonthSelect = document.getElementById('expMonth');
+        for (let i = 1; i <= 12; i++) {
+            const option = document.createElement('option');
+            option.value = i.toString().padStart(2, '0');
+            option.textContent = i.toString().padStart(2, '0');
+            expMonthSelect.appendChild(option);
+        }
 
-
+        // Populate year dropdown
+        const expYearSelect = document.getElementById('expYear');
+        const currentYear = new Date().getFullYear();
+        for (let i = 0; i < 10; i++) {
+            const year = currentYear + i;
+            const option = document.createElement('option');
+            option.value = year.toString();
+            option.textContent = year.toString();
+            expYearSelect.appendChild(option);
+        }
 
         let payOnline = document.getElementById("payOnline");
         let payAtFitting = document.getElementById("atFitting");

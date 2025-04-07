@@ -64,7 +64,7 @@
                                     <label for="">Role <span>*</span></label>
                                     <select name="role" id="role" class="form-select ">
                                         <option {{ old('role') == base64_encode(0) ? 'seleted' : '' }}
-                                            value="{{ base64_encode(0) }}" selected>Custom</option>
+                                            value="{{ base64_encode(0) }}" selected>Customer</option>
                                         <option {{ old('role') == base64_encode(2) ? 'seleted' : '' }}
                                             value="{{ base64_encode(2) }}">Wholesaler</option>
                                     </select>

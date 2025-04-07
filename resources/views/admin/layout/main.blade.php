@@ -81,6 +81,10 @@
                             href="{{ route('admin.vehicleCategory') }}"><i class="fa-solid fa-users"></i> Vehicle Category</a>
                         </li>
                         <li>
+                            <a class="{{ Route::is('admin.vehicle-brands') ? 'active' : '' }}"
+                            href="{{ route('admin.vehicle-brands') }}"><i class="fa-solid fa-users"></i> Vehicle Brands</a>
+                        </li>
+                        <li>
                             <a class="{{ Route::is('admin.users') ? 'active' : '' }}"
                                 href="{{ route('admin.users') }}"><i class="fa-solid fa-users"></i> All users</a>
                         </li>

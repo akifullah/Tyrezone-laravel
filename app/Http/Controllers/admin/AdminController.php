@@ -7,11 +7,14 @@ use App\Models\logo;
 use App\Models\Manufacturer;
 use App\Models\Order;
 use App\Models\Patteren;
+use App\Models\Privacy;
 use App\Models\Product;
 use App\Models\ProductImage;
 use App\Models\Size;
+use App\Models\StripeSetting;
 use App\Models\TempImage;
 use App\Models\User;
+use App\Models\VehicleBrand;
 use App\Models\VehicleCategory;
 use Doctrine\Inflector\Rules\Pattern;
 use Illuminate\Http\Request;
@@ -20,6 +23,7 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Input;
+use Stripe\Stripe;
 
 class AdminController extends Controller
 {
@@ -103,9 +107,24 @@ class AdminController extends Controller
 
     function profile()
     {
-        return view("admin.profile");
+        $data["stripeKeys"] = StripeSetting::first();
+        $data["privacy"] = Privacy::first();
+        return view("admin.profile", $data);
     }
 
+    // PRIVACY POLICY
+    function privacyPolicy(Request $request)
+    {
+        $privacy = Privacy::first();
+
+        if (!$privacy) {
+            $privacy = new Privacy();
+        }
+
+        $privacy->privacy = $request->privacy;
+        $privacy->save();
+        return redirect()->back()->with("success", "Privacy Policy updated successfully!");
+    }
 
     // SHOW ADMIN PRODUCT PAGE
     function products()
@@ -754,4 +773,78 @@ class AdminController extends Controller
             "error" => "something goes wrong"
         ];
     }
+
+
+
+    public function vehicleBrands()
+    {
+        $vehicleBrands = VehicleBrand::all();
+        return view("admin.vehicle-brands", ["vehicleBrands" => $vehicleBrands]);
+    }
+
+    public function addVehicleBrands(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            "name" => "required",
+            "image" => "required|image"
+        ]);
+
+        if ($validator->passes()) {
+            $image = $request->image;
+            $ext =  $image->getClientOriginalExtension();
+            $imageName = time() . "." . $ext;
+
+            $vehicleBrand = new VehicleBrand();
+            $vehicleBrand->v_brand_name = $request->name;
+            $vehicleBrand->v_brand_image = $imageName;
+            $vehicleBrand->save();
+
+            $image->move(public_path("/uploads/v_brands/"), $imageName);
+            return redirect()->back()->with("success", "Vehicle Brand Added Successfully!");
+        } else {
+            return redirect()->back()->withInput()->withErrors($validator);
+        }
+    }
+    public function updateVehicleBrands(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            "name" => "required",
+            "image" => "image"
+        ]);
+
+        if ($validator->passes()) {
+            $vehicleBrand = VehicleCategory::findOrFail($request->id);
+            $vehicleBrand->name = $request->name;
+
+            if ($request->image != null) {
+                File::delete(public_path("uploads/v_brands/") . $vehicleBrand->image);
+                $image = $request->image;
+                $ext =  $image->getClientOriginalExtension();
+                $imageName = time() . "." . $ext;
+                $vehicleBrand->image = $imageName;
+                $image->move(public_path("/uploads/v_brands/"), $imageName);
+            }
+            $vehicleBrand->save();
+            return redirect()->route("admin.vehicleBrands")->with("success", "Vehicle Brand Updated Successfully!");
+        } else {
+            return redirect()->back()->withInput()->withErrors($validator);
+        }
+    }
+    
+    public function deleteVehicleBrands(Request $request)
+    {
+        $vehicleBrand = VehicleBrand::findOrFail($request->id);
+        File::delete(public_path("uploads/v_brands/") . $vehicleBrand->image);
+        $vehicleBrand->delete();
+        session()->flash("success", "Vehicle Brand Deleted Successfully!");
+        return response()->json([
+            "status" => true,
+            "message" => "Vehicle Brand Deleted Successfully!"
+        ]);
+        // return redirect()->back()->with("success", "Vehicle Brand Deleted Successfully!");
+    }
+    
+    
 }
+
+

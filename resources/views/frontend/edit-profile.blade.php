@@ -72,26 +72,42 @@
                                                 <div class="col-md-6 mb-3">
                                                     <div class="form-group">
                                                         <label for="">City </label>
-                                                       <input type="text" name="city" value="{{ $user->city }}"
+                                                        <input type="text" name="city" value="{{ $user->city }}"
                                                             placeholder="City" class="form-control">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6 mb-3">
                                                     <div class="form-group">
                                                         <label for="">Postal Code</label>
-                                                       <input type="text" name="post_code" value="{{ $user->post_code }}"
-                                                            placeholder="Postal Code" class="form-control">
+                                                        <input type="text" name="post_code"
+                                                            value="{{ $user->post_code }}" placeholder="Postal Code"
+                                                            class="form-control">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6 mb-3">
+                                                    <div class="form-group ">
+                                                        <label for="">Role <span>*</span></label>
+                                                        <select name="role" id="role" {{ Auth::user()->role == 1? "disabled" : "" }} class="form-select ">
+                                                            <option {{ old('role') == base64_encode(0) ? 'seleted' : '' }}
+                                                                value="{{ base64_encode(0) }}" selected>Customer</option>
+                                                            <option {{ old('role') == base64_encode(2) ? 'seleted' : '' }}
+                                                                value="{{ base64_encode(2) }}">Wholesaler</option>
+                                                        </select>
+                                                        @error('role')
+                                                            <p class="d-block invalid-feedback">{{ $message }}</p>
+                                                        @enderror
+
                                                     </div>
                                                 </div>
 
-                                                <div class="col-md-4 mb-3">
+                                                <div class="col-md-6 mb-3">
                                                     <div class="form-group">
                                                         <label for="">Company</label>
-                                                       <input type="text" name="company" value="{{ $user->company }}"
+                                                        <input type="text" name="company" value="{{ $user->company }}"
                                                             placeholder="Company" class="form-control">
                                                     </div>
                                                 </div>
-                                                <div class="col-md-4 mb-3">
+                                                <div class="col-md-6 mb-3">
                                                     <div class="form-group">
                                                         <label for="">State </label>
                                                         <select class="form-select @error('state') is-invalid @enderror"
@@ -221,7 +237,7 @@
                                                     </div>
                                                 </div>
 
-                                                <div class="col-md-4 mb-3">
+                                                <div class="col-md-6 mb-3">
                                                     <div class="form-group">
                                                         <label for="">Country </label>
                                                         <select class="form-select @error('country') is-invalid @enderror"
@@ -232,12 +248,13 @@
                                                         </select>
                                                     </div>
                                                 </div>
-                                                
+
                                                 <div class="col-12">
                                                     <div class="form-group">
                                                         <label for="">Address</label>
-                                                        <input type="text" name="address" value="{{ $user->address }}"
-                                                            placeholder="Address" class="form-control">
+                                                        <input type="text" name="address"
+                                                            value="{{ $user->address }}" placeholder="Address"
+                                                            class="form-control">
                                                     </div>
                                                 </div>
 

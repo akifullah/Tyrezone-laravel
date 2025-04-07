@@ -107,6 +107,9 @@ class AuthController extends Controller
         $user->address = $req->address ?? "";
         $user->company = $req->company ?? "";
         $user->state = $req->state ?? "";
+        if(Auth::user()->role != "1"){
+            $user->role = base64_decode($req->role) ?? "";
+        }
         $user->country = $req->country ?? "";
         $save = $user->save();
 
