@@ -233,7 +233,10 @@
                             </a>
                             <ul class="dropdown-menu">
                                 @if (Auth::check())
-                                    <a href="{{ route('profile') }}" class="dropdown-item">Profile</a>
+                                    @if (Auth::user()->role == '1')
+                                        <a href="{{ route('admin.dashboard') }}" class="dropdown-item">Dashboard</a>
+                                        @endif
+                                        <a href="{{ route('profile') }}" class="dropdown-item">Profile</a>
                                     <a href="{{ route('logout') }}" class="dropdown-item">Logout</a>
                                 @else
                                     <a href="{{ route('login') }}" class="dropdown-item">Login</a>
