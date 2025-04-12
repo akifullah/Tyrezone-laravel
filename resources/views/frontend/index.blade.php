@@ -84,16 +84,16 @@
 
 
                 <!-- <div class="hero-content">
-                                                    <div class="col-md-9">
-                                                        <h1>Dynamite savings for you.</h1>
-                                                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas a nemo magni id enim
-                                                            omnis deserunt cupiditate commodi odio debitis alias autem, dolores dolorum, quod esse
-                                                            suscipit ullam eum repudiandae!</p>
-                                                        <div class="">
-                                                            <a href="#">Find Tyres</a>
-                                                        </div>
-                                                    </div>
-                                                </div> -->
+                                                                <div class="col-md-9">
+                                                                    <h1>Dynamite savings for you.</h1>
+                                                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas a nemo magni id enim
+                                                                        omnis deserunt cupiditate commodi odio debitis alias autem, dolores dolorum, quod esse
+                                                                        suscipit ullam eum repudiandae!</p>
+                                                                    <div class="">
+                                                                        <a href="#">Find Tyres</a>
+                                                                    </div>
+                                                                </div>
+                                                            </div> -->
             </div>
         </div>
     </section>
@@ -336,50 +336,50 @@
             </div>
 
             <!-- <div class="row mt-5">
-                                                <div class="col-md-6">
-                                                    <div class="step-card ">
-                                                        <div class="step-card-text">
-                                                            <h3>Choose Your Tyres</h3>
-                                                            <p>Use the vehicle registration tool above and select the correct tyre size that fit
-                                                                your make and model.</p>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                                            <div class="col-md-6">
+                                                                <div class="step-card ">
+                                                                    <div class="step-card-text">
+                                                                        <h3>Choose Your Tyres</h3>
+                                                                        <p>Use the vehicle registration tool above and select the correct tyre size that fit
+                                                                            your make and model.</p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
 
-                                                <div class="col-md-6">
-                                                    <div class="step-card ">
-                                                        <div class="step-card-text">
-                                                            <h3>Choose Your Tyres</h3>
-                                                            <p>Use the vehicle registration tool above and select the correct tyre size that fit
-                                                                your make and model.
-                                                            </p>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                                            <div class="col-md-6">
+                                                                <div class="step-card ">
+                                                                    <div class="step-card-text">
+                                                                        <h3>Choose Your Tyres</h3>
+                                                                        <p>Use the vehicle registration tool above and select the correct tyre size that fit
+                                                                            your make and model.
+                                                                        </p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
 
-                                                <div class="col-md-6">
-                                                    <div class="step-card ">
-                                                        <div class="step-card-text">
-                                                            <h3>Choose Your Tyres</h3>
-                                                            <p>Use the vehicle registration tool above and select the correct tyre size that fit
-                                                                your make and model.
-                                                            </p>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                                            <div class="col-md-6">
+                                                                <div class="step-card ">
+                                                                    <div class="step-card-text">
+                                                                        <h3>Choose Your Tyres</h3>
+                                                                        <p>Use the vehicle registration tool above and select the correct tyre size that fit
+                                                                            your make and model.
+                                                                        </p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
 
-                                                <div class="col-md-6">
-                                                    <div class="step-card ">
-                                                        <div class="step-card-text">
-                                                            <h3>Choose Your Tyres</h3>
-                                                            <p>Use the vehicle registration tool above and select the correct tyre size that fit
-                                                                your make and model.
-                                                            </p>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                                            <div class="col-md-6">
+                                                                <div class="step-card ">
+                                                                    <div class="step-card-text">
+                                                                        <h3>Choose Your Tyres</h3>
+                                                                        <p>Use the vehicle registration tool above and select the correct tyre size that fit
+                                                                            your make and model.
+                                                                        </p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
 
-                                            </div> -->
+                                                        </div> -->
 
         </div>
     </section>
@@ -648,80 +648,17 @@
             </div>
 
 
-            <div class="row g-0 mt-5 pt-4">
-                <div class="col-lg-2 col-md-3 col-sm-4 col-6 ">
-
-                    <div class="brand-img">
-                        <img src="{{ asset('frontend/assets_v2/imgs/bridgestone-logo.webp') }}" alt="">
-                    </div>
+            @if ($manufacturers->isNotEmpty())
+                <div class="row g-0 mt-5 pt-4">
+                    @foreach ($manufacturers as $manufacturer)
+                        <div class="col-lg-2 col-md-3 col-sm-4 col-6 ">
+                            <div class="brand-img">
+                                <img src="{{  asset('uploads/brands/' . $manufacturer->image) }}" alt="">
+                            </div>
+                        </div>
+                        @endforeach
                 </div>
-                <div class="col-lg-2 col-md-3 col-sm-4 col-6 ">
-
-                    <div class="brand-img">
-                        <img src="{{ asset('frontend/assets_v2/imgs/nexen-logo.webp') }}" alt="">
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-3 col-sm-4 col-6 ">
-
-                    <div class="brand-img">
-                        <img src="{{ asset('frontend/assets_v2/imgs/dunlop-logo.webp') }}" alt="">
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-3 col-sm-4 col-6 ">
-
-                    <div class="brand-img">
-                        <img src="{{ asset('frontend/assets_v2/imgs/continental-logo.webp') }}" alt="">
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-3 col-sm-4 col-6 ">
-
-                    <div class="brand-img">
-                        <img src="{{ asset('frontend/assets_v2/imgs/goodyear-logo.webp') }}" alt="">
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-3 col-sm-4 col-6 ">
-
-                    <div class="brand-img">
-                        <img src="{{ asset('frontend/assets_v2/imgs/maxxis-logo.webp') }}" alt="">
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-3 col-sm-4 col-6 ">
-
-                    <div class="brand-img">
-                        <img src="{{ asset('frontend/assets_v2/imgs/michelin-logo.webp') }}" alt="">
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-3 col-sm-4 col-6 ">
-
-                    <div class="brand-img">
-                        <img src="{{ asset('frontend/assets_v2/imgs/pirelli-logo.webp') }}" alt="">
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-3 col-sm-4 col-6 ">
-
-                    <div class="brand-img">
-                        <img src="{{ asset('frontend/assets_v2/imgs/uniroyal-logo.webp') }}" alt="">
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-3 col-sm-4 col-6 ">
-
-                    <div class="brand-img">
-                        <img src="{{ asset('frontend/assets_v2/imgs/roadstone-logo.webp') }}" alt="">
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-3 col-sm-4 col-6 ">
-
-                    <div class="brand-img">
-                        <img src="{{ asset('frontend/assets_v2/imgs/matador-logo.webp') }}" alt="">
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-3 col-sm-4 col-6 ">
-
-                    <div class="brand-img">
-                        <img src="{{ asset('frontend/assets_v2/imgs/riken-logo.webp') }}" alt="">
-                    </div>
-                </div>
-            </div>
+            @endif
 
         </div>
     </section>
@@ -770,48 +707,15 @@
         <div class="brands-wrapper">
             <div class="container ">
                 <div class="brands-slide owl-carousel owl-theme" id="logo-slides">
-                    <div class="slide-logo"><img src="{{ asset('frontend/assets_v2/imgs/m1.webp') }}" alt="">
-                    </div>
-                    <div class="slide-logo"><img src="{{ asset('frontend/assets_v2/imgs/m2.webp') }}" alt="">
-                    </div>
-                    <div class="slide-logo"><img src="{{ asset('frontend/assets_v2/imgs/m2.webp') }}" alt="">
-                    </div>
-                    <div class="slide-logo"><img src="{{ asset('frontend/assets_v2/imgs/m3.webp') }}" alt="">
-                    </div>
-                    <div class="slide-logo"><img src="{{ asset('frontend/assets_v2/imgs/m4.webp') }}" alt="">
-                    </div>
-                    <div class="slide-logo"><img src="{{ asset('frontend/assets_v2/imgs/m5.webp') }}" alt="">
-                    </div>
-                    <div class="slide-logo"><img src="{{ asset('frontend/assets_v2/imgs/m6.webp') }}" alt="">
-                    </div>
-                    <div class="slide-logo"><img src="{{ asset('frontend/assets_v2/imgs/m7.webp') }}" alt="">
-                    </div>
-                    <div class="slide-logo"><img src="{{ asset('frontend/assets_v2/imgs/m8.webp') }}" alt="">
-                    </div>
-                    <div class="slide-logo"><img src="{{ asset('frontend/assets_v2/imgs/m9.webp') }}" alt="">
-                    </div>
-                    <div class="slide-logo"><img src="{{ asset('frontend/assets_v2/imgs/m10.webp') }}" alt="">
-                    </div>
-                    <div class="slide-logo"><img src="{{ asset('frontend/assets_v2/imgs/m11.webp') }}" alt="">
-                    </div>
-                    <div class="slide-logo"><img src="{{ asset('frontend/assets_v2/imgs/m12.webp') }}" alt="">
-                    </div>
-                    <div class="slide-logo"><img src="{{ asset('frontend/assets_v2/imgs/m13.webp') }}" alt="">
-                    </div>
-                    <div class="slide-logo"><img src="{{ asset('frontend/assets_v2/imgs/m15.webp') }}" alt="">
-                    </div>
-                    <div class="slide-logo"><img src="{{ asset('frontend/assets_v2/imgs/m16.webp') }}" alt="">
-                    </div>
-                    <div class="slide-logo"><img src="{{ asset('frontend/assets_v2/imgs/m17.webp') }}" alt="">
-                    </div>
-                    <div class="slide-logo"><img src="{{ asset('frontend/assets_v2/imgs/m18.webp') }}" alt="">
-                    </div>
-                    <div class="slide-logo"><img src="{{ asset('frontend/assets_v2/imgs/m19.webp') }}" alt="">
-                    </div>
-                    <div class="slide-logo"><img src="{{ asset('frontend/assets_v2/imgs/m20.webp') }}" alt="">
-                    </div>
-                    <div class="slide-logo"><img src="{{ asset('frontend/assets_v2/imgs/m21.webp') }}" alt="">
-                    </div>
+                    @if ($vehicleBrands->isNotEmpty())
+                        @foreach ($vehicleBrands as $vehicleBrand)
+                            <div class="slide-logo"><img
+                                    src="{{ asset('uploads/v_brands/' . $vehicleBrand->v_brand_image) }}"
+                                    alt="{{ $vehicleBrand->v_brand_name }}">
+                            </div>
+                        @endforeach
+                    @endif
+
 
                 </div>
             </div>
@@ -1189,89 +1093,89 @@
 
             <!-- <div class="owl-carousel owl-theme" id="reviews">
 
-                                                <div class="review-card">
-                                                    <div class="rev-header">
-                                                        <h5>Bilal Khan</h5>
-                                                        <div class="stars">
-                                                            <i class="fa-solid fa-star"></i>
-                                                            <i class="fa-solid fa-star"></i>
-                                                            <i class="fa-solid fa-star"></i>
-                                                            <i class="fa-solid fa-star"></i>
-                                                            <i class="fa-solid fa-star"></i>
-                                                        </div>
-                                                    </div>
-                                                    <div class="rev-content">
-                                                        <p>Very good tyres at very good prices. I have been using this tyre garage for the past four
-                                                            years and have always had a fast and professional service.</p>
-                                                    </div>
-                                                </div>
-                                                <div class="review-card">
-                                                    <div class="rev-header">
-                                                        <h5>Bilal Khan</h5>
-                                                        <div class="stars">
-                                                            <i class="fa-solid fa-star"></i>
-                                                            <i class="fa-solid fa-star"></i>
-                                                            <i class="fa-solid fa-star"></i>
-                                                            <i class="fa-solid fa-star"></i>
-                                                            <i class="fa-solid fa-star"></i>
-                                                        </div>
-                                                    </div>
-                                                    <div class="rev-content">
-                                                        <p>Very good tyres at very good prices. I have been using this tyre garage for the past four
-                                                            years and have always had a fast and professional service.</p>
-                                                    </div>
-                                                </div>
-                                                <div class="review-card">
-                                                    <div class="rev-header">
-                                                        <h5>Bilal Khan</h5>
-                                                        <div class="stars">
-                                                            <i class="fa-solid fa-star"></i>
-                                                            <i class="fa-solid fa-star"></i>
-                                                            <i class="fa-solid fa-star"></i>
-                                                            <i class="fa-solid fa-star"></i>
-                                                            <i class="fa-solid fa-star"></i>
-                                                        </div>
-                                                    </div>
-                                                    <div class="rev-content">
-                                                        <p>Very good tyres at very good prices. I have been using this tyre garage for the past four
-                                                            years and have always had a fast and professional service.</p>
-                                                    </div>
-                                                </div>
-                                                <div class="review-card">
-                                                    <div class="rev-header">
-                                                        <h5>Bilal Khan</h5>
-                                                        <div class="stars">
-                                                            <i class="fa-solid fa-star"></i>
-                                                            <i class="fa-solid fa-star"></i>
-                                                            <i class="fa-solid fa-star"></i>
-                                                            <i class="fa-solid fa-star"></i>
-                                                            <i class="fa-solid fa-star"></i>
-                                                        </div>
-                                                    </div>
-                                                    <div class="rev-content">
-                                                        <p>Very good tyres at very good prices. I have been using this tyre garage for the past four
-                                                            years and have always had a fast and professional service.</p>
-                                                    </div>
-                                                </div>
-                                                <div class="review-card">
-                                                    <div class="rev-header">
-                                                        <h5>Bilal Khan</h5>
-                                                        <div class="stars">
-                                                            <i class="fa-solid fa-star"></i>
-                                                            <i class="fa-solid fa-star"></i>
-                                                            <i class="fa-solid fa-star"></i>
-                                                            <i class="fa-solid fa-star"></i>
-                                                            <i class="fa-solid fa-star"></i>
-                                                        </div>
-                                                    </div>
-                                                    <div class="rev-content">
-                                                        <p>Very good tyres at very good prices. I have been using this tyre garage for the past four
-                                                            years and have always had a fast and professional service.</p>
-                                                    </div>
-                                                </div>
+                                                            <div class="review-card">
+                                                                <div class="rev-header">
+                                                                    <h5>Bilal Khan</h5>
+                                                                    <div class="stars">
+                                                                        <i class="fa-solid fa-star"></i>
+                                                                        <i class="fa-solid fa-star"></i>
+                                                                        <i class="fa-solid fa-star"></i>
+                                                                        <i class="fa-solid fa-star"></i>
+                                                                        <i class="fa-solid fa-star"></i>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="rev-content">
+                                                                    <p>Very good tyres at very good prices. I have been using this tyre garage for the past four
+                                                                        years and have always had a fast and professional service.</p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="review-card">
+                                                                <div class="rev-header">
+                                                                    <h5>Bilal Khan</h5>
+                                                                    <div class="stars">
+                                                                        <i class="fa-solid fa-star"></i>
+                                                                        <i class="fa-solid fa-star"></i>
+                                                                        <i class="fa-solid fa-star"></i>
+                                                                        <i class="fa-solid fa-star"></i>
+                                                                        <i class="fa-solid fa-star"></i>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="rev-content">
+                                                                    <p>Very good tyres at very good prices. I have been using this tyre garage for the past four
+                                                                        years and have always had a fast and professional service.</p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="review-card">
+                                                                <div class="rev-header">
+                                                                    <h5>Bilal Khan</h5>
+                                                                    <div class="stars">
+                                                                        <i class="fa-solid fa-star"></i>
+                                                                        <i class="fa-solid fa-star"></i>
+                                                                        <i class="fa-solid fa-star"></i>
+                                                                        <i class="fa-solid fa-star"></i>
+                                                                        <i class="fa-solid fa-star"></i>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="rev-content">
+                                                                    <p>Very good tyres at very good prices. I have been using this tyre garage for the past four
+                                                                        years and have always had a fast and professional service.</p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="review-card">
+                                                                <div class="rev-header">
+                                                                    <h5>Bilal Khan</h5>
+                                                                    <div class="stars">
+                                                                        <i class="fa-solid fa-star"></i>
+                                                                        <i class="fa-solid fa-star"></i>
+                                                                        <i class="fa-solid fa-star"></i>
+                                                                        <i class="fa-solid fa-star"></i>
+                                                                        <i class="fa-solid fa-star"></i>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="rev-content">
+                                                                    <p>Very good tyres at very good prices. I have been using this tyre garage for the past four
+                                                                        years and have always had a fast and professional service.</p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="review-card">
+                                                                <div class="rev-header">
+                                                                    <h5>Bilal Khan</h5>
+                                                                    <div class="stars">
+                                                                        <i class="fa-solid fa-star"></i>
+                                                                        <i class="fa-solid fa-star"></i>
+                                                                        <i class="fa-solid fa-star"></i>
+                                                                        <i class="fa-solid fa-star"></i>
+                                                                        <i class="fa-solid fa-star"></i>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="rev-content">
+                                                                    <p>Very good tyres at very good prices. I have been using this tyre garage for the past four
+                                                                        years and have always had a fast and professional service.</p>
+                                                                </div>
+                                                            </div>
 
 
-                                            </div> -->
+                                                        </div> -->
 
 
         </div>

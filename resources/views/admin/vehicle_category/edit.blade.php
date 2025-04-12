@@ -27,7 +27,7 @@
                         <div class="col-md-12 mb-4">
                             <div class="form-group">
                                 <label for="">Vehicle Category Name:</label>
-                                <input type="text" name="id" value="{{ $vehicleCategory->id }}" >
+                                <input type="hidden" name="id" value="{{ $vehicleCategory->id }}" >
                                 <input type="text" name="v_cat_name" value="{{ $vehicleCategory->v_cat_name }}"
                                     class="form-control @error('v_cat_name') is-invalid @enderror " placeholder="4x4">
                                 @error('v_cat_name')

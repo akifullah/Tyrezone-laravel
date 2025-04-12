@@ -5,12 +5,63 @@
 
 
 @section('maincontent')
-    <div class="content-area mt-5">
+    <div class="content-area mt-2">
+        @include('admin.common.alert')
+
         <div class="d-flex justify-content-between align-items-center mb-3">
             <h5 class="m-0">Tyre Pattern</h5>
 
-            <a class="main-btn sm" href="{{ route('admin.addTyrePatteren') }}">Add Patteren</a>
+            {{-- <a class="main-btn sm" href="{{ route('admin.addTyrePatteren') }}">Add Patteren</a> --}}
 
+        </div>
+
+        <div class="form form-wrap sign-up-wrap ">
+            <form action="{{ route('admin.saveTyrePatteren') }}" method="post">
+                @csrf
+                <div class="row">
+
+                    <div class="col-lg col-sm-12 ">
+                        <div class="form-group">
+                            <label for="">Name:</label>
+                            <input type="text" name="name" class="form-control @error('name') is-invalid @enderror "
+                                placeholder="Name">
+                            @error('name')
+                                <p class="d-block invalid-feedback">{{ $message }}</p>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="col-lg col-sm-12 ">
+                        <div class="form-group">
+                            <label for="">Manufacturers:</label>
+
+                            <select name="manufacturer_id"
+                                class="form-select @error('manufacturer_id') is-invalid @enderror" id="">
+
+                                <option selected disabled>Select Manufacture</option>
+
+                                @if ($manufacturers->isNotEmpty())
+                                    @foreach ($manufacturers as $manufacturer)
+                                        <option value="{{ $manufacturer->id }}">{{ $manufacturer->name }}</option>
+                                    @endforeach
+                                @endif
+                            </select>
+                            @error('manufacturer_id')
+                                <p class="d-block invalid-feedback">{{ $message }}</p>
+                            @enderror
+
+                        </div>
+                    </div>
+
+
+
+
+                    <div class="col-lg col-sm-12 align-self-end pt-2 text-center">
+                        <button class="main-btn sm">Add Patteren</button>
+                    </div>
+
+                </div>
+            </form>
         </div>
 
 
@@ -77,7 +128,7 @@
         function deletePatteren(id) {
             if (confirm("Are you sure you want to delete?")) {
                 $.ajax({
-                    url: "{{ route("admin.deleteTyrePatteren") }}",
+                    url: "{{ route('admin.deleteTyrePatteren') }}",
                     type: "post",
                     data: {
                         "id": id

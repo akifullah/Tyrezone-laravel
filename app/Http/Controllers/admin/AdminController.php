@@ -88,13 +88,13 @@ class AdminController extends Controller
     function index()
     {
 
-        $products = Product::with("patteren", "manufacturer")->get();
-        $manufacturers = Manufacturer::get();
-        $patterens = Patteren::with("manufacturer")->get();
+        $products = Product::with("patteren", "manufacturer")->paginate(1, ['*'], 'products_page');
+        $manufacturers = Manufacturer::paginate(5, ['*'], 'manufacturers_page');
+        $patterens = Patteren::with("manufacturer")->paginate(5, ['*'], 'patterns_page');
         $users = User::select("id")->get();
         $orders = Order::select("id")->get();
 
-        // return $patterens;
+        // return $manufacturers;
 
         return view("admin.dashboard", [
             "products" => $products,
@@ -567,7 +567,9 @@ class AdminController extends Controller
     function tyrePatteren()
     {
         $patterens = Patteren::with("manufacturer")->get();
-        return view("admin.tyre-patteren", ["patterens" => $patterens]);
+        $manufacturers = Manufacturer::all();
+
+        return view("admin.tyre-patteren", ["patterens" => $patterens, "manufacturers" => $manufacturers]);
     }
 
 

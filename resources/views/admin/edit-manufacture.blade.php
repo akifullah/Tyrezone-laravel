@@ -52,7 +52,7 @@
                                     placeholder="Image Url">
                             </div>
                         </div>
-                        <div class="col-md-12 mb-4">
+                        {{-- <div class="col-md-12 mb-4">
                             <div class="form-group">
                                 <label for="">Excerp:</label>
                                 <input type="text" name="excerpt" value="{{ $manufacturer->excerpt }}" maxlength="100"
@@ -65,7 +65,7 @@
                                 <textarea name="description" id="editor" placeholder="Descriptions" style="visibility: hidden; display: none;">{{ $manufacturer->description }}</textarea>
 
                             </div>
-                        </div>
+                        </div> --}}
 
 
 

@@ -38,7 +38,21 @@ label,
 html {
   font-family: "Poppins", sans-serif !important;
 }
-
+.pagination .page-item .page-link {
+  color: var(--dark-blue);
+  background-color: var(--white);
+  /* border: 1px solid var(--dark-blue); */
+  box-shadow: none !important;
+}
+.pagination .page-item .page-link:hover {
+  background-color: var(--dark-blue);
+  color: var(--white);
+}
+.pagination .page-item.active .page-link {
+  background-color: var(--dark-blue);
+  color: var(--white);
+  border: 1px solid var(--dark-blue);
+}
 h1 {
   font-size: 35px;
   font-weight: 700;
@@ -278,6 +292,7 @@ a {
 .sign-up-wrap {
   min-height: 20px;
   padding: 19px;
+  padding-top: 10px;
   margin-bottom: 20px;
   background-color: #f5f5f5;
   border: 1px solid #e3e3e3;
@@ -332,6 +347,7 @@ a {
 }
 .content-area table  tr td .last-btns{
   display: flex;
+  justify-content: center;
   gap: 5px;
 }
 .content-area table  tr td:last-child .btn{

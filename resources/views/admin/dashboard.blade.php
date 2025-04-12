@@ -10,7 +10,7 @@
                 <a href="{{ route('admin.products') }}">
                     <div class="dash-card">
                         <h4>Products</h4>
-                        <h5>{{ $products->count() }}</h5>
+                        <h5>{{ $products->total() }}</h5>
                         <i class="fa-solid fa-box-archive"></i>
                     </div>
                 </a>
@@ -20,7 +20,7 @@
                 <a href="{{ route('admin.tyrePatteren') }}">
                     <div class="dash-card">
                         <h4>Patteren</h4>
-                        <h5>{{ $patterens->count() }}</h5>
+                        <h5>{{ $patterens->total() }}</h5>
                         <i class="fa-solid fa-sliders"></i>
                     </div>
                 </a>
@@ -31,7 +31,7 @@
                 <a href="{{ route('admin.manufacturers') }}">
                     <div class="dash-card">
                         <h4>Manufacturers</h4>
-                        <h5>{{ $manufacturers->count() }}</h5>
+                        <h5>{{ $manufacturers->total() }}</h5>
                         <i class="fa-solid fa-list"></i>
                     </div>
                 </a>
@@ -70,7 +70,6 @@
                             <tr>
                                 <th>Manufacturer Name</th>
                                 <th>Image</th>
-                                <th>Description</th>
                                 <th>Created At</th>
 
                             </tr>
@@ -87,9 +86,7 @@
                                                     alt="">
                                             @endif
                                         </td>
-                                        <td>
-                                            {{ $manufacturer->description }}
-                                        </td>
+                                        
 
                                         <!-- Truncate to 50 characters -->
                                         <td>{{ \Carbon\Carbon::parse($manufacturer->created_at)->format('d M, Y') }}</td>
@@ -100,6 +97,7 @@
                         </tbody>
                     </table>
                 </div>
+                {{ $manufacturers->links() }}
             </div>
             <div class="col-md-6">
                 <div class="d-flex justify-content-between align-items-center">
@@ -132,6 +130,8 @@
                         </tbody>
                     </table>
                 </div>
+                {{ $patterens->links() }}
+
             </div>
         </div>
 
@@ -182,6 +182,8 @@
                 </tbody>
             </table>
         </div>
+        {{ $products->links() }}
+
 
     </div>
 @endsection

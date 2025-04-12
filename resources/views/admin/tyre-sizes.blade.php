@@ -6,197 +6,71 @@
 
 @section('maincontent')
 
-    <div class="content-area mt-5">
+ 
+    <div class="content-area mt-2">
         @include('admin.common.alert')
 
         <div class="d-flex justify-content-between align-items-center">
             <h5 class="m-0">Tyre Sizes</h5>
 
-            <a href="{{ route('admin.addTyreSize') }}" class="main-btn sm">Add Size</a>
+            {{-- <a href="{{ route('admin.addTyreSize') }}" class="main-btn sm">Add Size</a> --}}
 
         </div>
 
-        {{-- <div class="row mt-4">
-            <div class="col-md-6">
-                <h5>Width</h5>
-                <div class="table-responsive mt-3">
-                    <table class="table table-bordered">
-                        <thead>
-                            <tr>
-                                <th>ID #</th>
-                                <th>Width</th>
-                                <th>Actions</th>
+        <div class="form form-wrap sign-up-wrap h-100 mt-3">
+               
 
-                            </tr>
-                        </thead>
+                <form action="{{ route('admin.saveTyreSize') }}" method="POST">
+                    @csrf
+                    <div class="row">
+                        <div class="col-lg col-md-6 ">
+                            <div class="form-group">
+                                <label for="width">Width:</label>
+                                <input type="text" name="width"
+                                    class="form-control @error('width') is-invalid @enderror" placeholder="Width">
+                                @error('width')
+                                    <span class="invalid-feedback d-block">{{ $message }}</span>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="col-lg col-md-6 ">
+                            <div class="form-group">
+                                <label for="profile">Profile:</label>
+                                <input type="text" name="profile"
+                                    class="form-control @error('profile') is-invalid @enderror" placeholder="Profile">
+                                @error('profile')
+                                    <span class="invalid-feedback d-block">{{ $message }}</span>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="col-lg col-md-6 ">
+                            <div class="form-group">
+                                <label for="rim_size">Rim Size:</label>
+                                <input type="text" name="rim_size"
+                                    class="form-control @error('profile') is-invalid @enderror" placeholder="Rim Size">
+                                @error('rim_size')
+                                    <span class="invalid-feedback d-block">{{ $message }}</span>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="col-lg col-md-6 ">
+                            <div class="form-group">
+                                <label for="speed">Speed:</label>
+                                <input type="text" name="speed"
+                                    class="form-control @error('speed') is-invalid @enderror" placeholder="Speed">
+                                @error('speed')
+                                    <span class="invalid-feedback d-block">{{ $message }}</span>
+                                @enderror
+                            </div>
+                        </div>
 
-                        <tbody>
-                            @if ($widths->isNotEmpty())
-                                @foreach ($widths as $width)
-                                    <tr>
-                                        <td>{{ $width->id }}</td>
-                                        <td>{{ $width->width }}</td>
-                                        <td>
-                                            <div class="last-btns d-flex justify-content-center">
-                                                <a href="" class="btn btn-success">
-                                                    <i class="fa-solid fa-pen"></i>
-                                                </a>
-
-                                                <button onclick="deleteWidth({{ $width->id }})" class="btn btn-danger">
-                                                    <i class="fa-solid fa-trash-can"></i>
-                                                </button>
-
-                                            </div>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                            @endif
-
-
-                        </tbody>
-                    </table>
-                </div>
-
-
+                        <div class="col-lg col-12 align-self-end text-center">
+                            <button class="main-btn sm">Add Size</button>
+                        </div>
+                    </div>
+                </form>
             </div>
-
-            <div class="col-md-6">
-                <h5>Profile/Height</h5>
-
-                <div class="table-responsive mt-3">
-                    <table class="table table-bordered">
-                        <thead>
-                            <tr>
-                                <th>ID #</th>
-                                <th>Profile</th>
-                                <th>Width</th>
-                                <th>Actions</th>
-
-                            </tr>
-                        </thead>
-
-                        <tbody>
-                            @if ($profiles->isNotEmpty())
-                                @foreach ($profiles as $profile)
-                                    <tr>
-                                        <td>{{ $profile->id }}</td>
-                                        <td>{{ $profile->profile }}</td>
-                                        <td>{{ $profile->width->width }}</td>
-                                        <td>
-                                            <div class="last-btns d-flex justify-content-center">
-                                                <a href="" class="btn btn-success">
-                                                    <i class="fa-solid fa-pen"></i>
-                                                </a>
-
-                                                <button onclick="deleteProfile({{ $profile->id }})" class="btn btn-danger">
-                                                    <i class="fa-solid fa-trash-can"></i>
-                                                </button>
-
-                                            </div>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                            @endif
-
-
-                        </tbody>
-                    </table>
-                </div>
-
-
-            </div>
-
-            <div class="col-md-6">
-                <h5>Rim Size</h5>
-
-                <div class="table-responsive mt-3">
-                    <table class="table table-bordered">
-                        <thead>
-                            <tr>
-                                <th>ID #</th>
-                                <th>Rim Size</th>
-                                <th>Profile</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-
-                        <tbody>
-                            @if ($rimSizes->isNotEmpty())
-                                @foreach ($rimSizes as $rimSize)
-                                    <tr>
-                                        <td>{{ $rimSize->id }}</td>
-                                        <td>{{ $rimSize->rim_size }}</td>
-                                        <td>{{ $rimSize->profile->profile }}</td>
-                                        <td>
-                                            <div class="last-btns d-flex justify-content-center">
-                                                <a href="" class="btn btn-success">
-                                                    <i class="fa-solid fa-pen"></i>
-                                                </a>
-
-                                                <button onclick="deleteRimSize({{ $rimSize->id }})" class="btn btn-danger">
-                                                    <i class="fa-solid fa-trash-can"></i>
-                                                </button>
-
-                                            </div>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                            @endif
-
-
-                        </tbody>
-                    </table>
-                </div>
-
-
-            </div>
-
-            <div class="col-md-6">
-                <h5>Speed</h5>
-
-                <div class="table-responsive mt-3">
-                    <table class="table table-bordered">
-                        <thead>
-                            <tr>
-                                <th>ID #</th>
-                                <th>Rim Size</th>
-                                <th>Profile</th>
-                                <th>Actions</th>
-
-                            </tr>
-                        </thead>
-
-                        <tbody>
-                            @if ($speeds->isNotEmpty())
-                                @foreach ($speeds as $speed)
-                                    <tr>
-                                        <td>{{ $speed->id }}</td>
-                                        <td>{{ $speed->speed }}</td>
-                                        <td>{{ $speed->rimSize->rim_size }}</td>
-                                        <td>
-                                            <div class="last-btns d-flex justify-content-center">
-                                                <a href="" class="btn btn-success">
-                                                    <i class="fa-solid fa-pen"></i>
-                                                </a>
-
-                                                <button onclick="deleteSpeed({{ $speed->id }})" class="btn btn-danger">
-                                                    <i class="fa-solid fa-trash-can"></i>
-                                                </button>
-
-                                            </div>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                            @endif
-
-                        </tbody>
-                    </table>
-                </div>
-
-
-            </div>
-
-        </div> --}}
+      
 
 
 

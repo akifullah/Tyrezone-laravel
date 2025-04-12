@@ -74,15 +74,15 @@
                         </li>
                         <li>
                             <a class="{{ Route::is('admin.tyreSize') ? 'active' : '' }}"
-                            href="{{ route('admin.tyreSize') }}"><i class="fa-solid fa-users"></i> Tyre Sizes</a>
+                            href="{{ route('admin.tyreSize') }}"><i class="fa-solid fa-expand"></i> Tyre Sizes</a>
                         </li>
                         <li>
                             <a class="{{ Route::is('admin.vehicleCategory') ? 'active' : '' }}"
-                            href="{{ route('admin.vehicleCategory') }}"><i class="fa-solid fa-users"></i> Vehicle Category</a>
+                            href="{{ route('admin.vehicleCategory') }}"><i class="fa-solid fa-layer-group"></i> Vehicle Category</a>
                         </li>
                         <li>
                             <a class="{{ Route::is('admin.vehicle-brands') ? 'active' : '' }}"
-                            href="{{ route('admin.vehicle-brands') }}"><i class="fa-solid fa-users"></i> Vehicle Brands</a>
+                            href="{{ route('admin.vehicle-brands') }}"><i class="fa-solid fa-shuffle"></i> Vehicle Brands</a>
                         </li>
                         <li>
                             <a class="{{ Route::is('admin.users') ? 'active' : '' }}"

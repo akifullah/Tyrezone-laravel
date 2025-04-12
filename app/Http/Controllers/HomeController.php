@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Manufacturer;
 use App\Models\Size;
 use App\Models\StripeSetting;
 use App\Models\TyreProfile;
 use App\Models\TyreRimsize;
 use App\Models\TyreWidth;
+use App\Models\VehicleBrand;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -25,6 +27,12 @@ class HomeController extends Controller
             \Stripe\Stripe::setApiKey($settings->stripe_secret_key);
         }
 
+        $vehicleBrands = VehicleBrand::all();
+        $manufacturers = Manufacturer::limit(12)->latest()->get();
+
+
+
+        // return $manufacturers;
         return view("frontend.index", get_defined_vars());
     }
 

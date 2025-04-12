@@ -7,6 +7,7 @@ use App\Models\Manufacturer;
 use App\Models\Size;
 use App\Models\SmtpSetting;
 use App\Models\StripeSetting;
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\View;
@@ -43,7 +44,7 @@ class AppServiceProvider extends ServiceProvider
         View::share('logo', $logo);
 
 
-
+        Paginator::useBootstrapFive();
 
         
         

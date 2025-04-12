@@ -5,7 +5,9 @@
 
 
 @section('maincontent')
-    <div class="content-area mt-5">
+    <div class="content-area mt-2">
+        @include('admin.common.alert')
+
         <div class="d-flex justify-content-between align-items-center mb-3">
             <h5 class="m-0">Vehicle Category</h5>
 
@@ -13,6 +15,30 @@
 
         </div>
 
+
+        <div class="form form-wrap sign-up-wrap ">
+            <form action="{{ route('admin.saveVehicleCategory') }}" method="post">
+                @csrf
+                <div class="row">
+
+                    <div class="col-md-8">
+                        <div class="form-group">
+                            <label for="">Vehicle Category Name:</label>
+                            <input type="text" name="v_cat_name" value="{{ old('v_cat_name') }}"
+                                class="form-control @error('v_cat_name') is-invalid @enderror " placeholder="4x4">
+                            @error('v_cat_name')
+                                <p class="d-block invalid-feedback">{{ $message }}</p>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 align-self-end text-center pt-2">
+                        <button class="main-btn sm px-3">Save Category</button>
+                    </div>
+
+                </div>
+            </form>
+        </div>
 
 
         <div class="table-responsive">
@@ -75,7 +101,7 @@
         function deleteCate(id) {
             if (confirm("Are you sure you want to delete?")) {
                 $.ajax({
-                    url: "{{ route("admin.deleteVehicleCategory") }}",
+                    url: "{{ route('admin.deleteVehicleCategory') }}",
                     type: "post",
                     data: {
                         "id": id
