@@ -7,9 +7,9 @@
         <!-- HERO BANNER SECTION START -->
         
         <!-- HERO BANNER SECTION END -->
-        <div class="container px-0 shop-filter man-search">
+        <div class="container px-0 pb-0 shop-filter man-search">
             <div class="product-search search-wrap overflow-hidden p-0 border-0 rounded">
-                <form action="<?php echo e(route('shopSearch')); ?>" class="border rounded p-3 overflow-hidden">
+                <form action="<?php echo e(route('wholesale.filter')); ?>" class="border rounded p-3 overflow-hidden">
                     <div class="">
                         <div class="row align-items-end ">
 
@@ -182,7 +182,7 @@
                             <div class="col-lg-5 col-md-4 col-sm-6 col-12 align-self-end">
                                 <div class="d-flex align-items-center justify-content-end mt-3">
 
-                                    <a href="<?php echo e(route('shop')); ?>" class="clear-btn">Clear Filter</a>
+                                    <a href="<?php echo e(route('wholesale')); ?>" class="clear-btn">Clear Filter</a>
                                     <div class="text-end ms-3">
                                         <button class="main-btn sm"> Show Result</button>
                                     </div>
@@ -206,91 +206,69 @@
 
 
         
-        <section class="shop">
+        <section class="shop mb-4">
             <div class="container">
                 <div class="row">
                     <div class="col-12 order-1 order-lg-0">
                         <div class="shop-content">
-                            <h2>Tyres</h2>
+                            <h3>Tyres</h3>
 
-                            <div class="row">
-                                <?php if($products->isNotEmpty()): ?>
-                                    <?php $__currentLoopData = $products; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $product): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                        <div class="col-xl-3 col-lg-4 col-md-4  col-sm-6 px-2">
+                            <?php if($products->isNotEmpty()): ?>
+                                <div class="table-responsive filter-table">
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th>S. No.</th>
+                                                
+                                                <th>Description</th>
+                                                <th>Season</th>
+                                                <th>Price</th>
+                                                <th>In Stock</th>
+                                                <th>Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php $__currentLoopData = $products; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $product): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                <tr>
+                                                    <td><?php echo e($product->id); ?></td>
+                                                    
+                                                    <td>(<?php echo e($product->tyre_size); ?>) <?php echo e($product->name); ?>
 
-                                            <div class="product-card position-relative overflow-hidden">
-                                                <?php if($product->in_stock < 1): ?>
-                                                    <div class="tags">Out of Stock</div>
-                                                <?php endif; ?>
-                                                <div class="img-row">
-                                                    <?php if($product->manufacturer?->image != ''): ?>
-                                                        <div class="brand-img">
-                                                            <img
-                                                                src="<?php echo e(asset('uploads/brands/' . $product->manufacturer->image)); ?>">
-                                                        </div>
-                                                    <?php endif; ?>
-                                                    <div class="p-card-img position-relative w-100">
-                                                        <?php if($product->images->isNotEmpty()): ?>
-                                                            <img
-                                                                src="<?php echo e(asset('uploads/products/' . $product->images[0]->name)); ?>">
+                                                        <?php echo e($product?->manufacturer?->name); ?></td>
+                                                    <td class="text-center">
+                                                        <?php if($product?->season_type == 1): ?>
+                                                            <i title="Summer" class=" h3 mb-0 fa-solid fa-sun"></i>
+                                                        <?php elseif($product?->season_type == 2): ?>
+                                                            <i title="Winter"
+                                                                class=" h3 mb-0 fa-regular fa-snowflake"></i>
+                                                        <?php else: ?>
+                                                            <i title="All Season"
+                                                                class=" h3 mb-0 fa-brands fa-galactic-republic"></i>
                                                         <?php endif; ?>
+                                                    </td>
+                                                    <td><?php echo e($product->price); ?></td>
+                                                    <td><?php echo e($product->in_stock); ?></td>
+                                                    <td>
+                                                        <div class="d-flex align-items-center">
 
-                                                    </div>
-
-
-                                                </div>
-
-                                                <div class="product-cart-text pt-2">
-
-                                                    <div class="title-wrap">
-
-                                                        <div class="d-flex justify-space-between">
-                                                            <div class="">
-                                                                <h6 class="title">
-                                                                    <?php echo e($product->name); ?>
-
-                                                                </h6>
-                                                                <p class="tyre-size"><?php echo e($product->tyre_size); ?></p>
-                                                            </div>
-                                                            <div class="ms-auto ">
-                                                                <h4 class="price ">£<?php echo e($product->price); ?>
-
-                                                                    <small>each</small>
-                                                                </h4>
-                                                            </div>
+                                                            <input
+                                                                class="form-control   item-qty-inp me-2 form-control-sm shadow-none"
+                                                                type="number" placeholder="Quantity"
+                                                                id="qty_<?php echo e($product->id); ?>">
+                                                            <button class="main-btn sm text-nowrap"
+                                                                onclick="addToCart(<?php echo e($product); ?>)">Add</button>
                                                         </div>
+                                                    </td>
+                                                </tr>
+                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            <?php else: ?>
+                                <h3 class=" my-4 fw-normal text-center">Items Not Found</h3>
+                            <?php endif; ?>
 
-
-                                                    </div>
-                                                    <div class="d-flex flex-wrap gap-2 labels-wrap w-100 mb-2">
-
-                                                        <?php if($product->season_type == '0'): ?>
-                                                            <span><i title="All Season"
-                                                                    class="fa-brands fa-galactic-republic"></i>
-                                                                All Season</span>
-                                                        <?php elseif($product->season_type == '1'): ?>
-                                                            <span><i class="fa-regular fa-sun"></i>
-                                                                Summer</span>
-                                                        <?php elseif($product->season_type == '2'): ?>
-                                                            <span><i class="fa-regular fa-snowflake"></i>
-                                                                Winter</span>
-                                                        <?php endif; ?>
-                                                    </div>
-
-                                                    <a href="<?php echo e(route('shop-detail', ['id' => $product->id])); ?>"
-                                                        class="main-btn sm w-100 d-block text-center">Select</a>
-
-                                                </div>
-
-                                            </div>
-
-                                        </div>
-                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                                <?php else: ?>
-                                    <h3 class=" my-4 fw-normal text-center">Item Not Found</h3>
-                                <?php endif; ?>
-
-                            </div>
+                            
                         </div>
                     </div>
 
@@ -306,7 +284,76 @@
 
 
 
+
+
     </div>
 <?php $__env->stopSection(); ?>
 
-<?php echo $__env->make('frontend.layout.app', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH C:\Users\hy\Desktop\Tyrezone-laravel\resources\views/frontend/shop.blade.php ENDPATH**/ ?>
+
+
+<?php $__env->startSection('customjs'); ?>
+    <script>
+        function addToCart(pname, qty, buyNow = false) {
+            let productQty = document.getElementById(`qty_${pname.id}`)?.value;
+            if (!productQty) {
+                alert("Please Enter item Quantity.");
+                return
+            }
+            if (productQty <= 0) {
+                alert("Whoops! Quantity must be 1 or more.");
+                return
+            }
+            let product = pname;
+
+
+            if (product?.in_stock <= 0) {
+                alert("Product is out of stock!")
+                return
+            }
+            if (Number(productQty) > Number(product.in_stock)) {
+                alert("Product is not available in this quantity!")
+                return
+            }
+
+            product.qty = productQty;
+
+
+
+            let cart = JSON.parse(localStorage.getItem("tyreZoneCart"));
+            let isInCart = cart.findIndex((value) => value.id == product.id);
+
+            if (isInCart < 0) {
+                cart.push({
+                    ...product
+                });
+            } else {
+                // if (buyNow) {
+
+                //     window.location.href = '<?php echo e(route('checkout')); ?>';
+                // } else {
+                //     alert("Item already added in your  cart!")
+                //     return
+                // }
+                cart[isInCart].qty = Number(cart[isInCart].qty) + Number(productQty);
+            }
+
+            localStorage.setItem("tyreZoneCart", JSON.stringify(cart));
+            cartLength();
+            callData();
+
+            
+
+            // if (buyNow) {
+
+            //     window.location.href = '<?php echo e(route('checkout')); ?>';
+            // } else {
+            //     window.location.href = '<?php echo e(route('cart')); ?>';
+
+            // }
+            // localStorage.setItem("tyreZoneCart", [...cart, product])
+
+        }
+    </script>
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('frontend.layout.app', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH C:\Users\hy\Desktop\Tyrezone-laravel\resources\views/frontend/wholesale.blade.php ENDPATH**/ ?>

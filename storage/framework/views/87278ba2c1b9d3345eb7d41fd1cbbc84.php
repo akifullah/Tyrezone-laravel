@@ -50,6 +50,10 @@
                                                 <td colspan="5" class="text-end" id="subTotal">0.00</td>
                                             </tr>
                                             <tr class="hidden-xs">
+                                                <td colspan="5" class="text-end"><strong>Vat Price:</strong></td>
+                                                <td colspan="5" class="text-end" id="vatTotal">0.00</td>
+                                            </tr>
+                                            <tr class="hidden-xs">
                                                 <td colspan="5" class="text-end"><strong>Total:</strong></td>
                                                 <td colspan="5" class="text-end" id="total">0.00</td>
                                             </tr>

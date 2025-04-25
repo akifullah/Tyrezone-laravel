@@ -22,8 +22,7 @@
                     style="background-image: url(<?php echo e(asset('frontend/assets/imgs/profile-bg.jpg')); ?>);">
                     <div class="container">
                         <div class="banner-text text-center">
-                            <h1>Welcome Back <?php echo e(Auth::user()->fname . ' ' . Auth::user()->lname); ?>
-
+                            <h1>Welcome Back <?php echo e(Auth::user()->fname . ' ' . Auth::user()->lname); ?></h1>
                             </h1>
                         </div>
                     </div>
@@ -44,16 +43,38 @@
                         <div class="user-main border rounded my-5">
                             <h5>User Information</h5>
                             <div class="user-profile">
-                                <h4><?php echo e(Auth::user()->fname . ' ' . Auth::user()->lname); ?></h4>
+                                <h4><?php echo e(Auth::user()->fname . ' ' . Auth::user()->lname); ?>
+
+                                    (<?php echo e(getUserRoleName(Auth::user()->role)); ?>)
+
+                                </h4>
 
 
                                 <div class="row">
 
-                                    <div class="col-md-12">
+                                    <div class="col-md-6">
                                         <p><strong>Email:</strong> <?php echo e(Auth::user()->email); ?></p>
                                     </div>
-                                    <div class="col-md-12">
+                                    <div class="col-md-6">
                                         <p><strong>Phone:</strong> <?php echo e(Auth::user()->phone); ?></p>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p><strong>Company:</strong> <?php echo e(Auth::user()->company); ?></p>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p><strong>City:</strong> <?php echo e(Auth::user()->city); ?></p>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p><strong>Postal Code:</strong> <?php echo e(Auth::user()->post_code); ?></p>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p><strong>State:</strong> <?php echo e(Auth::user()->state); ?></p>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p><strong>Country:</strong> <?php echo e(Auth::user()->country); ?></p>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <p><strong>Address:</strong> <?php echo e(Auth::user()->address); ?></p>
                                     </div>
 
 

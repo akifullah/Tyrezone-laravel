@@ -88,7 +88,7 @@
                     </div>
                     <div class="top-card-text">
                         <h4 class="top-text-title">FEEL FREE TO CONTACT</h4>
-                        <span class="top-card-desc">07563896325</span>
+                        <a href="tel:07563896325"><span class="top-card-desc">0756 389 6325</span></a>
                     </div>
                 </div>
                 <!-- CARD START -->
@@ -115,7 +115,7 @@
         <nav class="navbar navbar-expand-lg  navbar-dark p-0">
             <div class="container">
                 <a href="<?php echo e(route('home')); ?>" class="navbar-brand">
-                  
+
                     <?php if(!empty($logo)): ?>
                         <img src="<?php echo e(asset('uploads/logos/' . $logo->name)); ?>" class="logo" alt="">
                     <?php else: ?>
@@ -167,6 +167,13 @@
                             <li><a class="<?php echo e(Route::is('shop') ? 'active' : ''); ?>"
                                     href="<?php echo e(route('shop')); ?>">Shop</a>
                             </li>
+
+                            <?php if(in_array(Auth::user()?->role, ['1', '2'])): ?>
+                                <li><a class="<?php echo e(Route::is('wholesale') ? 'active' : ''); ?>"
+                                        href="<?php echo e(route('wholesale')); ?>">Wholesales</a>
+                                </li>
+                            <?php endif; ?>
+
                             
                             
                             <li><a class="<?php echo e(Route::is('contact') ? 'active' : ''); ?>"
@@ -204,11 +211,22 @@
                     <ul class="navs d-flex list-unstyled gap-3 m-0">
                         
                         <li class="dropdown">
-                            <a href="#" data-bs-toggle="dropdown" class=" nav-item"><i
-                                    class="fa-solid fa-user"></i></a>
+                            <a href="#" data-bs-toggle="dropdown" class=" nav-item">
+                                <span>
+                                    <?php if(Auth::check()): ?>
+                                        Hi, <?php echo e(Auth::user()?->fname); ?>
+
+                                    <?php endif; ?>
+                                </span>
+                                <i class="fa-solid fa-user"></i>
+
+                            </a>
                             <ul class="dropdown-menu">
                                 <?php if(Auth::check()): ?>
-                                    <a href="<?php echo e(route('profile')); ?>" class="dropdown-item">Profile</a>
+                                    <?php if(Auth::user()->role == '1'): ?>
+                                        <a href="<?php echo e(route('admin.dashboard')); ?>" class="dropdown-item">Dashboard</a>
+                                        <?php endif; ?>
+                                        <a href="<?php echo e(route('profile')); ?>" class="dropdown-item">Profile</a>
                                     <a href="<?php echo e(route('logout')); ?>" class="dropdown-item">Logout</a>
                                 <?php else: ?>
                                     <a href="<?php echo e(route('login')); ?>" class="dropdown-item">Login</a>
@@ -299,9 +317,11 @@
                         <h3>Newsletter Signup</h3>
                         <p>Sign up for exclusive offers, original stories, activism awareness, events and more.</p>
 
-                        <form action="">
+                        <form id="newsletter-form">
+                            <?php echo csrf_field(); ?>
                             <div class="form-group">
-                                <input type="text" placeholder="E-Mail *" class="form-control">
+                                <input type="email" name="email" id="email" placeholder="Enter your email"
+                                    required class="form-control">
                             </div>
 
                             <div class="">
@@ -400,6 +420,25 @@
     <?php echo $__env->yieldContent('customjs'); ?>
 
     <script>
+        document.getElementById('newsletter-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            let formData = new FormData(this);
+
+            fetch('/subscribe', {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                })
+                .then(response => response.json())
+                .then(data => alert(data.message))
+                .catch(error => console.error('Error:', error));
+        });
+
+
+
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')

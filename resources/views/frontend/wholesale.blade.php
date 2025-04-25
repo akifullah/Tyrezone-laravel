@@ -477,7 +477,7 @@
                 return
             }
 
-            product.qty = productQty;
+            product.qty = Number(productQty);
 
 
 

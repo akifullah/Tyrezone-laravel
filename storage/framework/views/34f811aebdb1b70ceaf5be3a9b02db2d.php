@@ -82,15 +82,15 @@
                                     <table class="table table-striped border">
                                         <tbody>
                                             <tr>
-                                                <td>Tyre Size</td>
+                                                <td>Pattern Name</td>
                                                 <td class="text-end">
-                                                    <span><?php echo e($product->tyre_size); ?></span>
+                                                    <span><?php echo e($product->patteren != null ? $product->patteren->name : 'Not Specified'); ?></span>
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td>Rim Size</td>
+                                                <td>Tyre Size</td>
                                                 <td class="text-end">
-                                                    <span><?php echo e($product->rim_size); ?> Inches</span>
+                                                    <span><?php echo e($product->tyre_size); ?></span>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -100,17 +100,30 @@
                                                 </td>
                                             </tr>
                                             <tr>
+                                                <td>Rim Size</td>
+                                                <td class="text-end">
+                                                    <span><?php echo e($product->rim_size); ?> Inches</span>
+                                                </td>
+                                            </tr>
+                                            <tr>
                                                 <td>Tyre Aspect Ratio (Height)</td>
                                                 <td class="text-end">
                                                     <span><?php echo e($product->profile); ?> %</span>
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td>Pattern Name</td>
+                                                <td>Speed Rating</td>
                                                 <td class="text-end">
-                                                    <span><?php echo e($product->patteren != null ? $product->patteren->name : 'Not Specified'); ?></span>
+                                                    <span><?php echo e($product->speed); ?></span>
                                                 </td>
                                             </tr>
+                                            <tr>
+                                                <td>Load Index</td>
+                                                <td class="text-end">
+                                                    <span><?php echo e($product->load_index); ?></span>
+                                                </td>
+                                            </tr>
+
 
                                         </tbody>
                                     </table>
@@ -158,16 +171,16 @@
 
                                                 <div class="img-row">
 
-                                                    <?php if($product->manufacturer->image != ''): ?>
+                                                    <?php if($relatedProduct->manufacturer->image != ''): ?>
                                                         <div class="brand-img">
                                                             <img
-                                                                src="<?php echo e(asset('uploads/brands/' . $product->manufacturer->image)); ?>">
+                                                                src="<?php echo e(asset('uploads/brands/' . $relatedProduct->manufacturer->image)); ?>">
                                                         </div>
                                                     <?php endif; ?>
 
                                                     <div class="p-card-img position-relative w-100">
-                                                        <?php if($product->images->isNotEmpty()): ?>
-                                                            <img src="<?php echo e(asset('uploads/products/' . $product->images[0]->name)); ?>"
+                                                        <?php if($relatedProduct->images->isNotEmpty()): ?>
+                                                            <img src="<?php echo e(asset('uploads/products/' . $relatedProduct->images[0]->name)); ?>"
                                                                 alt="" width="100%">
                                                         <?php endif; ?>
                                                     </div>
@@ -182,13 +195,13 @@
                                                         <div class="d-flex justify-space-between">
                                                             <div class="">
                                                                 <h6 class="title">
-                                                                    <?php echo e($product->name); ?>
+                                                                    <?php echo e($relatedProduct->name); ?>
 
                                                                 </h6>
-                                                                <p class="tyre-size"><?php echo e($product->tyre_size); ?></p>
+                                                                <p class="tyre-size"><?php echo e($relatedProduct->tyre_size); ?></p>
                                                             </div>
                                                             <div class="ms-auto ">
-                                                                <h4 class="price ">£<?php echo e($product->price); ?>
+                                                                <h4 class="price ">£<?php echo e($relatedProduct->price); ?>
 
                                                                     <small>each</small>
                                                                 </h4>
@@ -198,23 +211,21 @@
 
                                                     </div>
                                                     <div class="d-flex flex-wrap gap-2 labels-wrap w-100 mb-2">
-                                                        <span><i class="fa-solid fa-car"></i>
-                                                            <?php echo e($product->tyre_type); ?></span>
-
-                                                        <?php if($product->season_type == '0'): ?>
+                                                        
+                                                        <?php if($relatedProduct->season_type == '0'): ?>
                                                             <span><i title="All Season"
                                                                     class="fa-brands fa-galactic-republic"></i>
                                                                 All Season</span>
-                                                        <?php elseif($product->season_type == '1'): ?>
+                                                        <?php elseif($relatedProduct->season_type == '1'): ?>
                                                             <span><i class="fa-regular fa-sun"></i>
                                                                 Summer</span>
-                                                        <?php elseif($product->season_type == '2'): ?>
+                                                        <?php elseif($relatedProduct->season_type == '2'): ?>
                                                             <span><i class="fa-regular fa-snowflake"></i>
                                                                 Winter</span>
                                                         <?php endif; ?>
                                                     </div>
 
-                                                    <a href="<?php echo e(route('shop-detail', ['id' => $product->id])); ?>"
+                                                    <a href="<?php echo e(route('shop-detail', ['id' => $relatedProduct->id])); ?>"
                                                         class="main-btn sm w-100 d-block text-center">Select</a>
 
                                                 </div>
@@ -278,7 +289,7 @@
         function addToCart(pname, buyNow = false) {
             let product = pname;
 
-            if (product.in_stock == 0) {
+            if (product.in_stock <= 0) {
                 alert("Product is out of stock!")
                 return
             }
