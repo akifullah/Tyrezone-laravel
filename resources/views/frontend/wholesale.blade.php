@@ -47,8 +47,8 @@
 
                                     <select name="width" id="" class="form-select">
                                         <option disabled selected>Width</option>
-                                        @if ($sizes->isNotEmpty())
-                                            @foreach ($sizes as $size)
+                                        @if ($allWidths->isNotEmpty())
+                                            @foreach ($allWidths as $size)
                                                 <option {{ Request::get('width') == $size->width ? 'selected' : '' }}
                                                     value="{{ $size->width }}">
                                                     {{ $size->width }}</option>
@@ -63,8 +63,8 @@
                                     <label for="" class="inp-label">Height</label>
                                     <select name="profile" class="form-select">
                                         <option disabled selected>Profile</option>
-                                        @if ($sizes->isNotEmpty())
-                                            @foreach ($sizes as $size)
+                                        @if ($allProfiles->isNotEmpty())
+                                            @foreach ($allProfiles as $size)
                                                 <option {{ Request::get('profile') == $size->profile ? 'selected' : '' }}
                                                     value="{{ $size->profile }}">
                                                     {{ $size->profile }}</option>
@@ -82,8 +82,8 @@
                                     <label for="" class="inp-label">Rim Size</label>
                                     <select name="rim_size" class="form-select">
                                         <option disabled selected>Rim Size</option>
-                                        @if ($sizes->isNotEmpty())
-                                            @foreach ($sizes as $size)
+                                        @if ($allRimSizes->isNotEmpty())
+                                            @foreach ($allRimSizes as $size)
                                                 <option {{ Request::get('rim_size') == $size->rim_size ? 'selected' : '' }}
                                                     value="{{ $size->rim_size }}">
                                                     {{ $size->rim_size }}</option>
@@ -98,8 +98,8 @@
                                     <label for="" class="inp-label">Speed</label>
                                     <select name="speed" class="form-select">
                                         <option value="">Speed</option>
-                                        @if ($sizes->isNotEmpty())
-                                            @foreach ($sizes as $size)
+                                        @if ($allSpeeds->isNotEmpty())
+                                            @foreach ($allSpeeds as $size)
                                                 <option {{ Request::get('speed') == $size->speed ? 'selected' : '' }}
                                                     value="{{ $size->speed }}">
                                                     {{ $size->speed }}</option>

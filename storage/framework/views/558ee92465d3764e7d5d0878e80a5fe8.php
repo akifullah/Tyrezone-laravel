@@ -16,7 +16,7 @@
 
     <!-- include summernote css/js -->
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
-<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
 
 
 
@@ -26,6 +26,9 @@
     <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css" />
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css"
+        integrity="sha512-nMNlpuaDPrqlEls3IX/Q56H36qvBASwb3ipuo3MxeWbsQB1881ox0cRv7UPTgBlriqoynt35KjEwgGUeUXIPnw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- CUSTOM CSS -->
     <link rel="stylesheet" href="<?php echo e(asset('admin/assets/css/style.css')); ?>">
 
@@ -70,12 +73,20 @@
                                 Patteren</a>
                         </li>
                         <li>
-                            <a class="<?php echo e(Route::is('admin.users') ? 'active' : ''); ?>"
-                                href="<?php echo e(route('admin.users')); ?>"><i class="fa-solid fa-users"></i> All users</a>
+                            <a class="<?php echo e(Route::is('admin.tyreSizes') ? 'active' : ''); ?>"
+                            href="<?php echo e(route('admin.tyreSizes')); ?>"><i class="fa-solid fa-expand"></i> Tyre Sizes</a>
                         </li>
                         <li>
-                            <a class="<?php echo e(Route::is('admin.tyreSize') ? 'active' : ''); ?>"
-                                href="<?php echo e(route('admin.tyreSize')); ?>"><i class="fa-solid fa-users"></i> Tyre Sizes</a>
+                            <a class="<?php echo e(Route::is('admin.vehicleCategory') ? 'active' : ''); ?>"
+                            href="<?php echo e(route('admin.vehicleCategory')); ?>"><i class="fa-solid fa-layer-group"></i> Vehicle Category</a>
+                        </li>
+                        <li>
+                            <a class="<?php echo e(Route::is('admin.vehicle-brands') ? 'active' : ''); ?>"
+                            href="<?php echo e(route('admin.vehicle-brands')); ?>"><i class="fa-solid fa-shuffle"></i> Vehicle Brands</a>
+                        </li>
+                        <li>
+                            <a class="<?php echo e(Route::is('admin.users') ? 'active' : ''); ?>"
+                                href="<?php echo e(route('admin.users')); ?>"><i class="fa-solid fa-users"></i> All users</a>
                         </li>
                         <li>
                             <a class="<?php echo e(Route::is('admin.orders') ? 'active' : ''); ?>"
@@ -84,7 +95,7 @@
                     </ul>
                 </div>
 
-              
+
 
             </aside>
 
@@ -102,7 +113,7 @@
                                 class="fa-solid fa-user-tie"></i></a>
 
                         <ul class="dropdown-menu dropdown-menu-end">
-                            <a href="<?php echo e(route("admin.profile")); ?>" class="dropdown-item">Profile</a>
+                            <a href="<?php echo e(route('admin.profile')); ?>" class="dropdown-item">Profile</a>
                             <a href="<?php echo e(route('logout')); ?>" class="dropdown-item">Logout</a>
                         </ul>
                     </div>
@@ -129,14 +140,21 @@
 
     <!-- BOOTSTRAP 5 JS CDN -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"
+        integrity="sha512-2ImtlRlf2VVmiGZsjm9bEyhjGW4dU7B6TNwh/hx/iSByxNENtj3WVE6o/9Lj4TJeVXPi4bnOIMXFIJJAeufa0A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 
     <script>
+        // $(document).ready(function() {
+        //     setTimeout(() => {
+        //         $('.select2').select2();
+        //     }, 500);
+        // });
         $(document).ready(function() {
             $(document).ready(function() {
                 $('.summernote').summernote();
-                
+
             });
         });
 

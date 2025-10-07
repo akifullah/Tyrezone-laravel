@@ -13,6 +13,10 @@ use App\Models\ProductImage;
 use App\Models\Size;
 use App\Models\StripeSetting;
 use App\Models\TempImage;
+use App\Models\TyreProfile;
+use App\Models\TyreRimsize;
+use App\Models\TyreSpeed;
+use App\Models\TyreWidth;
 use App\Models\User;
 use App\Models\VehicleBrand;
 use App\Models\VehicleCategory;
@@ -142,13 +146,25 @@ class AdminController extends Controller
         $manufacturers = Manufacturer::all();
         $vehicleCategories = VehicleCategory::all();
 
+
+        $widths = TyreWidth::all();
+        $profiles  = TyreProfile::all();
+        $rimsizes = TyreRimsize::all();
+        $speeds = TyreSpeed::all();
+
+
+
         $sizes = Size::all();
 
         return view("admin.add-product", [
             "manufacturers" => $manufacturers,
             "patterens" => $patterens,
             "sizes" => $sizes,
-            "vehicleCategories" => $vehicleCategories
+            "vehicleCategories" => $vehicleCategories,
+            "widths" => $widths,
+            "profiles" => $profiles,
+            "rimsizes" => $rimsizes,
+            "speeds" => $speeds,
         ]);
     }
 
@@ -166,18 +182,25 @@ class AdminController extends Controller
             "fuel_efficiency" => "required",
             "wet_grip" => "required",
             "road_noise" => "required",
-            "tyre_size" => "required",
-            // "width" => "required",
-            // "profile" => "required",
-            // "rim_size" => "required",
-            // "speed" => "required",
+            "width" => "required",
+            "profile" => "required",
+            "rim_size" => "required",
+            "speed" => "required",
             "load_index" => "required",
             "season_type" => "required",
             "price" => "required|numeric",
             "vat_price" => "numeric",
             "in_stock" => "required|numeric",
-
         ]);
+
+        // Get those values: width, rim, profile, and speed
+        $width = $req->width;
+        $profile = $req->profile;
+        $rim = $req->rim_size;
+        $speed = $req->speed;
+
+        // Combine width, profile, rim, and speed into the format "width/profile Rrim speed"
+        $tyre_size = $width . '/' . $profile . ' R' . $rim . ' ' . $speed;
 
         if ($validator->passes()) {
             // $image = $req->image;
@@ -197,7 +220,7 @@ class AdminController extends Controller
             //     $imageName3 = "3_" . time() . "." . $ext;
             // }
 
-            $tyreSize = $req->tyre_size;
+            $tyreSize = $tyre_size;
 
             // Explode by spaces to separate "145/45", "R15", and "H"
             $parts = explode(' ', $tyreSize);
@@ -227,7 +250,7 @@ class AdminController extends Controller
             $product->fuel_efficiency = $req->fuel_efficiency;
             $product->wet_grip = $req->wet_grip;
             $product->road_noise = $req->road_noise;
-            $product->tyre_size = $req->tyre_size;
+            $product->tyre_size = $tyreSize;
             $product->width = $width;
             $product->profile = $profile;
             $product->rim_size = $rim;
@@ -315,13 +338,52 @@ class AdminController extends Controller
         $sizes = Size::all();
         $vehicleCategories = VehicleCategory::all();
 
+        $widths = TyreWidth::all();
+        $profiles  = TyreProfile::all();
+        $rimsizes = TyreRimsize::all();
+        $speeds = TyreSpeed::all();
+
+        $tyre_size = $product->tyre_size; // e.g., '100/35 R16 S'
+        $width = $profile = $rim_size = $speed = null;
+
+        if (preg_match('/^(\d+)\/(\d+)\s*R(\d+)\s*(\w+)$/i', $tyre_size, $matches)) {
+            $width = $matches[1];
+            $profile = $matches[2];
+            $rim_size = $matches[3];
+            $speed = $matches[4];
+        }
+
+        // // Now pass these to the view:
+        // return view('admin.edit-product', compact(
+        //     'product',
+        //     'widths',
+        //     'profiles',
+        //     'rimsizes',
+        //     'speeds',
+        //     'width',
+        //     'profile',
+        //     'rim_size',
+        //     'speed'
+        //     // ...other variables
+        // ));
+
         return view("admin.edit-product", [
             "product" => $product,
             "images" => $productImage,
             "manufacturers" => $manufacturers,
             "patterens" => $patterens,
             "sizes" => $sizes,
-            "vehicleCategories" => $vehicleCategories
+            "vehicleCategories" => $vehicleCategories,
+            "widths" => $widths,
+            "profiles" => $profiles,
+            "rimsizes" => $rimsizes,
+            "speeds" => $speeds,
+
+            // pre selected
+            'width' => $width,
+            'profile' => $profile,
+            'rim_size' => $rim_size,
+            'speed' => $speed
         ]);
     }
 
@@ -336,11 +398,10 @@ class AdminController extends Controller
             "fuel_efficiency" => "required",
             "wet_grip" => "required",
             "road_noise" => "required",
-            "tyre_size" => "required",
-            // "width" => "required",
-            // "profile" => "required",
-            // "rim_size" => "required",
-            // "speed" => "required",
+            "width" => "required",
+            "profile" => "required",
+            "rim_size" => "required",
+            "speed" => "required",
             "load_index" => "required",
             "season_type" => "required",
             "budget_tyre" => "required",
@@ -349,10 +410,20 @@ class AdminController extends Controller
 
         ]);
 
+        // Get those values: width, rim, profile, and speed
+        $width = $req->width;
+        $profile = $req->profile;
+        $rim = $req->rim_size;
+        $speed = $req->speed;
+
+        // Combine width, profile, rim, and speed into the format "width/profile Rrim speed"
+        $tyre_size = $width . '/' . $profile . ' R' . $rim . ' ' . $speed;
+
+
         if ($validator->passes()) {
 
 
-            $tyreSize = $req->tyre_size;
+            $tyreSize = $tyre_size;
 
             // Explode by spaces to separate "145/45", "R15", and "H"
             $parts = explode(' ', $tyreSize);
@@ -382,7 +453,7 @@ class AdminController extends Controller
             $product->fuel_efficiency = $req->fuel_efficiency;
             $product->wet_grip = $req->wet_grip;
             $product->road_noise = $req->road_noise;
-            $product->tyre_size = $req->tyre_size;
+            $product->tyre_size = $tyreSize;
             $product->width = $width;
             $product->profile = $profile;
             $product->rim_size = $rim;
@@ -832,7 +903,7 @@ class AdminController extends Controller
             return redirect()->back()->withInput()->withErrors($validator);
         }
     }
-    
+
     public function deleteVehicleBrands(Request $request)
     {
         $vehicleBrand = VehicleBrand::findOrFail($request->id);
@@ -845,8 +916,4 @@ class AdminController extends Controller
         ]);
         // return redirect()->back()->with("success", "Vehicle Brand Deleted Successfully!");
     }
-    
-    
 }
-
-

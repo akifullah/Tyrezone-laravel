@@ -7,25 +7,42 @@ use App\Models\Manufacturer;
 use App\Models\Patteren;
 use App\Models\Product;
 use App\Models\Size;
+use App\Models\TyreProfile;
+use App\Models\TyreRimsize;
+use App\Models\TyreSpeed;
+use App\Models\TyreWidth;
 use App\Models\VehicleCategory;
 use Illuminate\Http\Request;
 
 class WholeSaleController extends Controller
 {
-    public function index(){
+    public function index()
+    {
         $sizes = Size::get();
+
+        $allWidths = TyreWidth::all();
+        $allProfiles = TyreProfile::all();
+        $allRimSizes = TyreRimsize::all();
+        $allSpeeds = TyreSpeed::all();
+
         $patterens = Patteren::get();
         $manufacturers = Manufacturer::with("products")->has("products")->get();
         $products = Product::with("manufacturer", "patteren", "images")->get();
         $vehicleCategory = VehicleCategory::with("products")->has("products")->get();
         // return $products;
-        return view("frontend.wholesale", ["products" => $products, "patterens" => $patterens, "manufacturers" => $manufacturers, "sizes" => $sizes, "vehicleCategory" => $vehicleCategory]);
+        return view("frontend.wholesale", get_defined_vars());
     }
 
 
     function filter(Request $req)
     {
         $sizes = Size::get();
+
+        $allWidths = TyreWidth::all();
+        $allProfiles = TyreProfile::all();
+        $allRimSizes = TyreRimsize::all();
+        $allSpeeds = TyreSpeed::all();
+
         $patterens = Patteren::get();
         $manufacturers = Manufacturer::get();
         $vehicleCategory = VehicleCategory::with("products")->has("products")->get();
@@ -72,7 +89,6 @@ class WholeSaleController extends Controller
         }
 
         $products = $products->with("manufacturer", "patteren")->get();
-        return view("frontend.wholesale", ["products" => $products, "patterens" => $patterens, "manufacturers" => $manufacturers, "sizes" => $sizes, "vehicleCategory" => $vehicleCategory]);
+        return view("frontend.wholesale", get_defined_vars());
     }
-    
 }

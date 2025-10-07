@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('tyre_speeds', function (Blueprint $table) {
             $table->id();
             $table->string("speed");
-            $table->foreignId("rim_id")->constrained("tyre_rimsizes")->onDelete("cascade");
             $table->timestamps();
         });
     }

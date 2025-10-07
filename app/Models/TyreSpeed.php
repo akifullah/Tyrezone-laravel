@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class TyreSpeed extends Model
 {
     use HasFactory;
+    protected $guarded = [];
+
 
     function rimSize(){
         return $this->belongsTo(TyreRimsize::class, "rim_id");

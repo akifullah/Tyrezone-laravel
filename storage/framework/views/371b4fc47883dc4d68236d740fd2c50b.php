@@ -41,8 +41,8 @@
 
                                     <select name="width" id="" class="form-select">
                                         <option disabled selected>Width</option>
-                                        <?php if($sizes->isNotEmpty()): ?>
-                                            <?php $__currentLoopData = $sizes; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $size): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                        <?php if($allWidths->isNotEmpty()): ?>
+                                            <?php $__currentLoopData = $allWidths; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $size): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                 <option <?php echo e(Request::get('width') == $size->width ? 'selected' : ''); ?>
 
                                                     value="<?php echo e($size->width); ?>">
@@ -58,8 +58,8 @@
                                     <label for="" class="inp-label">Height</label>
                                     <select name="profile" class="form-select">
                                         <option disabled selected>Profile</option>
-                                        <?php if($sizes->isNotEmpty()): ?>
-                                            <?php $__currentLoopData = $sizes; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $size): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                        <?php if($allProfiles->isNotEmpty()): ?>
+                                            <?php $__currentLoopData = $allProfiles; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $size): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                 <option <?php echo e(Request::get('profile') == $size->profile ? 'selected' : ''); ?>
 
                                                     value="<?php echo e($size->profile); ?>">
@@ -78,8 +78,8 @@
                                     <label for="" class="inp-label">Rim Size</label>
                                     <select name="rim_size" class="form-select">
                                         <option disabled selected>Rim Size</option>
-                                        <?php if($sizes->isNotEmpty()): ?>
-                                            <?php $__currentLoopData = $sizes; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $size): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                        <?php if($allRimSizes->isNotEmpty()): ?>
+                                            <?php $__currentLoopData = $allRimSizes; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $size): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                 <option <?php echo e(Request::get('rim_size') == $size->rim_size ? 'selected' : ''); ?>
 
                                                     value="<?php echo e($size->rim_size); ?>">
@@ -95,8 +95,8 @@
                                     <label for="" class="inp-label">Speed</label>
                                     <select name="speed" class="form-select">
                                         <option value="">Speed</option>
-                                        <?php if($sizes->isNotEmpty()): ?>
-                                            <?php $__currentLoopData = $sizes; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $size): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                        <?php if($allSpeeds->isNotEmpty()): ?>
+                                            <?php $__currentLoopData = $allSpeeds; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $size): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                 <option <?php echo e(Request::get('speed') == $size->speed ? 'selected' : ''); ?>
 
                                                     value="<?php echo e($size->speed); ?>">

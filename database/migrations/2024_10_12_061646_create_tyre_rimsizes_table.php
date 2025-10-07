@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('tyre_rimsizes', function (Blueprint $table) {
             $table->id();
             $table->string("rim_size");
-            $table->foreignId("profile_id")->constrained("tyre_profiles")->onDelete("cascade");
             $table->timestamps();
         });
     }

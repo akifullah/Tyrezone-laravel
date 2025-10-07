@@ -19,8 +19,8 @@
                                         <label for="">Width</label>
                                         <select name="width" id="" class="form-select">
                                             <option disabled selected>Select</option>
-                                            <?php if($sizes->isNotEmpty()): ?>
-                                                <?php $__currentLoopData = $sizes; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $size): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                            <?php if($allWidths->isNotEmpty()): ?>
+                                                <?php $__currentLoopData = $allWidths; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $size): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                     <option value="<?php echo e($size->width); ?>">
                                                         <?php echo e($size->width); ?></option>
                                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
@@ -34,8 +34,8 @@
                                         <label for="">Profile</label>
                                         <select name="profile" id="" required class="form-select">
                                             <option disabled selected>Select</option>
-                                            <?php if($sizes->isNotEmpty()): ?>
-                                                <?php $__currentLoopData = $sizes; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $size): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                            <?php if($allProfiles->isNotEmpty()): ?>
+                                                <?php $__currentLoopData = $allProfiles; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $size): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                     <option value="<?php echo e($size->profile); ?>">
                                                         <?php echo e($size->profile); ?></option>
                                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
@@ -49,8 +49,8 @@
                                         <label for="">Rim Size</label>
                                         <select name="rim_size" id="" class="form-select">
                                             <option disabled selected>Select</option>
-                                            <?php if($sizes->isNotEmpty()): ?>
-                                                <?php $__currentLoopData = $sizes; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $size): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                            <?php if($allRimSizes->isNotEmpty()): ?>
+                                                <?php $__currentLoopData = $allRimSizes; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $size): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                     <option value="<?php echo e($size->rim_size); ?>">
                                                         <?php echo e($size->rim_size); ?></option>
                                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
@@ -64,8 +64,8 @@
                                         <label for="">Speed</label>
                                         <select name="speed" id="" class="form-select">
                                             <option disabled selected>Select</option>
-                                            <?php if($sizes->isNotEmpty()): ?>
-                                                <?php $__currentLoopData = $sizes; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $size): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                            <?php if($allSpeeds->isNotEmpty()): ?>
+                                                <?php $__currentLoopData = $allSpeeds; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $size): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                     <option value="<?php echo e($size->speed); ?>">
                                                         <?php echo e($size->speed); ?></option>
                                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>

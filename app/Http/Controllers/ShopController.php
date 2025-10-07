@@ -6,6 +6,10 @@ use App\Models\Manufacturer;
 use App\Models\Patteren;
 use App\Models\Product;
 use App\Models\Size;
+use App\Models\TyreProfile;
+use App\Models\TyreRimsize;
+use App\Models\TyreSpeed;
+use App\Models\TyreWidth;
 use App\Models\VehicleCategory;
 use Illuminate\Http\Request;
 
@@ -19,12 +23,18 @@ class ShopController extends Controller
 
 
         $sizes = Size::get();
+
+        $allWidths = TyreWidth::all();
+        $allProfiles = TyreProfile::all();
+        $allRimSizes = TyreRimsize::all();
+        $allSpeeds = TyreSpeed::all();
+
         $patterens = Patteren::get();
         $manufacturers = Manufacturer::with("products")->has("products")->get();
         $products = Product::with("manufacturer", "patteren", "images")->get();
         $vehicleCategory = VehicleCategory::with("products")->has("products")->get();
         // return $vehicleCategory;
-        return view("frontend.shop", ["products" => $products, "patterens" => $patterens, "manufacturers" => $manufacturers, "sizes" => $sizes, "vehicleCategory" => $vehicleCategory]);
+        return view("frontend.shop", get_defined_vars());
     }
 
     function shopDetail($id)
@@ -41,8 +51,14 @@ class ShopController extends Controller
     }
 
     function search(Request $req)
-    {   
+    {
         $sizes = Size::get();
+
+        $allWidths = TyreWidth::all();
+        $allProfiles = TyreProfile::all();
+        $allRimSizes = TyreRimsize::all();
+        $allSpeeds = TyreSpeed::all();
+
         $patterens = Patteren::get();
         $manufacturers = Manufacturer::get();
         $vehicleCategory = VehicleCategory::with("products")->has("products")->get();
@@ -72,23 +88,23 @@ class ShopController extends Controller
             $products->where("run_flat", "$req->run_flat");
         }
         $size = "";
-        if($req->width){
-            $size .= $req->width  ;
+        if ($req->width) {
+            $size .= $req->width;
         }
-        if($req->profile){
+        if ($req->profile) {
             $size .=  "/" . $req->profile;
         }
-        if($req->rim_size){
+        if ($req->rim_size) {
             $size .=  " R" . $req->rim_size;
         }
-        if($req->speed){
-            $size .= " " . $req->speed ;
+        if ($req->speed) {
+            $size .= " " . $req->speed;
         }
-        if($size){
+        if ($size) {
             $products->where("tyre_size", "like", "%$size%");
         }
-        
+
         $products = $products->with("manufacturer", "patteren")->get();
-            return view("frontend.shop", ["products" => $products, "patterens" => $patterens, "manufacturers" => $manufacturers, "sizes" => $sizes, "vehicleCategory" => $vehicleCategory]);
+        return view("frontend.shop", get_defined_vars());
     }
 }

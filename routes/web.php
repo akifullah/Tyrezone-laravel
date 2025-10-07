@@ -96,8 +96,8 @@ Route::group(["middleware" => "isAdmin"], function () {
         Route::get("dashboard", [AdminController::class, "index"])->name("admin.dashboard");
         Route::get("profile", [AdminController::class, "profile"])->name("admin.profile");
 
-        
-        
+
+
 
         // PRIVACY CONTROLLER
         Route::post("privacy", [AdminController::class, "privacyPolicy"])->name("admin.privacy");
@@ -166,7 +166,7 @@ Route::group(["middleware" => "isAdmin"], function () {
         Route::post("users/delete", [AdminController::class, "deleteUser"])->name("admin.deleteUser");
 
         // TYRE SIZES 
-        Route::get("/tyre-sizes", [TyreSizeController::class, "index"])->name("admin.tyreSize");
+        Route::get("/tyre-sizes", [TyreSizeController::class, "index"])->name("admin.tyreSizes");
         Route::get("/tyre-sizes/add", [TyreSizeController::class, "add"])->name("admin.addTyreSize");
         Route::post("/tyre-sizes/save", [TyreSizeController::class, "save"])->name("admin.saveTyreSize");
         Route::get("/tyre-sizes/edit/{id}", [TyreSizeController::class, "edit"])->name("admin.editTyreSize");
@@ -208,4 +208,28 @@ Route::controller(PaymentController::class)->group(function () {
     Route::post('/create-checkout-session', 'createCheckoutSession')->name('checkout.session');
     Route::get('/checkout/success', 'success')->name('checkout.success');
     Route::get('/checkout/cancel', 'cancel')->name('checkout.cancel');
+});
+
+
+
+// routes/web.php
+
+Route::prefix('admin')->middleware(['auth'])->group(function () {
+    Route::get('tyre-sizes', [TyreSizeController::class, 'index'])->name('admin.tyreSizes');
+
+    // Width
+    Route::post('tyre-sizes/width/store', [TyreSizeController::class, 'widthStore'])->name('admin.size.width.store');
+    Route::post('tyre-sizes/width/delete', [TyreSizeController::class, 'widthDelete'])->name('admin.size.width.delete');
+
+    // Profile
+    Route::post('tyre-sizes/profile/store', [TyreSizeController::class, 'profileStore'])->name('admin.size.profile.store');
+    Route::post('tyre-sizes/profile/delete', [TyreSizeController::class, 'profileDelete'])->name('admin.size.profile.delete');
+
+    // Rim Size
+    Route::post('tyre-sizes/rimsize/store', [TyreSizeController::class, 'rimsizeStore'])->name('admin.size.rimsize.store');
+    Route::post('tyre-sizes/rimsize/delete', [TyreSizeController::class, 'rimsizeDelete'])->name('admin.size.rimsize.delete');
+
+    // Speed
+    Route::post('tyre-sizes/speed/store', [TyreSizeController::class, 'speedStore'])->name('admin.size.speed.store');
+    Route::post('tyre-sizes/speed/delete', [TyreSizeController::class, 'speedDelete'])->name('admin.size.speed.delete');
 });

@@ -7,6 +7,7 @@ use App\Models\Size;
 use App\Models\StripeSetting;
 use App\Models\TyreProfile;
 use App\Models\TyreRimsize;
+use App\Models\TyreSpeed;
 use App\Models\TyreWidth;
 use App\Models\VehicleBrand;
 use Illuminate\Http\Request;
@@ -21,6 +22,11 @@ class HomeController extends Controller
         $widths = size::get();
         // return $widths;
         $sizes = Size::get();
+
+        $allWidths = TyreWidth::all();
+        $allProfiles = TyreProfile::all();
+        $allRimSizes = TyreRimsize::all();
+        $allSpeeds = TyreSpeed::all();
 
         $settings = StripeSetting::first();
         if ($settings) {

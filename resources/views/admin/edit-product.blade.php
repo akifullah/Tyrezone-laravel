@@ -102,83 +102,63 @@
                             </div>
                         </div>
 
-                        <div class="col-md-4 mb-4">
-                            <div class="form-group">
-                                <label for="">Tyre Size</label>
-                                <select name="tyre_size" class="form-select @error('tyre_size') is-invalid @enderror"
-                                    required="">
-                                    <option disabled selected>Select Size</option>
-                                    @foreach ($sizes as $size)
-                                        <option
-                                            value="{{ $size->width . '/' . $size->profile . ' R' . $size->rim_size . ' ' . $size->speed }}"
-                                            {{ $product->tyre_size == $size->width . '/' . $size->profile . ' R' . $size->rim_size . ' ' . $size->speed ? 'selected' : '' }}>
-                                            {{ $size->width . '/' . $size->profile . ' R' . $size->rim_size . ' ' . $size->speed }}
-                                        </option>
-                                    @endforeach
-
-                                </select>
-                            </div>
-                        </div>
-
-                        {{-- <div class="col-md-4 mb-4">
+                        <div class="col-md-3 mb-2">
                             <div class="form-group">
                                 <label for="">Width</label>
-                                <select name="width" class="form-select @error('width') is-invalid @enderror"
-                                    required="">
+                                <select name="width" class="form-select @error('width') is-invalid @enderror" required>
                                     <option disabled selected>Select Width</option>
-                                    @foreach ($sizes as $size)
-                                        <option value="{{ $size->width }}"
-                                            {{$product->width == $size->width ? 'selected' : '' }}>{{ $size->width }}
+                                    @foreach ($widths as $w)
+                                        <option value="{{ $w->width }}"
+                                            {{ isset($width) && $width == $w->width ? 'selected' : '' }}>
+                                            {{ $w->width }}
                                         </option>
                                     @endforeach
-
                                 </select>
                             </div>
                         </div>
-                        <div class="col-md-4 mb-4">
+                        <div class="col-md-3 mb-2">
                             <div class="form-group">
                                 <label for="">Profile</label>
-                                <select name="profile" class="form-select @error('profile') is-invalid @enderror"
-                                    required="">
+                                <select name="profile" class="form-select @error('profile') is-invalid @enderror" required>
                                     <option disabled selected>Select Profile</option>
-                                    @foreach ($sizes as $size)
-                                        <option value="{{ $size->profile }}"
-                                            {{$product->profile == $size->profile ? 'selected' : '' }}>
-                                            {{ $size->profile }}</option>
+                                    @foreach ($profiles as $p)
+                                        <option value="{{ $p->profile }}"
+                                            {{ isset($profile) && $profile == $p->profile ? 'selected' : '' }}>
+                                            {{ $p->profile }}
+                                        </option>
                                     @endforeach
                                 </select>
                             </div>
                         </div>
-                        <div class="col-md-4 mb-4">
+                        <div class="col-md-3 mb-2">
                             <div class="form-group">
                                 <label for="">Rim Size</label>
                                 <select name="rim_size" class="form-select @error('rim_size') is-invalid @enderror"
-                                    required="">
+                                    required>
                                     <option disabled selected>Select Rim Size</option>
-                                    @foreach ($sizes as $size)
-                                        <option value="{{ $size->rim_size }}"
-                                            {{$product->rim_size == $size->rim_size ? 'selected' : '' }}>
-                                            {{ $size->rim_size }}</option>
-                                    @endforeach
-
-                                </select>
-                            </div>
-                        </div>
-
-
-                        <div class="col-md-4 mb-4">
-                            <div class="form-group">
-                                <label for="">Speed</label>
-                                <select name="speed" class="form-select @error('speed') is-invalid @enderror">
-                                    <option disabled selected>Select Speed</option>
-                                    @foreach ($sizes as $size)
-                                        <option value="{{ $size->speed }}"
-                                            {{$product->speed == $size->speed ? 'selected' : '' }}>{{ $size->speed }}
+                                    @foreach ($rimsizes as $r)
+                                        <option value="{{ $r->rim_size }}"
+                                            {{ isset($rim_size) && $rim_size == $r->rim_size ? 'selected' : '' }}>
+                                            {{ $r->rim_size }}
                                         </option>
                                     @endforeach
                                 </select>
                             </div>
-                        </div> --}}
+                        </div>
+                        <div class="col-md-3 mb-2">
+                            <div class="form-group">
+                                <label for="">Speed</label>
+                                <select name="speed" class="form-select @error('speed') is-invalid @enderror" required>
+                                    <option disabled selected>Select Speed</option>
+                                    @foreach ($speeds as $s)
+                                        <option value="{{ $s->speed }}"
+                                            {{ isset($speed) && $speed == $s->speed ? 'selected' : '' }}>
+                                            {{ $s->speed }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
 
                         <div class="col-md-4">
                             <div class="row">
@@ -196,7 +176,8 @@
                                     <div class="form-group">
                                         <label for="">In Stock:</label>
                                         <input type="number" name="in_stock" value="{{ $product->in_stock }}"
-                                            class="form-control @error('in_stock') is-invalid @enderror" placeholder="10 ">
+                                            class="form-control @error('in_stock') is-invalid @enderror"
+                                            placeholder="10 ">
                                     </div>
                                 </div>
                             </div>
@@ -209,7 +190,8 @@
                                     <div class="form-group">
                                         <label for="">Price:</label>
                                         <input type="text" name="price" value="{{ $product->price }}"
-                                            class="form-control @error('price') is-invalid @enderror" placeholder="Price">
+                                            class="form-control @error('price') is-invalid @enderror"
+                                            placeholder="Price">
                                     </div>
                                 </div>
 
@@ -248,7 +230,7 @@
                                 <label for="">Vehicle Category</label>
                                 <select name="v_category" class="form-select @error('v_category') is-invalid @enderror">
                                     <option disabled selected>Select Category</option>
-                                    @if($vehicleCategories->isNotEmpty())
+                                    @if ($vehicleCategories->isNotEmpty())
                                         @foreach ($vehicleCategories as $v_cat)
                                             <option value="{{ $v_cat->v_cat_name }}"
                                                 {{ $product->v_category == $v_cat->v_cat_name ? 'selected' : '' }}>
@@ -256,7 +238,7 @@
                                         @endforeach
                                     @endif
                                     {{-- <option value="passenger car" {{ old('v_category') == 'passenger car' ? 'selected' : '' }}>Passenger Car</option> --}}
-                                    
+
                                 </select>
                             </div>
                         </div>
@@ -290,11 +272,11 @@
                             </div>
                         </div>
 
-                         <div class="col-md-5  mb-2">
+                        <div class="col-md-5  mb-2">
                             <div class="">
                                 <label for="budget">Brand Category</label>
                             </div>
-                            
+
                             <div class="form-check form-check-inline mt-0">
                                 <input id="budget" type="radio" name="budget_tyre"
                                     {{ $product->budget_tyre == 'budget' ? 'checked' : '' }} value="budget"
@@ -314,7 +296,8 @@
                                 <label for="premium">Premium</label>
                             </div>
                             <div class="form-check form-check-inline mt-0">
-                                <input type="checkbox" class="form-check-input" name="run_flat" id="run_flat" value="1" {{ $product->run_flat == '1' ? 'checked' : '' }}>
+                                <input type="checkbox" class="form-check-input" name="run_flat" id="run_flat"
+                                    value="1" {{ $product->run_flat == '1' ? 'checked' : '' }}>
                                 <label for="run_flat">Run Flat</label>
                             </div>
                         </div>

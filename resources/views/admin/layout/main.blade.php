@@ -73,8 +73,8 @@
                                 Patteren</a>
                         </li>
                         <li>
-                            <a class="{{ Route::is('admin.tyreSize') ? 'active' : '' }}"
-                            href="{{ route('admin.tyreSize') }}"><i class="fa-solid fa-expand"></i> Tyre Sizes</a>
+                            <a class="{{ Route::is('admin.tyreSizes') ? 'active' : '' }}"
+                            href="{{ route('admin.tyreSizes') }}"><i class="fa-solid fa-expand"></i> Tyre Sizes</a>
                         </li>
                         <li>
                             <a class="{{ Route::is('admin.vehicleCategory') ? 'active' : '' }}"

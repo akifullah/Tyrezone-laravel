@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class TyreProfile extends Model
 {
     use HasFactory;
+    protected $guarded = [];
 
     function width(){
        return  $this->belongsTo(TyreWidth::class);

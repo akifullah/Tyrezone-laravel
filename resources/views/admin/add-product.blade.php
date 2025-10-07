@@ -95,20 +95,55 @@
                             </div>
                         </div>
 
-                        <div class="col-md-4 mb-2">
+                        <div class="col-md-3 mb-2">
                             <div class="form-group">
-                                <label for="">Tyre Size</label>
-                                <select name="tyre_size" class="form-select @error('tyre_size') is-invalid @enderror"
-                                    required="">
-                                    <option disabled selected>Select Size</option>
-                                    @foreach ($sizes as $size)
-                                        <option
-                                            value="{{ $size->width . '/' . $size->profile . ' R' . $size->rim_size . ' ' . $size->speed }}"
-                                            {{ old('tyre_size') == $size->width . '/' . $size->profile . ' R' . $size->rim_size . ' ' . $size->speed ? 'selected' : '' }}>
-                                            {{ $size->width . '/' . $size->profile . ' R' . $size->rim_size . ' ' . $size->speed }}
+                                <label for="">Width</label>
+                                <select name="width" class="form-select @error('width') is-invalid @enderror" required>
+                                    <option disabled selected>Select Width</option>
+                                    @foreach ($widths as $width)
+                                        <option value="{{ $width->width }}" {{ old('width') == $width->width ? 'selected' : '' }}>
+                                            {{ $width->width }}
                                         </option>
                                     @endforeach
-
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-2">
+                            <div class="form-group">
+                                <label for="">Profile</label>
+                                <select name="profile" class="form-select @error('profile') is-invalid @enderror" required>
+                                    <option disabled selected>Select Profile</option>
+                                    @foreach ($profiles as $profile)
+                                        <option value="{{ $profile->profile }}" {{ old('profile') == $profile->profile ? 'selected' : '' }}>
+                                            {{ $profile->profile }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-2">
+                            <div class="form-group">
+                                <label for="">Rim Size</label>
+                                <select name="rim_size" class="form-select @error('rim_size') is-invalid @enderror" required>
+                                    <option disabled selected>Select Rim Size</option>
+                                    @foreach ($rimsizes as $rimsize)
+                                        <option value="{{ $rimsize->rim_size }}" {{ old('rim_size') == $rimsize->rim_size ? 'selected' : '' }}>
+                                            {{ $rimsize->rim_size }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-2">
+                            <div class="form-group">
+                                <label for="">Speed</label>
+                                <select name="speed" class="form-select @error('speed') is-invalid @enderror" required>
+                                    <option disabled selected>Select Speed</option>
+                                    @foreach ($speeds as $speed)
+                                        <option value="{{ $speed->speed }}" {{ old('speed') == $speed->speed ? 'selected' : '' }}>
+                                            {{ $speed->speed }}
+                                        </option>
+                                    @endforeach
                                 </select>
                             </div>
                         </div>

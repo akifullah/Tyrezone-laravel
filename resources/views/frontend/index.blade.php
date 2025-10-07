@@ -19,8 +19,8 @@
                                         <label for="">Width</label>
                                         <select name="width" id="" class="form-select">
                                             <option disabled selected>Select</option>
-                                            @if ($sizes->isNotEmpty())
-                                                @foreach ($sizes as $size)
+                                            @if ($allWidths->isNotEmpty())
+                                                @foreach ($allWidths as $size)
                                                     <option value="{{ $size->width }}">
                                                         {{ $size->width }}</option>
                                                 @endforeach
@@ -34,8 +34,8 @@
                                         <label for="">Profile</label>
                                         <select name="profile" id="" required class="form-select">
                                             <option disabled selected>Select</option>
-                                            @if ($sizes->isNotEmpty())
-                                                @foreach ($sizes as $size)
+                                            @if ($allProfiles->isNotEmpty())
+                                                @foreach ($allProfiles as $size)
                                                     <option value="{{ $size->profile }}">
                                                         {{ $size->profile }}</option>
                                                 @endforeach
@@ -49,8 +49,8 @@
                                         <label for="">Rim Size</label>
                                         <select name="rim_size" id="" class="form-select">
                                             <option disabled selected>Select</option>
-                                            @if ($sizes->isNotEmpty())
-                                                @foreach ($sizes as $size)
+                                            @if ($allRimSizes->isNotEmpty())
+                                                @foreach ($allRimSizes as $size)
                                                     <option value="{{ $size->rim_size }}">
                                                         {{ $size->rim_size }}</option>
                                                 @endforeach
@@ -64,8 +64,8 @@
                                         <label for="">Speed</label>
                                         <select name="speed" id="" class="form-select">
                                             <option disabled selected>Select</option>
-                                            @if ($sizes->isNotEmpty())
-                                                @foreach ($sizes as $size)
+                                            @if ($allSpeeds->isNotEmpty())
+                                                @foreach ($allSpeeds as $size)
                                                     <option value="{{ $size->speed }}">
                                                         {{ $size->speed }}</option>
                                                 @endforeach
