@@ -1,7 +1,4 @@
-@extends('frontend.layout.app')
-
-
-@section('main')
+<?php $__env->startSection('main'); ?>
     <!-- HERO SECTION START -->
     <section class="hero-section">
         <div class="hero">
@@ -11,7 +8,7 @@
                     <div class="size" style="height: auto;">
 
                         <h4 class="">Find tyres by size</h4>
-                        <form action="{{ route('search') }}">
+                        <form action="<?php echo e(route('search')); ?>">
                             <div class="row">
 
                                 <div class="col-6 ">
@@ -19,12 +16,12 @@
                                         <label for="">Width</label>
                                         <select name="width" id="" class="form-select">
                                             <option disabled selected>Select</option>
-                                            @if ($allWidths->isNotEmpty())
-                                                @foreach ($allWidths as $size)
-                                                    <option value="{{ $size->width }}">
-                                                        {{ $size->width }}</option>
-                                                @endforeach
-                                            @endif
+                                            <?php if($allWidths->isNotEmpty()): ?>
+                                                <?php $__currentLoopData = $allWidths; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $size): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                    <option value="<?php echo e($size->width); ?>">
+                                                        <?php echo e($size->width); ?></option>
+                                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                            <?php endif; ?>
                                         </select>
                                     </div>
                                 </div>
@@ -34,12 +31,12 @@
                                         <label for="">Profile</label>
                                         <select name="profile" id="" required class="form-select">
                                             <option disabled selected>Select</option>
-                                            @if ($allProfiles->isNotEmpty())
-                                                @foreach ($allProfiles as $size)
-                                                    <option value="{{ $size->profile }}">
-                                                        {{ $size->profile }}</option>
-                                                @endforeach
-                                            @endif
+                                            <?php if($allProfiles->isNotEmpty()): ?>
+                                                <?php $__currentLoopData = $allProfiles; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $size): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                    <option value="<?php echo e($size->profile); ?>">
+                                                        <?php echo e($size->profile); ?></option>
+                                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                            <?php endif; ?>
                                         </select>
                                     </div>
                                 </div>
@@ -49,12 +46,12 @@
                                         <label for="">Rim Size</label>
                                         <select name="rim_size" id="" class="form-select">
                                             <option disabled selected>Select</option>
-                                            @if ($allRimSizes->isNotEmpty())
-                                                @foreach ($allRimSizes as $size)
-                                                    <option value="{{ $size->rim_size }}">
-                                                        {{ $size->rim_size }}</option>
-                                                @endforeach
-                                            @endif
+                                            <?php if($allRimSizes->isNotEmpty()): ?>
+                                                <?php $__currentLoopData = $allRimSizes; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $size): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                    <option value="<?php echo e($size->rim_size); ?>">
+                                                        <?php echo e($size->rim_size); ?></option>
+                                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                            <?php endif; ?>
                                         </select>
                                     </div>
                                 </div>
@@ -64,12 +61,12 @@
                                         <label for="">Speed</label>
                                         <select name="speed" id="" class="form-select">
                                             <option disabled selected>Select</option>
-                                            @if ($allSpeeds->isNotEmpty())
-                                                @foreach ($allSpeeds as $size)
-                                                    <option value="{{ $size->speed }}">
-                                                        {{ $size->speed }}</option>
-                                                @endforeach
-                                            @endif
+                                            <?php if($allSpeeds->isNotEmpty()): ?>
+                                                <?php $__currentLoopData = $allSpeeds; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $size): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                    <option value="<?php echo e($size->speed); ?>">
+                                                        <?php echo e($size->speed); ?></option>
+                                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                            <?php endif; ?>
                                         </select>
                                     </div>
                                 </div>
@@ -118,7 +115,7 @@
                             </div>
                             <div class="col-4 ms-auto text-end">
                                 <div class="dicount-card-img">
-                                    <img src="{{ asset('frontend/assets_v2/imgs/discount-tyre.png') }}" width="70px"
+                                    <img src="<?php echo e(asset('frontend/assets_v2/imgs/discount-tyre.png')); ?>" width="70px"
                                         alt="">
                                 </div>
                             </div>
@@ -140,7 +137,7 @@
                             </div>
                             <div class="col-4 ms-auto text-end">
                                 <div class="dicount-card-img">
-                                    <img src="{{ asset('frontend/assets_v2/imgs/discount-tyre.png') }}" width="70px"
+                                    <img src="<?php echo e(asset('frontend/assets_v2/imgs/discount-tyre.png')); ?>" width="70px"
                                         alt="">
                                 </div>
                             </div>
@@ -163,7 +160,7 @@
                             </div>
                             <div class="col-4 ms-auto text-end">
                                 <div class="dicount-card-img">
-                                    <img src="{{ asset('frontend/assets_v2/imgs/discount-tyre.png') }}" width="70px"
+                                    <img src="<?php echo e(asset('frontend/assets_v2/imgs/discount-tyre.png')); ?>" width="70px"
                                         alt="">
                                 </div>
                             </div>
@@ -187,7 +184,7 @@
                 <div class="col-sm-6 col-lg-4">
                     <div class="feature-card">
                         <div class="feature-icon">
-                            <img src="{{ asset('frontend/assets_v2/imgs/feature1.png') }}" alt="">
+                            <img src="<?php echo e(asset('frontend/assets_v2/imgs/feature1.png')); ?>" alt="">
                         </div>
                         <div class="feature-text">
                             <h3>AIR CONDITIONING</h3>
@@ -199,7 +196,7 @@
                 <div class="col-sm-6 col-lg-4">
                     <div class="feature-card">
                         <div class="feature-icon">
-                            <img src="{{ asset('frontend/assets_v2/imgs/feature2.png') }}" alt="">
+                            <img src="<?php echo e(asset('frontend/assets_v2/imgs/feature2.png')); ?>" alt="">
                         </div>
                         <div class="feature-text">
                             <h3>BELT AND HOSES</h3>
@@ -211,7 +208,7 @@
                 <div class="col-sm-6 col-lg-4">
                     <div class="feature-card">
                         <div class="feature-icon">
-                            <img src="{{ asset('frontend/assets_v2/imgs/feature3.png') }}" alt="">
+                            <img src="<?php echo e(asset('frontend/assets_v2/imgs/feature3.png')); ?>" alt="">
                         </div>
                         <div class="feature-text">
                             <h3>LUBE, OILS AND FILTERS</h3>
@@ -223,7 +220,7 @@
                 <div class="col-sm-6 col-lg-4">
                     <div class="feature-card">
                         <div class="feature-icon">
-                            <img src="{{ asset('frontend/assets_v2/imgs/feature4.png') }}" alt="">
+                            <img src="<?php echo e(asset('frontend/assets_v2/imgs/feature4.png')); ?>" alt="">
                         </div>
                         <div class="feature-text">
                             <h3>LUBE, OILS AND FILTERS</h3>
@@ -235,7 +232,7 @@
                 <div class="col-sm-6 col-lg-4">
                     <div class="feature-card">
                         <div class="feature-icon">
-                            <img src="{{ asset('frontend/assets_v2/imgs/feature5.png') }}" alt="">
+                            <img src="<?php echo e(asset('frontend/assets_v2/imgs/feature5.png')); ?>" alt="">
                         </div>
                         <div class="feature-text">
                             <h3>BRAKE REPAIR</h3>
@@ -247,7 +244,7 @@
                 <div class="col-sm-6 col-lg-4">
                     <div class="feature-card">
                         <div class="feature-icon">
-                            <img src="{{ asset('frontend/assets_v2/imgs/feature6.png') }}" alt="">
+                            <img src="<?php echo e(asset('frontend/assets_v2/imgs/feature6.png')); ?>" alt="">
                         </div>
                         <div class="feature-text">
                             <h3>ENGINE DIAGNOSTIC</h3>
@@ -401,7 +398,7 @@
                         <div class="col-md-6">
                             <div class="our-client-card">
                                 <div class="client-logo">
-                                    <img src="{{ asset('frontend/assets_v2/imgs/honda.png') }}" alt="">
+                                    <img src="<?php echo e(asset('frontend/assets_v2/imgs/honda.png')); ?>" alt="">
                                 </div>
                             </div>
                         </div>
@@ -409,7 +406,7 @@
                         <div class="col-md-6">
                             <div class="our-client-card">
                                 <div class="client-logo">
-                                    <img src="{{ asset('frontend/assets_v2/imgs/mercedes.png') }}" alt="">
+                                    <img src="<?php echo e(asset('frontend/assets_v2/imgs/mercedes.png')); ?>" alt="">
                                 </div>
                             </div>
                         </div>
@@ -417,7 +414,7 @@
                         <div class="col-md-6">
                             <div class="our-client-card">
                                 <div class="client-logo">
-                                    <img src="{{ asset('frontend/assets_v2/imgs/audi.png') }}" alt="">
+                                    <img src="<?php echo e(asset('frontend/assets_v2/imgs/audi.png')); ?>" alt="">
                                 </div>
                             </div>
                         </div>
@@ -425,7 +422,7 @@
                         <div class="col-md-6">
                             <div class="our-client-card">
                                 <div class="client-logo">
-                                    <img src="{{ asset('frontend/assets_v2/imgs/porsche.png') }}" alt="">
+                                    <img src="<?php echo e(asset('frontend/assets_v2/imgs/porsche.png')); ?>" alt="">
                                 </div>
                             </div>
                         </div>
@@ -454,7 +451,7 @@
 
                         <div class="card-body">
                             <div class="card-img">
-                                <img src="{{ asset('frontend/assets_v2/imgs/recommend-tyre.png') }}" alt="">
+                                <img src="<?php echo e(asset('frontend/assets_v2/imgs/recommend-tyre.png')); ?>" alt="">
                             </div>
 
                             <div class="card-text">
@@ -482,7 +479,7 @@
 
                         <div class="card-body">
                             <div class="card-img">
-                                <img src="{{ asset('frontend/assets_v2/imgs/recommend-tyre.png') }}" alt="">
+                                <img src="<?php echo e(asset('frontend/assets_v2/imgs/recommend-tyre.png')); ?>" alt="">
                             </div>
 
                             <div class="card-text">
@@ -512,7 +509,7 @@
 
                         <div class="card-body">
                             <div class="card-img">
-                                <img src="{{ asset('frontend/assets_v2/imgs/recommend-tyre.png') }}" alt="">
+                                <img src="<?php echo e(asset('frontend/assets_v2/imgs/recommend-tyre.png')); ?>" alt="">
                             </div>
 
                             <div class="card-text">
@@ -543,97 +540,10 @@
 
 
     <!-- MAIN SLIDER SECTION START -->
-    {{-- <section class="main-img-slider owl-carousel owl-theme" id="main-slider-1">
-
-        <div class="slide-img">
-            <img src="{{ asset('frontend/assets_v2/imgs/main-slider1.webp') }}" width="100%" alt="">
-        </div>
-
-        <div class="slide-img">
-            <img src="{{ asset('frontend/assets_v2/imgs/main-slider2.webp') }}" width="100%" alt="">
-        </div>
-
-        <div class="slide-img">
-            <img src="{{ asset('frontend/assets_v2/imgs/main-slider3.webp') }}" width="100%" alt="">
-        </div>
-
-        <div class="slide-img">
-            <img src="{{ asset('frontend/assets_v2/imgs/main-slider4.webp') }}" width="100%" alt="">
-        </div>
-
-        <div class="slide-img">
-            <img src="{{ asset('frontend/assets_v2/imgs/main-slider5.webp') }}" width="100%" alt="">
-        </div>
-
-
-    </section> --}}
+    
     <!-- MAIN SLIDER SECTION END -->
 
-    {{-- <!-- ABOUT SECTION START -->
-    <section class="about-section">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-4 mb-4">
-                    <div class="about-card">
-                        <div class="card-img">
-                            <img src="{{ asset("frontend/assets_v2/imgs/about1.png")}}" alt="">
-                        </div>
-
-                        <div class="card-text">
-                            <h3>Highly-trained technicians</h3>
-                            <p>When it comes to safety on the road, it's vital to have expert technicians working on
-                                your car. Our recruitment process
-                                includes industry-leading, Ofsted-accredited training to ensure that, when our
-                                technicians get out of the academy to
-                                start inspecting, servicing, and repairing your vehicle, they're the best in the
-                                trade.</p>
-                        </div>
-
-                    </div>
-                </div>
-
-                <div class="col-md-4 mb-4">
-                    <div class="about-card">
-                        <div class="card-img">
-                            <img src="{{ asset("frontend/assets_v2/imgs/about2.png")}}" alt="">
-                        </div>
-
-                        <div class="card-text">
-                            <h3>Vehicle maintenance</h3>
-                            <p>When it comes to safety on the road, it's vital to have expert technicians working on
-                                your car. Our recruitment process
-                                includes industry-leading, Ofsted-accredited training to ensure that, when our
-                                technicians get out of the academy to
-                                start inspecting, servicing, and repairing your vehicle, they're the best in the
-                                trade.</p>
-                        </div>
-
-                    </div>
-                </div>
-
-                <div class="col-md-4 mb-4">
-                    <div class="about-card">
-                        <div class="card-img">
-                            <img src="{{ asset("frontend/assets_v2/imgs/about3.png")}}" alt="">
-                        </div>
-
-                        <div class="card-text">
-                            <h3>Centres on your doorstep</h3>
-                            <p>When it comes to safety on the road, it's vital to have expert technicians working on
-                                your car. Our recruitment process
-                                includes industry-leading, Ofsted-accredited training to ensure that, when our
-                                technicians get out of the academy to
-                                start inspecting, servicing, and repairing your vehicle, they're the best in the
-                                trade.</p>
-                        </div>
-
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </section>
-    <!-- ABOUT SECTION END --> --}}
+    
 
     <!-- STOCK SECTION START -->
     <section class="stock-section">
@@ -648,19 +558,19 @@
             </div>
 
 
-            @if ($manufacturers->isNotEmpty())
+            <?php if($manufacturers->isNotEmpty()): ?>
     <div class="row g-0 mt-5 pt-4">
-        @foreach ($manufacturers as $manufacturer)
-            @if (!empty($manufacturer->image))
+        <?php $__currentLoopData = $manufacturers; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $manufacturer): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+            <?php if(!empty($manufacturer->image)): ?>
                 <div class="col-lg-2 col-md-3 col-sm-4 col-6">
                     <div class="brand-img">
-                        <img src="{{ asset('uploads/brands/' . $manufacturer->image) }}" alt="">
+                        <img src="<?php echo e(asset('uploads/brands/' . $manufacturer->image)); ?>" alt="">
                     </div>
                 </div>
-            @endif
-        @endforeach
+            <?php endif; ?>
+        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
     </div>
-@endif
+<?php endif; ?>
 
 
         </div>
@@ -692,7 +602,7 @@
 
                 <div class="col-lg-6">
                     <div class="oldham-img">
-                        <img src="{{ asset('frontend/assets_v2/imgs/oldham.png') }}" width="100%" alt="">
+                        <img src="<?php echo e(asset('frontend/assets_v2/imgs/oldham.png')); ?>" width="100%" alt="">
                     </div>
                 </div>
 
@@ -710,14 +620,14 @@
         <div class="brands-wrapper">
             <div class="container ">
                 <div class="brands-slide owl-carousel owl-theme" id="logo-slides">
-                    @if ($vehicleBrands->isNotEmpty())
-                        @foreach ($vehicleBrands as $vehicleBrand)
+                    <?php if($vehicleBrands->isNotEmpty()): ?>
+                        <?php $__currentLoopData = $vehicleBrands; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $vehicleBrand): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                             <div class="slide-logo"><img
-                                    src="{{ asset('uploads/v_brands/' . $vehicleBrand->v_brand_image) }}"
-                                    alt="{{ $vehicleBrand->v_brand_name }}">
+                                    src="<?php echo e(asset('uploads/v_brands/' . $vehicleBrand->v_brand_image)); ?>"
+                                    alt="<?php echo e($vehicleBrand->v_brand_name); ?>">
                             </div>
-                        @endforeach
-                    @endif
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                    <?php endif; ?>
                 </div>
             </div>
         </div>
@@ -992,10 +902,10 @@
 
 
 
-@endsection
+<?php $__env->stopSection(); ?>
 
 
-@section('customjs')
+<?php $__env->startSection('customjs'); ?>
     <script>
         // main image slider
         $('#main-slider-1').owlCarousel({
@@ -1074,45 +984,7 @@
     </script>
 
 
-    {{-- <script>
-        $("#width").change(function() {
-            let val = $("#width").val();
-            $.ajax({
-                url: "{{ route('get.profiles') }}",
-                type: "post",
-                data: {
-                    id: val
-                },
-                success: function(res) {
-                    console.log(res);
-                    $("#profile").find("option").not(":first").remove();
-                    $.each(res.profiles, function(key, item) {
-                        $("#profile").append(
-                            `<option value='${item.id}' >${item.profile}</option>`
-                        )
-                    });
-                }
-            })
-        });
+    
+<?php $__env->stopSection(); ?>
 
-        $("#profile").change(function() {
-            let val = $("#profile").val();
-            $.ajax({
-                url: "{{ route('get.rim.size') }}",
-                type: "post",
-                data: {
-                    id: val
-                },
-                success: function(res) {
-                    console.log(res);
-                    $("#rim_size").find("option").not(":first").remove();
-                    $.each(res.rim_sizes, function(key, item) {
-                        $("#rim_size").append(
-                            `<option value='${item.id}' >${item.rim_size}</option>`
-                        )
-                    });
-                }
-            })
-        });
-    </script> --}}
-@endsection
+<?php echo $__env->make('frontend.layout.app', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH /Users/atifjan/Documents/GitHub/Tyrezone-laravel/resources/views/frontend/index.blade.php ENDPATH**/ ?>

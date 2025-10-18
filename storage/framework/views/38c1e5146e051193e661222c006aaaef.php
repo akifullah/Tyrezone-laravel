@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TYRE ZONE</title>
-    <meta name="csrf-token" content="{{ csrf_token() }}" />
+    <meta name="csrf-token" content="<?php echo e(csrf_token()); ?>" />
 
     <!-- FONTAWESOME ICON -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
@@ -19,18 +19,18 @@
     <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css" />
 
-    <link rel="stylesheet" href="{{ asset('frontend/assets/css/lightbox.min.css') }}">
+    <link rel="stylesheet" href="<?php echo e(asset('frontend/assets/css/lightbox.min.css')); ?>">
     <!-- CUSTOM CSS -->
-    <link rel="stylesheet" href="{{ asset('frontend/assets/css/style.css') }}">
-    <link rel="stylesheet" href="{{ asset('frontend/assets_v2/css/style.css') }}">
+    <link rel="stylesheet" href="<?php echo e(asset('frontend/assets/css/style.css')); ?>">
+    <link rel="stylesheet" href="<?php echo e(asset('frontend/assets_v2/css/style.css')); ?>">
 
-    @yield('style')
+    <?php echo $__env->yieldContent('style'); ?>
 
 </head>
 
 <body>
 
-    <div id="product-container" class="d-none" data-asset-base-url="{{ asset('uploads/products') }}"></div>
+    <div id="product-container" class="d-none" data-asset-base-url="<?php echo e(asset('uploads/products')); ?>"></div>
     <!-- SIDE CART -->
     <div class="side-cart" id="side-cart">
 
@@ -55,8 +55,8 @@
                 <h6 class="mb-3">Total <strong id="totalAmount">£127.05</strong></h6>
             </div>
             <div class=" d-flex justify-content-between">
-                <a href="{{ route('cart') }}" class="main-btn">View Cart</a>
-                <a href="{{ route('checkout') }}" class="main-btn">Checkout</a>
+                <a href="<?php echo e(route('cart')); ?>" class="main-btn">View Cart</a>
+                <a href="<?php echo e(route('checkout')); ?>" class="main-btn">Checkout</a>
             </div>
         </div>
 
@@ -72,7 +72,7 @@
                 <!-- CARD START -->
                 <div class="top-card d-flex align-item-center">
                     <div class="top-card-icon">
-                        <img src="{{ asset('frontend/assets_v2/imgs/clock.png') }}" alt="">
+                        <img src="<?php echo e(asset('frontend/assets_v2/imgs/clock.png')); ?>" alt="">
                     </div>
                     <div class="top-card-text">
                         <h4 class="top-text-title">OPENING HOURS</h4>
@@ -84,7 +84,7 @@
                 <!-- CARD START -->
                 <div class="top-card d-flex align-item-center">
                     <div class="top-card-icon">
-                        <img src="{{ asset('frontend/assets_v2/imgs/phone.png') }}" alt="">
+                        <img src="<?php echo e(asset('frontend/assets_v2/imgs/phone.png')); ?>" alt="">
                     </div>
                     <div class="top-card-text">
                         <h4 class="top-text-title">FEEL FREE TO CONTACT</h4>
@@ -96,7 +96,7 @@
                 <!-- CARD START -->
                 <div class="top-card d-flex align-item-center">
                     <div class="top-card-icon">
-                        <img src="{{ asset('frontend/assets_v2/imgs/location-mark.png') }}" alt="">
+                        <img src="<?php echo e(asset('frontend/assets_v2/imgs/location-mark.png')); ?>" alt="">
                     </div>
                     <div class="top-card-text">
                         <h4 class="top-text-title">OUR ADDRESS</h4>
@@ -114,13 +114,13 @@
     <header class="header">
         <nav class="navbar navbar-expand-lg  navbar-dark p-0">
             <div class="container">
-                <a href="{{ route('home') }}" class="navbar-brand">
+                <a href="<?php echo e(route('home')); ?>" class="navbar-brand">
 
-                    @if (!empty($logo))
-                        <img src="{{ asset('uploads/logos/' . $logo->name) }}" class="logo" alt="">
-                    @else
-                        <img src="{{ asset('frontend/assets_v2/imgs/logo.png') }}" class="logo" alt="">
-                    @endif
+                    <?php if(!empty($logo)): ?>
+                        <img src="<?php echo e(asset('uploads/logos/' . $logo->name)); ?>" class="logo" alt="">
+                    <?php else: ?>
+                        <img src="<?php echo e(asset('frontend/assets_v2/imgs/logo.png')); ?>" class="logo" alt="">
+                    <?php endif; ?>
                 </a>
 
                 <div class="offcanvas offcanvas-end navbar-navs" tabindex="-1" id="offcanvasNavbar"
@@ -132,63 +132,52 @@
                     <div class="offcanvas-body ">
                         <ul class="navbar-nav flex-grow-1 pe-3">
 
-                            <li><a href="{{ route('home') }}" class="{{ Route::is('home') ? 'active' : '' }}">Home</a>
+                            <li><a href="<?php echo e(route('home')); ?>" class="<?php echo e(Route::is('home') ? 'active' : ''); ?>">Home</a>
                             </li>
 
-                            {{-- <li class="dropdown">
-                                <a class="{{ Route::is('manufacturers') ? 'active' : '' }}"
-                                    href="{{ route('manufacturers', ['id' => 3]) }}">
-                                    MANUFACTURERS</a>
-
-
-                            </li> --}}
+                            
 
                             <li class="dropdown mega-dropdown">
-                                <a class="{{ Route::is('manufacturers') ? 'active' : '' }}" href="#"
+                                <a class="<?php echo e(Route::is('manufacturers') ? 'active' : ''); ?>" href="#"
                                     data-bs-toggle="dropdown">
                                     TYRE Brands <i class="ms-1 fa-solid fa-angle-down"></i></a>
 
                                 <div class="dropdown-menu mega-dropdown-menu">
                                     <div class="row">
-                                        @if ($navManufactures->isNotEmpty())
-                                            @foreach ($navManufactures as $manufucturer)
-                                                @if (count($manufucturer->products) != 0)
+                                        <?php if($navManufactures->isNotEmpty()): ?>
+                                            <?php $__currentLoopData = $navManufactures; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $manufucturer): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                <?php if(count($manufucturer->products) != 0): ?>
                                                     <div class="col-12">
                                                         <a
-                                                            href="{{ route('manufacturers', ['id' => $manufucturer->id]) }}">{{ $manufucturer->name }}</a>
+                                                            href="<?php echo e(route('manufacturers', ['id' => $manufucturer->id])); ?>"><?php echo e($manufucturer->name); ?></a>
                                                     </div>
-                                                @endif
-                                            @endforeach
-                                        @endif
+                                                <?php endif; ?>
+                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                        <?php endif; ?>
 
                                     </div>
                                 </div>
 
                             </li>
 
-                            {{-- <li class="dropdown mega-dropdown">
-                                <a class="{{ Route::is('services') ? 'active' : '' }}"
-                                    href="{{ route('services') }}">
-                                    Services</a>
-                            </li> --}}
+                            
 
-                            <li><a class="{{ Route::is('gallery') ? 'active' : '' }}"
-                                    href="{{ route('gallery') }}">Gallery</a></li>
-                            <li><a class="{{ Route::is('shop') ? 'active' : '' }}"
-                                    href="{{ route('shop') }}">Shop</a>
+                            <li><a class="<?php echo e(Route::is('gallery') ? 'active' : ''); ?>"
+                                    href="<?php echo e(route('gallery')); ?>">Gallery</a></li>
+                            <li><a class="<?php echo e(Route::is('shop') ? 'active' : ''); ?>"
+                                    href="<?php echo e(route('shop')); ?>">Shop</a>
                             </li>
 
-                            @if (in_array(Auth::user()?->role, ['1', '2']))
-                                <li><a class="{{ Route::is('wholesale') ? 'active' : '' }}"
-                                        href="{{ route('wholesale') }}">Wholesales</a>
+                            <?php if(in_array(Auth::user()?->role, ['1', '2'])): ?>
+                                <li><a class="<?php echo e(Route::is('wholesale') ? 'active' : ''); ?>"
+                                        href="<?php echo e(route('wholesale')); ?>">Wholesales</a>
                                 </li>
-                            @endif
+                            <?php endif; ?>
 
-                            {{-- <li><a href="blogs.html">Blog</a></li> --}}
-                            {{-- <li><a class="{{ Route::is('about') ? 'active' : '' }}"
-                                    href="{{ route('about') }}">About</a></li> --}}
-                            <li><a class="{{ Route::is('contact') ? 'active' : '' }}"
-                                    href="{{ route('contact') }}">Contact</a></li>
+                            
+                            
+                            <li><a class="<?php echo e(Route::is('contact') ? 'active' : ''); ?>"
+                                    href="<?php echo e(route('contact')); ?>">Contact</a></li>
 
 
                             <!-- <li class="nav-item">
@@ -220,28 +209,29 @@
 
 
                     <ul class="navs d-flex list-unstyled gap-3 m-0">
-                        {{-- <li><button class="nav-item"><i class="fa-solid fa-magnifying-glass"></i></button></li> --}}
+                        
                         <li class="dropdown">
                             <a href="#" data-bs-toggle="dropdown" class=" nav-item">
                                 <span>
-                                    @if (Auth::check())
-                                        Hi, {{ Auth::user()?->fname }}
-                                    @endif
+                                    <?php if(Auth::check()): ?>
+                                        Hi, <?php echo e(Auth::user()?->fname); ?>
+
+                                    <?php endif; ?>
                                 </span>
                                 <i class="fa-solid fa-user"></i>
 
                             </a>
                             <ul class="dropdown-menu">
-                                @if (Auth::check())
-                                    @if (Auth::user()->role == '1')
-                                        <a href="{{ route('admin.dashboard') }}" class="dropdown-item">Dashboard</a>
-                                        @endif
-                                        <a href="{{ route('profile') }}" class="dropdown-item">Profile</a>
-                                    <a href="{{ route('logout') }}" class="dropdown-item">Logout</a>
-                                @else
-                                    <a href="{{ route('login') }}" class="dropdown-item">Login</a>
-                                    <a href="{{ route('signup') }}" class="dropdown-item">Register</a>
-                                @endif
+                                <?php if(Auth::check()): ?>
+                                    <?php if(Auth::user()->role == '1'): ?>
+                                        <a href="<?php echo e(route('admin.dashboard')); ?>" class="dropdown-item">Dashboard</a>
+                                        <?php endif; ?>
+                                        <a href="<?php echo e(route('profile')); ?>" class="dropdown-item">Profile</a>
+                                    <a href="<?php echo e(route('logout')); ?>" class="dropdown-item">Logout</a>
+                                <?php else: ?>
+                                    <a href="<?php echo e(route('login')); ?>" class="dropdown-item">Login</a>
+                                    <a href="<?php echo e(route('signup')); ?>" class="dropdown-item">Register</a>
+                                <?php endif; ?>
                             </ul>
                         </li>
                         <li>
@@ -263,7 +253,7 @@
         </nav>
         <!-- <nav class="navbar navbar-expand-lg navbar-dark">
                     <a href="#" class="navbar-brand">
-                        <img src="{{ asset('frontend/assets_v2/imgs/logo.png') }}" class="logo" alt="">
+                        <img src="<?php echo e(asset('frontend/assets_v2/imgs/logo.png')); ?>" class="logo" alt="">
                     </a>
 
                     <div class="navbar-navs">
@@ -316,7 +306,7 @@
     <!-- HEADER SECTION END -->
 
 
-    @yield('main')
+    <?php echo $__env->yieldContent('main'); ?>
 
     <!-- FOOTER SECTION START -->
     <footer class="footer-section">
@@ -328,7 +318,7 @@
                         <p>Sign up for exclusive offers, original stories, activism awareness, events and more.</p>
 
                         <form id="newsletter-form">
-                            @csrf
+                            <?php echo csrf_field(); ?>
                             <div class="form-group">
                                 <input type="email" name="email" id="email" placeholder="Enter your email"
                                     required class="form-control">
@@ -347,35 +337,25 @@
 
                     <ul class="list-rounded">
                         <li>
-                            <a href="{{ route('contact') }}">Customer Service</a>
+                            <a href="<?php echo e(route('contact')); ?>">Customer Service</a>
                         </li>
 
-                        {{-- <li>
-                            <a href="#">Delivery</a>
-                        </li> --}}
+                        
 
-                        {{-- <li>
-                            <a href="#">FAQs</a>
-                        </li> --}}
+                        
 
-                        {{-- <li>
-                            <a href="#">Repairs</a>
-                        </li> --}}
-                        {{-- <li>
-                            <a href="#">Returns</a>
-                        </li> --}}
+                        
+                        
                         <li>
-                            <a href="{{ route('services') }}">Services</a>
+                            <a href="<?php echo e(route('services')); ?>">Services</a>
                         </li>
                         <li>
-                            <a href="{{ route('login') }}">Login</a>
+                            <a href="<?php echo e(route('login')); ?>">Login</a>
                         </li>
                         <li>
-                            <a href="{{ route('contact') }}">Contact</a>
+                            <a href="<?php echo e(route('contact')); ?>">Contact</a>
                         </li>
-                        {{-- <li>
-                            <a href="#">Size Guide</a>
-                        </li> --}}
+                        
 
                     </ul>
 
@@ -387,29 +367,25 @@
                         <div class="col-6">
                              <h3>Information</h3>
                             <ul>
-                                @if ($navManufactures->isNotEmpty())
-                                    @foreach ($navManufactures as $manufucturer)
-                                        @if (count($manufucturer->products) != 0)
+                                <?php if($navManufactures->isNotEmpty()): ?>
+                                    <?php $__currentLoopData = $navManufactures; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $manufucturer): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                        <?php if(count($manufucturer->products) != 0): ?>
                                             <li>
                                                 <a
-                                                    href="{{ route('manufacturers', ['id' => $manufucturer->id]) }}">{{ $manufucturer->name }}</a>
+                                                    href="<?php echo e(route('manufacturers', ['id' => $manufucturer->id])); ?>"><?php echo e($manufucturer->name); ?></a>
                                             </li>
-                                        @endif
-                                    @endforeach
-                                @endif
-                                {{-- <li><a href="#">Maxxis Tyres</a></li>
-                                <li><a href="#">Dunlop Tyres</a></li>
-                                <li><a href="#">Bridgestone Tyres</a></li>
-                                <li><a href="#">Continental Tyres</a></li>
-                                <li><a href="#">Wheel Balancing</a></li> --}}
+                                        <?php endif; ?>
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                <?php endif; ?>
+                                
                             </ul>
                         </div>
 
                         <div class="col-6">
                              <h3>Pages</h3>
                             <ul>
-                                <li><a href="{{ route('about') }}">About Us</a></li>
-                                <li><a href="{{ route('contact') }}">Contact Us</a></li>
+                                <li><a href="<?php echo e(route('about')); ?>">About Us</a></li>
+                                <li><a href="<?php echo e(route('contact')); ?>">Contact Us</a></li>
                                 <li><a href="#">Sitemap</a></li>
                                 <li><a href="#">Cookies</a></li>
                                 <li><a href="#">Privacy Policy</a></li>
@@ -424,7 +400,7 @@
         </div>
 
         <div class="footer-bottom d-flex align-items-center justify-content-center flex-column">
-                    <p class="mb-0">© TYRE ZONE TYRES LTD {{ date('Y') }}. All Rights Reserved. Developed with ❤️ by <a href="https://webspires.co.uk/?utm_source=junkandcrumbs" target="_blank"><strong>Webspires</strong></a></p>
+                    <p class="mb-0">© TYRE ZONE TYRES LTD <?php echo e(date('Y')); ?>. All Rights Reserved. Developed with ❤️ by <a href="https://webspires.co.uk/?utm_source=junkandcrumbs" target="_blank"><strong>Webspires</strong></a></p>
 
         </div>
 
@@ -439,11 +415,11 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
 
     <!-- CUSTOM JS -->
-    <script src="{{ asset('frontend/assets/js/app.js') }}"></script>
-    <script src="{{ asset('frontend/assets/js/cart.js') }}"></script>
+    <script src="<?php echo e(asset('frontend/assets/js/app.js')); ?>"></script>
+    <script src="<?php echo e(asset('frontend/assets/js/cart.js')); ?>"></script>
 
 
-    @yield('customjs')
+    <?php echo $__env->yieldContent('customjs'); ?>
 
     <script>
         document.getElementById('newsletter-form').addEventListener('submit', function(e) {
@@ -494,3 +470,4 @@
 </body>
 
 </html>
+<?php /**PATH /Users/atifjan/Documents/GitHub/Tyrezone-laravel/resources/views/frontend/layout/app.blade.php ENDPATH**/ ?>
